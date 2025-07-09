@@ -11,7 +11,12 @@ const Logo = ({ className = "" }) => {
                 alt="Logo"
                 width={210}
                 height={56}
-                className="w-full h-full object-contain"
+                priority
+                style={{
+                    width: 'auto', // if you modified height
+                    height: 'auto' // if you modified width
+                }}
+                className="object-contain"
             />
         </Link>
     )

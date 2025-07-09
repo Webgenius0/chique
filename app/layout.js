@@ -1,5 +1,6 @@
 import { DM_Sans, Playfair_Display, Poppins } from 'next/font/google';
 import './globals.css';
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 // Primary - DM Sans (all weights)
 const primaryFont = DM_Sans({
@@ -30,7 +31,9 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${primaryFont.variable} ${secondaryFont.variable} ${specialFont.variable}`}>
             <body>
-                {children}
+                <AntdRegistry>
+                    {children}
+                </AntdRegistry>
             </body>
         </html>
     );

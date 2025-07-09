@@ -5,9 +5,11 @@
 @theme inline {
   --color-background: #ffffff;
   --color-primary-dark: #0d0e10;
+  --color-common-border: #dbdbdb;
   --font-primary: "DM Sans", sans-serif;
   --font-secondary: "Playfair Display", serif;
   --font-special: "Poppins", sans-serif;
+  --shadow-auth: 6px 6px 39px 0px rgba(0, 0, 0, 0.06);
   /* custom breakpoints */
   --breakpoint-3xs: 375px; /* For small phones */
   --breakpoint-2xs: 390px; /* For medium phones */
@@ -30,4 +32,23 @@ body {
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
+}
+
+/*
+
+ant select
+
+*/
+
+.ant-select-selector {
+  border: 0 !important;
+  background: transparent !important;
+}
+.ant-select-focused .ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+}
+.ant-select-single.ant-select-show-arrow .ant-select-selection-item {
+  color: black;
+  font-size: 16px !important;
 }

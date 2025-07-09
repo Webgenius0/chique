@@ -6,8 +6,8 @@ const NavItems = () => {
     const pathname = usePathname();
     const navItems = [
         { name: "Home", path: "/" },
-        { name: "About", path: "/about" },
-        { name: "Features", path: "/features" },
+        { name: "About", path: "/#about" },
+        { name: "Pricing", path: "/#Pricing" },
         { name: "Contact", path: "/contact" },
     ];
 
