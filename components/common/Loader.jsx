@@ -1,4 +1,8 @@
+"use client";
+
 import dynamic from 'next/dynamic';
+import { useEffect } from "react";
+import { lineSpinner } from "ldrs";
 
 const Loader = dynamic(
   () => import('ldrs').then((mod) => {
