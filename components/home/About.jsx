@@ -1,5 +1,10 @@
+"use client";
+
 import CommonSectionTitle from "../common/CommonSectionTitle";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import layer_image from "@/public/images/bannerImages/layer_image3.png";
+import Image from "next/image";
 
 const About = () => {
   const items = [
@@ -33,25 +38,48 @@ const About = () => {
     },
   ];
   return (
-    <div className="container flex flex-col gap-14 py-20 px-28">
-      <CommonSectionTitle
-        text="Who It's For"
-        className={"!font-bold !font-secondary"}
-      />
-      <div className="w-full grid grid-cols-2 gap-20">
-        {items.map((item) => (
-          <div key={item.id}>
-            <div className="w-full flex gap-4 justify-center">
-              <div className="text-2xl">{item.icon}</div>
-              <div className="w-full flex flex-col gap-3">
-                <p className="text-3xl font-bold font-secondary text-primary-dark leading-10">
-                  {item.title}
-                </p>
-                <p className="text-base font-light font-primary text-primary-dark">{item.subtitle}</p>
+    <div className="w-full  relative">
+      <div className="container flex flex-col gap-14 py-20 px-28">
+        {/* Right side layer Flower Image with Animation */}
+        <motion.div
+          initial={{
+            x: 200,
+            opacity: 0,
+            rotateX: 90,
+            transformOrigin: "bottom right",
+          }}
+          animate={{ x: 0, opacity: 1, rotateX: 0 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+          className="absolute right-0 bottom-32 w-[300px] md:w-[400px] lg:w-[300px]"
+        >
+          <Image
+            src={layer_image}
+            alt="Right Flower"
+            className="object-contain w-full h-auto"
+            priority
+          />
+        </motion.div>
+        <CommonSectionTitle
+          text="Who It's For"
+          className={"!font-bold !font-secondary"}
+        />
+        <div className="w-full grid grid-cols-2 gap-20">
+          {items.map((item) => (
+            <div key={item.id}>
+              <div className="w-full flex gap-4 justify-center">
+                <div className="text-2xl">{item.icon}</div>
+                <div className="w-full flex flex-col gap-3">
+                  <p className="text-3xl font-bold font-secondary text-primary-dark leading-10">
+                    {item.title}
+                  </p>
+                  <p className="text-base font-light font-primary text-primary-dark">
+                    {item.subtitle}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
