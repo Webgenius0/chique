@@ -30,7 +30,7 @@ const specialFont = Poppins({
 export default function RootLayout({ children }) {
     return (
         <html lang="en" className={`${primaryFont.variable} ${secondaryFont.variable} ${specialFont.variable}`}>
-            <body>
+            <body suppressHydrationWarning={false}>
                 <AntdRegistry>
                     {children}
                 </AntdRegistry>
