@@ -2,6 +2,7 @@ import About from "@/components/home/About";
 import ChiqueAI from "@/components/home/ChiqueAI";
 import Evolution from "@/components/home/Evolution";
 import Hero from "@/components/home/Hero";
+import Price from "@/components/home/Price";
 import WhyCreated from "@/components/home/WhyCreated";
 
 export const metadata = {
@@ -16,6 +17,7 @@ const Home = () => {
       <ChiqueAI />
       <WhyCreated />
       <About />
+      <Price />
       <Evolution />
     </div>
   );
