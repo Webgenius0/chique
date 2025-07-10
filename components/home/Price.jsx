@@ -4,6 +4,20 @@ import { FaStar } from "react-icons/fa";
 import { FaCircleCheck } from "react-icons/fa6";
 import CommonTitle from "../common/CommonTitle";
 import CommonBtn from "../common/CommonBtn";
+import { motion } from "framer-motion";
+
+const flipVariants = {
+  hidden: { rotateY: 180, opacity: 0 },
+  visible: (index) => ({
+    rotateY: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      delay: index * 0.2, // staggered delay
+      ease: "easeOut",
+    },
+  }),
+};
 
 const Price = () => {
   const cardItems = [
@@ -62,10 +76,16 @@ const Price = () => {
         </p>
       </div>
       <div className="w-full grid grid-cols-4 gap-6">
-        {cardItems.map((item) => (
-          <div
+        {cardItems.map((item, index) => (
+          <motion.div
             key={item.id}
             className="w-full flex flex-col gap-8 border rounded-[20px] py-6 px-5 hover:bg-[#B1B0B0] transition duration-500"
+            variants={flipVariants}
+            initial="hidden"
+            whileInView="visible"
+            custom={index} // this is passed to variants for delay
+            viewport={{ once: true, amount: 0.4 }}
+            style={{ transformStyle: "preserve-3d" }}
           >
             <CommonBtn className="rounded-[100px] text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
               {item.buttonText}
@@ -84,7 +104,7 @@ const Price = () => {
             <CommonBtn className="rounded-[100px] text-nowrap !min-h-10 !p-2.5 !px-10">
               Get Started
             </CommonBtn>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

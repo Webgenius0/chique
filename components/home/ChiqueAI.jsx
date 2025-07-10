@@ -6,6 +6,8 @@ import { PiTShirtLight } from "react-icons/pi";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { motion } from "framer-motion";
+import layer_image from "@/public/images/bannerImages/layer_image1.png";
+import Image from "next/image";
 
 const flipVariants = {
   hidden: { rotateY: 180, opacity: 0 },
@@ -54,6 +56,25 @@ const ChiqueAI = () => {
 
   return (
     <div className="container flex flex-col gap-14 pb-20">
+      {/* Right side layer Flower Image with Animation */}
+      <motion.div
+        initial={{
+          x: 200,
+          opacity: 0,
+          rotateX: 90,
+          transformOrigin: "bottom right",
+        }}
+        animate={{ x: 0, opacity: 1, rotateX: 0 }}
+        transition={{ duration: 1.4, ease: "easeOut" }}
+        className="absolute right-0 -bottom-72 w-[300px] md:w-[400px] lg:w-[300px]"
+      >
+        <Image
+          src={layer_image}
+          alt="Right Flower"
+          className="object-contain w-full h-auto"
+          priority
+        />
+      </motion.div>
       <CommonSectionTitle
         text="What Chique AI Does"
         className={"!font-bold !font-secondary"}
