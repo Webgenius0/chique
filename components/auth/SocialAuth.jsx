@@ -4,7 +4,7 @@ import React from 'react'
 const SocialAuth = () => {
     return (
         <div className="w-full flex flex-col gap-4">
-            <button className='w-full flex  border border-common-border rounded-[40px] bg-white py-4 px-5 text-primary-dark capitalize  gap-5 justify-center items-center'>
+            <button className='w-full flex cursor-pointer border border-common-border rounded-[40px] bg-white py-4 px-5 text-primary-dark capitalize  gap-5 justify-center items-center'>
                 <Image
                     src={"/images/icons/google.png"}
                     alt="Logo"
@@ -19,7 +19,7 @@ const SocialAuth = () => {
                 />
                 <span>Continue with Google</span>
             </button>
-            <button className='w-full flex  border border-common-border rounded-[40px] bg-white py-4 px-5 text-primary-dark capitalize  gap-5 justify-center items-center'>
+            <button className='w-full flex cursor-pointer border border-common-border rounded-[40px] bg-white py-4 px-5 text-primary-dark capitalize  gap-5 justify-center items-center'>
                 <Image
                     src={"/images/icons/apple.png"}
                     alt="Logo"
