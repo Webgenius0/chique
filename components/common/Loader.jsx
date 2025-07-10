@@ -1,21 +1,22 @@
-"use client"
-import { useEffect } from 'react';
-import { lineSpinner } from "ldrs";
+import dynamic from 'next/dynamic';
 
-const Loader = ({ size = 25, stroke = 4, color = "white", speed = 1 }) => {
-  useEffect(() => {
-    // Register the component only on client side
+const Loader = dynamic(
+  () => import('ldrs').then((mod) => {
+    const { lineSpinner } = mod;
     lineSpinner.register();
-  }, []);
 
-  return (
-    <l-line-spinner
-      size={size}
-      stroke={stroke}
-      speed={speed}
-      color={color}
-    ></l-line-spinner>
-  );
-};
+    return function Loader({ size = 25, stroke = 4, color = "white", speed = 1 }) {
+      return (
+        <l-line-spinner
+          size={size}
+          stroke={stroke}
+          speed={speed}
+          color={color}
+        />
+      );
+    };
+  }),
+  { ssr: false }
+);
 
 export default Loader;
