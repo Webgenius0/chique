@@ -22,6 +22,7 @@ const SignUpForm = () => {
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
+            {/* name */}
             <CommonInputWrapper
                 register={register}
                 errors={errors}
@@ -35,6 +36,7 @@ const SignUpForm = () => {
                     required: "This field is required",
                 }}
             />
+            {/* email */}
             <CommonInputWrapper
                 register={register}
                 errors={errors}
@@ -52,6 +54,7 @@ const SignUpForm = () => {
                     },
                 }}
             />
+            {/* password */}
             <CommonInputWrapper
                 register={register}
                 errors={errors}
@@ -66,6 +69,7 @@ const SignUpForm = () => {
                     validate: validatePassword
                 }}
             />
+            {/* confirm password */}
             <CommonInputWrapper
                 register={register}
                 errors={errors}
@@ -100,7 +104,7 @@ const SignUpForm = () => {
                 <ErrorText error={errors?.terms?.message} />
             )}
             {/* submit button */}
-            <CommonBtn type="submit" className={`mt-4`} isLoading={true} >
+            <CommonBtn type="submit" className={`mt-4`} isLoading={false} link={true} path="/auth/user-verification">
                 Sign Up
             </CommonBtn>
         </form>
