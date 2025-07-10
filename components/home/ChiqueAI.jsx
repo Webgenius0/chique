@@ -15,7 +15,7 @@ const flipVariants = {
     rotateY: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.1,
       delay: index * 0.2, // staggered delay
       ease: "easeOut",
     },
@@ -92,7 +92,7 @@ const ChiqueAI = () => {
               viewport={{ once: true, amount: 0.4 }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-4 cursor-pointer">
+              <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-[18px] cursor-pointer">
                 {item.icon}
               </div>
               <p className="text-lg font-bold font-secondary text-primary-dark">

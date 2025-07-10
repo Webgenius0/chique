@@ -14,7 +14,7 @@ const flipVariants = {
     rotateY: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.1,
       delay: index * 0.2, // staggered delay
       ease: "easeOut",
     },
@@ -106,7 +106,7 @@ const Price = () => {
               initial="hidden"
               whileInView="visible"
               custom={index} // this is passed to variants for delay
-              viewport={{ once: true, amount: 0.4 }}
+              viewport={{ once: true, amount: 0 }}
               style={{ transformStyle: "preserve-3d" }}
             >
               <CommonBtn className="rounded-[100px] text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
