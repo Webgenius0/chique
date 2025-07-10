@@ -19,7 +19,8 @@ const ContactForm = () => {
     console.log(data);
   };
   return (
-    <div className="bg-[#FAFAFB] max-w-[646px] w-full rounded-3xl border border-[#DFE0E4] p-8 flex flex-col items-start justify-start">
+    <div className="bg-[#FAFAFB] max-w-[646px] w-full flex flex-col gap-8 rounded-3xl border border-[#DFE0E4] p-8 items-start justify-start">
+      <p className="text-3xl font-extrabold text-primary-dark font-secondary">Contact now</p>
       {/* contact now form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -101,17 +102,17 @@ const ContactForm = () => {
         />
 
         {/* terms and conditions */}
-        <label htmlFor="terms" className="w-full flex gap-2 cursor-pointer justify-start items-start">
+        <label htmlFor="terms" className="w-full flex gap-2 cursor-pointer justify-start items-start py-5">
           <input
             type="checkbox"
             id="terms"
             defaultChecked
-            className={`w-6 h-6 ${errors.terms ? 'accent-red-500' : 'accent-primary-dark'}`}
+            className={`w-4 h-4 ${errors.terms ? 'accent-red-500' : 'accent-primary-dark'}`}
             {...register("terms", {
               required: "You must accept the terms to continue"
             })}
           />
-          <span className={`text-sm capitalize text-[#0B0B0B] max-w-[458px] ${errors.terms ? 'text-red-500' : ''}`}>
+          <span className={`text-sm -mt-1 capitalize text-[#0B0B0B] max-w-[458px] ${errors.terms ? 'text-red-500' : ''}`}>
             I agree that my data may be processed to respond to my request for information.
           </span>
         </label>
