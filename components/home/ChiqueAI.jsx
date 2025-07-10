@@ -70,7 +70,7 @@ const ChiqueAI = () => {
             viewport={{ once: true, amount: 0.4 }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-3xl p-4 cursor-pointer">
+            <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-4 cursor-pointer">
               {item.icon}
             </div>
             <p className="text-lg font-bold font-secondary text-primary-dark">

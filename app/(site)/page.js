@@ -1,3 +1,4 @@
+import About from "@/components/home/About";
 import ChiqueAI from "@/components/home/ChiqueAI";
 import Hero from "@/components/home/Hero";
 import WhyCreated from "@/components/home/WhyCreated";
@@ -13,6 +14,7 @@ const Home = () => {
       <Hero />
       <ChiqueAI />
       <WhyCreated />
+      <About />
     </div>
   );
 };
