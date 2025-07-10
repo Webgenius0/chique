@@ -53,7 +53,7 @@ const ChiqueAI = () => {
   ];
 
   return (
-    <div className="container flex flex-col gap-14">
+    <div className="container flex flex-col gap-14 pb-20">
       <CommonSectionTitle
         text="What Chique AI Does"
         className={"!font-bold !font-secondary"}

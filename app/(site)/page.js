@@ -1,5 +1,6 @@
 import ChiqueAI from "@/components/home/ChiqueAI";
 import Hero from "@/components/home/Hero";
+import WhyCreated from "@/components/home/WhyCreated";
 
 export const metadata = {
   title: "Chique | Home",
@@ -11,6 +12,7 @@ const Home = () => {
     <div className="w-full">
       <Hero />
       <ChiqueAI />
+      <WhyCreated />
     </div>
   );
 };
