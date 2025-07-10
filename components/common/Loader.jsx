@@ -1,5 +1,5 @@
-"use client"
-import { useEffect } from 'react';
+"use client";
+import { useEffect } from "react";
 import { lineSpinner } from "ldrs";
 
 const Loader = ({ size = 25, stroke = 4, color = "white", speed = 1 }) => {
