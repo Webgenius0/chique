@@ -6,6 +6,8 @@ import { PiTShirtLight } from "react-icons/pi";
 import { LiaShoppingBagSolid } from "react-icons/lia";
 import { LuMessageCircleMore } from "react-icons/lu";
 import { motion } from "framer-motion";
+import layer_image from "@/public/images/bannerImages/layer_image1.png";
+import Image from "next/image";
 
 const flipVariants = {
   hidden: { rotateY: 180, opacity: 0 },
@@ -13,7 +15,7 @@ const flipVariants = {
     rotateY: 0,
     opacity: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.1,
       delay: index * 0.2, // staggered delay
       ease: "easeOut",
     },
@@ -53,34 +55,55 @@ const ChiqueAI = () => {
   ];
 
   return (
-    <div className="container flex flex-col gap-14 pb-20">
-      <CommonSectionTitle
-        text="What Chique AI Does"
-        className={"!font-bold !font-secondary"}
-      />
-      <div className="w-full grid grid-cols-4 gap-5">
-        {cardItems.map((item, index) => (
-          <motion.div
-            key={item.id}
-            className="w-full flex flex-col gap-4 bg-[#F8F8F8] p-6 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
-            variants={flipVariants}
-            initial="hidden"
-            whileInView="visible"
-            custom={index} // this is passed to variants for delay
-            viewport={{ once: true, amount: 0.4 }}
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-4 cursor-pointer">
-              {item.icon}
-            </div>
-            <p className="text-lg font-bold font-secondary text-primary-dark">
-              {item.title}
-            </p>
-            <p className="text-sm font-light font-primary text-primary-dark">
-              {item.subTitle}
-            </p>
-          </motion.div>
-        ))}
+    <div className="w-full relative">
+      <div className="container flex flex-col gap-14 pb-20">
+        {/* Right side layer Flower Image with Animation */}
+        <motion.div
+          initial={{
+            x: 200,
+            opacity: 0,
+            rotateX: 90,
+            transformOrigin: "bottom right",
+          }}
+          animate={{ x: 0, opacity: 1, rotateX: 0 }}
+          transition={{ duration: 1.4, ease: "easeOut" }}
+          className="absolute right-0 -bottom-5 w-[300px] md:w-[400px] lg:w-[300px]"
+        >
+          <Image
+            src={layer_image}
+            alt="Right Flower"
+            className="object-contain w-full h-auto"
+            priority
+          />
+        </motion.div>
+        <CommonSectionTitle
+          text="What Chique AI Does"
+          className={"!font-bold !font-secondary"}
+        />
+        <div className="w-full grid grid-cols-4 gap-5">
+          {cardItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              className="w-full flex flex-col gap-4 bg-[#F8F8F8] p-6 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
+              variants={flipVariants}
+              initial="hidden"
+              whileInView="visible"
+              custom={index} // this is passed to variants for delay
+              viewport={{ once: true, amount: 0.4 }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-[18px] cursor-pointer">
+                {item.icon}
+              </div>
+              <p className="text-lg font-bold font-secondary text-primary-dark">
+                {item.title}
+              </p>
+              <p className="text-sm font-light font-primary text-primary-dark">
+                {item.subTitle}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
