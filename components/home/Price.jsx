@@ -61,7 +61,7 @@ const Price = () => {
     },
   ];
   return (
-    <div className="w-full relative">
+    <div id="pricing" className="w-full relative">
       <div className="container flex flex-col gap-10 py-20">
         {/* Right side layer Flower Image with Animation */}
         <motion.div

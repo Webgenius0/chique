@@ -38,7 +38,7 @@ const About = () => {
     },
   ];
   return (
-    <div className="w-full  relative">
+    <div id="about" className="w-full  relative">
       <div className="container flex flex-col gap-14 py-20 px-28">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
@@ -68,8 +68,8 @@ const About = () => {
             <div key={item.id}>
               <div className="w-full flex gap-4 justify-center">
                 <div className="text-2xl">{item.icon}</div>
-                <div className="w-full flex flex-col gap-3">
-                  <p className="text-3xl font-bold font-secondary text-primary-dark leading-10">
+                <div className="w-full flex flex-col gap-3 -mt-1">
+                  <p className="text-3xl font-bold font-secondary text-primary-dark">
                     {item.title}
                   </p>
                   <p className="text-base font-light font-primary text-primary-dark">
