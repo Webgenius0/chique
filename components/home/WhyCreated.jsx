@@ -9,7 +9,7 @@ const WhyCreated = () => {
   return (
     <div className="w-full relative">
       <div className="max-w-4xl mx-auto flex flex-col gap-8 py-20">
-        {/* Right side layer Flower Image with Animation */}
+        {/* left side layer Flower Image with Animation */}
         <motion.div
           initial={{
             x: -200,
