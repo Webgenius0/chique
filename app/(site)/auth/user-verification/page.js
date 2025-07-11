@@ -1,5 +1,5 @@
 "use client";
-import AuthSubText from "@/components/auth/AuthSubText";
+
 import AuthTitle from "@/components/auth/AuthTitle";
 import AuthWrapper from "@/components/auth/AuthWrapper";
 import OtpWrapper from "@/components/auth/OtpWrapper";
@@ -41,11 +41,11 @@ const UserVerification = () => {
   //     },
   //   });
   //   // final submit
-  //   const handleSubmit = () => {
-  //     if (otp.length !== 6)
-  //       return toast.error("Please enter a valid 6-digit code");
-  //     confirmSignUp.mutate({ otp, email: verify_email });
-  //   };
+    const handleSubmit = () => {
+      if (otp.length !== 4)
+        return toast.error("Please enter a valid 4-digit code");
+      // confirmSignUp.mutate({ otp, email: verify_email });
+    };
 
   //   // Resend OTP mutation
   //   const resendOtp = useMutation({
@@ -85,21 +85,25 @@ const UserVerification = () => {
       <AuthWrapper>
         <div className="w-full flex flex-col gap-4 justify-start items-center">
           {/* Header */}
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col gap-3 items-center">
             <AuthTitle title="Enter Verification Code" />
-            <AuthSubText text="Please enter the verification code sent to your email" />
+            <h5 className="text-center text-xl text-gray-400 font-primary">
+              Enter Confirm code sent to your email address <br />
+              <span>{"farokafs100@gmail.com" || "--"}</span>
+            </h5>
           </div>
 
           {/* Otp */}
-          <div className="w-full font-medium flex flex-col justify-start items-center">
+          <div className="w-full font-medium flex flex-col gap-3 justify-start items-center">
             <OtpWrapper /> {/* label="Code" OtpChange={OtpChange} otp={otp} */}
             <CommonBtn
               type="button"
               isLoading={false}
               className="max-w-[300px]"
-              link={true} 
-              path="/auth/create-new-password"
-            //   onclick={handleSubmit}
+              link={true}
+              path="/welcome"
+              onclick={handleSubmit}
+              //   onclick={handleSubmit}
             >
               Verify Code
             </CommonBtn>

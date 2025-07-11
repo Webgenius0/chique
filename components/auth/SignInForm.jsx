@@ -10,7 +10,6 @@ const SignInForm = () => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -21,7 +20,7 @@ const SignInForm = () => {
   // on submit
   const onSubmit = (data) => {
     console.log(data);
-    router.push("/");
+    router.push("/dashboard");
   };
   return (
     <form
@@ -34,7 +33,7 @@ const SignInForm = () => {
         errors={errors}
         type="email"
         name="email"
-        placeholder="abc@gmail.com"
+        placeholder="Enter your email"
         register_as="email"
         label="Email address:"
         validationRules={{

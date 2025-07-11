@@ -28,8 +28,7 @@ const SignUpForm = () => {
                 errors={errors}
                 type="text"
                 name="name"
-                control={control}
-                placeholder="Name"
+                placeholder="Your name"
                 register_as="name"
                 label="Your Name:"
                 validationRules={{
@@ -42,8 +41,7 @@ const SignUpForm = () => {
                 errors={errors}
                 type="email"
                 name="email"
-                control={control}
-                placeholder="abc@gmail.com"
+                placeholder="Enter your email"
                 register_as="email"
                 label="Email address:"
                 validationRules={{
@@ -60,8 +58,7 @@ const SignUpForm = () => {
                 errors={errors}
                 type="password"
                 name="password"
-                control={control}
-                placeholder="6544A@#Avb"
+                placeholder="Enter password"
                 register_as="password"
                 label="Password:"
                 validationRules={{
@@ -75,8 +72,7 @@ const SignUpForm = () => {
                 errors={errors}
                 type="password"
                 name="confirm_password"
-                control={control}
-                placeholder="6544A@#Avb"
+                placeholder="Confirm password"
                 register_as="confirm_password"
                 label="Confirm Password:"
                 validationRules={{

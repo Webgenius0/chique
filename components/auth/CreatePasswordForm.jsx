@@ -49,7 +49,7 @@ const CreatePasswordForm = () => {
     // on submit
     const onSubmit = (data) => {
         console.log(data);
-        router.push("/welcome");
+        router.push("/auth/sign-in");
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">

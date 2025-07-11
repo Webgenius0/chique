@@ -10,7 +10,7 @@ const CreateNewPassword = () => {
       <AuthWrapper>
         <div className="w-full flex flex-col gap-4 justify-start items-center">
           {/* Header */}
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col gap-2 items-center">
             <AuthTitle title="Create New Password" />
             <AuthSubText text="Please create a strong password for your account" />
           </div>
