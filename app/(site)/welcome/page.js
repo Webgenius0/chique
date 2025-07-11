@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 const WelcomePage = () => {
   const router = useRouter();
   const handleNavigate = () => {
-    router.push("/auth/sign-in");
+    router.push("/quiz");
   };
   return (
     <div className="container min-h-screen py-32 flex justify-center items-center">
@@ -31,7 +31,11 @@ const WelcomePage = () => {
             text="We’re going to ask a few quick questions about your health and lifestyle to create a plan tailored just for you."
           />
           {/* start button */}
-          <CommonBtn className={"max-w-32"} type="submit" onclick={handleNavigate}>
+          <CommonBtn
+            className={"max-w-32"}
+            type="submit"
+            onclick={handleNavigate}
+          >
             Start
           </CommonBtn>
         </div>
