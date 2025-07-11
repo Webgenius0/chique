@@ -11,12 +11,12 @@ const Footer = () => {
   const socialLinks = [
     {
       id: 1,
-      icon: <FaInstagram />,
+      icon: <FaInstagram className="text-3xl" />,
       link: "https://www.instagram.com/accounts/emailsignup/",
     },
-    { id: 2, icon: <FaTwitter />, link: "https://x.com/home" },
-    { id: 3, icon: <FaLinkedin />, link: "https://www.linkedin.com/" },
-    { id: 4, icon: <FaFacebookSquare />, link: "https://www.facebook.com/" },
+    { id: 2, icon: <FaTwitter className="text-3xl" />, link: "https://x.com/home" },
+    { id: 3, icon: <FaLinkedin className="text-3xl" />, link: "https://www.linkedin.com/" },
+    { id: 4, icon: <FaFacebookSquare className="text-3xl" />, link: "https://www.facebook.com/" },
   ];
 
   const items = [
@@ -39,7 +39,7 @@ const Footer = () => {
                 href={social.link}
                 key={social.id}
                 target="_blank"
-                className="w-6 h-6  overflow-hidden"
+                className="w-full h-full  overflow-hidden"
               >
                 {social.icon}
               </a>

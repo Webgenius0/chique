@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // ✅ Import useRouter
 import Progressbar from "@/components/quiz/Progressbar";
 import QuizStep from "@/components/quiz/QuizStep";
 import { quizQuestions } from "@/data/db";
+import toast from "react-hot-toast"; // ✅ Make sure toast is imported if you're using it
 
 const Quiz = () => {
+  const router = useRouter(); // ✅ Initialize router
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState({});
 
@@ -20,6 +23,11 @@ const Quiz = () => {
     } else {
       toast.success("Quiz Completed!");
       console.log("Final Answers:", answers);
+
+      // ✅ Navigate to home after short delay (optional)
+      setTimeout(() => {
+        router.push("/profile-results"); // ✅ Go to home page
+      }, 1000);
     }
   };
 
@@ -64,18 +72,21 @@ const Quiz = () => {
             onClick={previous}
             className="cursor-pointer border px-4 py-2 rounded text-primary hover:bg-gray-100"
           >
-             {"< Previous"}
+            {"< Previous"}
           </button>
         )}
 
         <div className={current === 0 ? "ml-auto" : ""}>
           <button
             onClick={next}
-            className="cursor-pointer bg-primary-dark text-white px-4 py-2 rounded "
-            disabled={
-              currentQuestion.is_required &&
-              !currentAnswer
-            }
+            className={`cursor-pointer px-4 py-2 rounded text-white
+              ${
+                currentQuestion.is_required && !currentAnswer
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-primary-dark hover:bg-primary"
+              }
+            `}
+            disabled={currentQuestion.is_required && !currentAnswer}
           >
             {current === quizQuestions.length - 1
               ? "Get My Style Results"
@@ -88,3 +99,4 @@ const Quiz = () => {
 };
 
 export default Quiz;
+

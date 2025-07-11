@@ -7,6 +7,7 @@ export const metadata = {
 }
 
 const Dashboard = () => {
+  // throw new Error(`Error from dashboard layout`) 
   return (
     <div className="w-full h-full flex flex-col justify-start items-center gap-3 relative ">
       <MessageScreen />

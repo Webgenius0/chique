@@ -10,10 +10,10 @@ import { IoIosTime } from "react-icons/io";
 const SideBar = ({ isOpen = false }) => {
     const pathname = usePathname()
     const navItems = [
-        { path: "/dashboard", name: "Chat", icon: <BsChatDots /> },
-        { path: "/dashboard/my-clothes", name: "My Clothes", icon: <PiCoatHangerBold /> },
-        { path: "/dashboard/explore", name: "Explore", icon: <FaGlobeAmericas /> },
-        { path: "/dashboard/feedback", name: "Feedback", icon: <IoIosTime /> },
+        { path: "/dashboard", name: "Chat", icon: <BsChatDots className="text-2xl" /> },
+        { path: "/dashboard/my-clothes", name: "My Clothes", icon: <PiCoatHangerBold className="text-2xl" /> },
+        { path: "/dashboard/explore", name: "Explore", icon: <FaGlobeAmericas className="text-2xl" /> },
+        { path: "/dashboard/feedback", name: "Feedback", icon: <IoIosTime className="text-3xl" /> },
     ]
     return (
         <aside
@@ -49,7 +49,7 @@ const SideBar = ({ isOpen = false }) => {
                     className={` w-full hover:bg-primary-dark hover:text-white rounded-tl-lg text-xl rounded-bl-lg px-4 py-3 flex justify-start items-center gap-3 transition-colors duration-300`}
                 >
                     <span className="text-2xl shrink-0">
-                        <PiSignOutBold />
+                        <PiSignOutBold className="text-[26px]" />
                     </span>
                     <span>Sign Out</span>
                 </Link>

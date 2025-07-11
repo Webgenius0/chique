@@ -8,6 +8,7 @@ export const quizQuestions = [
       "I’m okay showing some skin if it looks nice",
       "I don’t mind anything — I wear what feels right in the moment",
     ],
+    is_required: true,
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ export const quizQuestions = [
       "Bold colors (red, green, blue)",
       "I don’t know",
     ],
+    is_required: true,
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ export const quizQuestions = [
       "Any color – I wear them all",
       "I don’t know",
     ],
+    is_required: true,
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ export const quizQuestions = [
       "Rectangle (shoulders, waist, and hips are straight)",
       "I don’t know",
     ],
+    is_required: true,
   },
   {
     id: 5,
@@ -53,6 +57,7 @@ export const quizQuestions = [
       "Bold",
       "GRelaxed",
     ],
+    is_required: true,
   },
   {
     id: 6,
@@ -65,6 +70,7 @@ export const quizQuestions = [
       "Light fabric like chiffon or tulle (soft and flowy)",
       "I don’t know",
     ],
+    is_required: true,
   },
   {
     id: 7,
@@ -76,6 +82,7 @@ export const quizQuestions = [
       "Keeping it simple",
       "Looking unique and different",
     ],
+    is_required: true,
   },
   {
     id: 8,
@@ -86,6 +93,7 @@ export const quizQuestions = [
       "Many items together (jewelry, scarf, glasses…)",
       "I don’t wear accessories much",
     ],
+    is_required: true,
   },
   {
     id: 9,
@@ -98,6 +106,7 @@ export const quizQuestions = [
       "Simple and neat outfits",
       "Creative, fun, or unique looks",
     ],
+    is_required: true,
   },
   {
     id: 10,
@@ -110,5 +119,6 @@ export const quizQuestions = [
       "Cairo or Istanbul – modest with soft traditions",
       "I don’t know",
     ],
+    is_required: true,
   },
 ];
