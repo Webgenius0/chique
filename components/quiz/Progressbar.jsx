@@ -1,51 +1,33 @@
 const Progressbar = ({ current = 0, quizQuestions = [] }) => {
-    // Calculate progress safely
-    const totalQuestions = quizQuestions.length || 1; // Prevent division by zero
-    const safeCurrent = Math.min(current, totalQuestions - 1); // Ensure current doesn't exceed total
-    const progressPercentage = ((safeCurrent + 1) / totalQuestions) * 100;
+  const totalQuestions = quizQuestions.length || 1;
+  const safeCurrent = Math.min(current, totalQuestions - 1);
+  const progressPercentage = ((safeCurrent + 1) / totalQuestions) * 100;
 
-    return (
-        <div className="w-full flex items-center justify-center">
-            <div className="flex items-center w-[971px]">
-                {/* Left circle - Always green */}
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                >
-                    <circle cx="20" cy="20" r="20" fill="#0D0E10" />
-                </svg>
+  return (
+    <div className="w-full flex items-center justify-center">
+      <div className="flex items-center w-full max-w-6xl">
+        {/* Left circle - always filled */}
+        {/* <div className="w-5 h-5 rounded-full bg-primary-dark" /> */}
 
-                {/* Progress bar */}
-                <div className="flex-1 bg-[#EBECEF] relative overflow-hidden">
-                    <div
-                        className="bg-primary h-[10px] transition-all duration-300"
-                        style={{
-                            width: `${progressPercentage}%`,
-                        }}
-                    ></div>
-                </div>
-
-                {/* Right circle - Gray by default, green when quiz is finished */}
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 40 40"
-                    fill="none"
-                >
-                    <circle
-                        cx="20"
-                        cy="20"
-                        r="20"
-                        fill={safeCurrent >= totalQuestions - 1 ? "" : ""}
-                    />
-                </svg>
-            </div>
+        {/* Progress bar background */}
+        <div className="flex-1 bg-[#EBECEF] h-[10px] rounded-full relative overflow-hidden">
+          <div
+            className="bg-primary-dark h-full rounded-full transition-all duration-300 ease-in-out"
+            style={{ width: `${progressPercentage}%` }}
+          />
         </div>
-    );
+
+        {/* Right circle - fill based on quiz state */}
+        {/* <div
+          className={`w-5 h-5 rounded-full ${
+            safeCurrent >= totalQuestions - 1
+              ? "bg-primary-dark"
+              : "bg-[#EBECEF]"
+          }`}
+        /> */}
+      </div>
+    </div>
+  );
 };
 
 export default Progressbar;

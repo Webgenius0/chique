@@ -1,6 +1,7 @@
 import { DM_Sans, Playfair_Display, Poppins } from 'next/font/google';
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { Toaster } from 'react-hot-toast';
 
 // Primary - DM Sans (all weights)
 const primaryFont = DM_Sans({
@@ -31,6 +32,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning className={`${primaryFont.variable} ${secondaryFont.variable} ${specialFont.variable}`}>
             <body suppressHydrationWarning>
+                <Toaster position="top-center" />
                 <AntdRegistry>
                     {children}
                 </AntdRegistry>
