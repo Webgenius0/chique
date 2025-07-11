@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 const WelcomePage = () => {
   const router = useRouter();
   const handleNavigate = () => {
-    router.push("/");
+    router.push("/auth/sign-in");
   };
   return (
     <div className="container min-h-screen py-32 flex justify-center items-center">
