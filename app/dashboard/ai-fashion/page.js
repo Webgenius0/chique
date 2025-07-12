@@ -1,7 +1,11 @@
+"use client";
+
 import { pantData } from "@/data/db";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const AiFashion = () => {
+  const router = useRouter();
   return (
     <div className="w-full flex flex-col gap-6 py-8">
       <p className="text-2xl font-semibold font-primary text-primary-dark">
@@ -9,7 +13,11 @@ const AiFashion = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-5">
         {pantData.map((item) => (
-          <div key={item.id} className="w-full flex flex-col gap-3">
+          <div
+            onClick={() => router.push("/dashboard/ai-style")}
+            key={item.id}
+            className="w-full flex flex-col gap-3 cursor-pointer"
+          >
             <div className="w-full h-[360px] overflow-hidden rounded-2xl border p-4">
               <Image
                 src={item.image}
