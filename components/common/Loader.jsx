@@ -22,5 +22,4 @@ const Loader = dynamic(
   }),
   { ssr: false }
 );
-
 export default Loader;

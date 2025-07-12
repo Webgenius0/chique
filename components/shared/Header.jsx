@@ -8,7 +8,7 @@ const Header = () => {
       <div className="container flex gap-6 justify-between items-center">
         <Logo />
         <NavItems />
-        <div className="flex gap-5 justify-end items-center shrink-0">
+        <div className="flex gap-5 justify-end items-center shrink-0 hidden">
           <Link href={"/auth/sign-up"}>Sign Up</Link>
           <Link
             href={"/auth/sign-in"}
@@ -21,5 +21,4 @@ const Header = () => {
     </header>
   );
 };
-
 export default Header;

@@ -12,7 +12,7 @@ const NavItems = () => {
   ];
 
   return (
-    <nav className="flex  justify-between items-center gap-6">
+    <nav className="md:flex hidden justify-between items-center gap-6">
       {navItems.map((item) => (
         <Link
           key={item.path}

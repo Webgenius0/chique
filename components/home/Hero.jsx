@@ -9,7 +9,7 @@ import left_image from "@/public/images/bannerImages/leftFlower.png";
 
 const Hero = () => {
   return (
-    <div className="relative w-full h-[750px] overflow-hidden bg-white">
+    <div className="relative w-full xl:h-[750px] lg:h-[600px] md:h-[380px] h-[600px] overflow-hidden bg-white"> 
       {/* Left Flower Image with Animation */}
       <motion.div
         initial={{
@@ -20,7 +20,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute left-0 bottom-0 w-[300px] md:w-[400px] lg:w-[500px]"
+        className="absolute left-0 xl:bottom-0 w-[250px] lg:w-[400px] xl:w-[500px]"
       >
         <Image
           src={left_image}
@@ -40,7 +40,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute right-0 bottom-0 w-[300px] md:w-[400px] lg:w-[500px]"
+        className="absolute right-0 bottom-0 w-[250px] lg:w-[370px] xl:w-[500px]" // lg:top-[100px] xl:bottom-0 xs:h-[380px] h-[300px]
       >
         <Image
           src={right_image}
@@ -55,18 +55,18 @@ const Hero = () => {
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
-        className="relative z-10 max-w-xl mx-auto pt-60 flex flex-col gap-6 justify-center items-center"
+        className="w-full relative px-4 z-10 max-w-xl mx-auto xl:pt-60 lg:pt-40 pt-28 flex flex-col lg:gap-6 gap-3 justify-center items-center"
       >
         <CommonTitle
           text="Your Personal Style Assistant"
-          className="text-start font-secondary !font-semibold !leading-[60px]"
+          className="text-start font-secondary !font-semibold"
         />
-        <p className="text-xl font-primary text-primary-dark font-normal">
+        <p className="md:text-xl text-base font-primary text-primary-dark font-normal text-center md:text-start">
           Discover your unique style, organize your wardrobe, and get
           personalized fashion advice with Chique Al.
         </p>
 
-        <div className="w-full mt-2 flex gap-3 justify-start items-start">
+        <div className="w-full mt-2 flex gap-3 md:justify-start md:items-start justify-center">
           <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
             Try Chique Al
           </CommonBtn>
