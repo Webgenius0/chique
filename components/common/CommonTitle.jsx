@@ -4,7 +4,7 @@ const CommonTitle = ({ text = "", className }) => {
   return (
     <h3
       className={cn(
-        "text-[56px] font-semibold text-center text-primary-dark",
+        "lg:text-[56px] md:text-4xl sm:text-3xl xs:text-2xl text-[22px] font-semibold text-center sm:text-start text-primary-dark",
         className
       )}
     >

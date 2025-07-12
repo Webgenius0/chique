@@ -1,5 +1,4 @@
 "use client";
-
 import CommonSectionTitle from "../common/CommonSectionTitle";
 import { LuPalette } from "react-icons/lu";
 import { PiTShirtLight } from "react-icons/pi";
@@ -53,10 +52,8 @@ const ChiqueAI = () => {
         "Get real-time fashion advice through intelligent chat that understands your preferences.",
     },
   ];
-
   return (
-    <div className="w-full relative">
-      <div className="container flex flex-col gap-14 pb-20">
+      <div className="w-full container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 pb-20">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -76,15 +73,17 @@ const ChiqueAI = () => {
             priority
           />
         </motion.div>
+        {/* title */}
         <CommonSectionTitle
           text="What Chique AI Does"
           className={"!font-bold !font-secondary"}
         />
-        <div className="w-full grid grid-cols-4 gap-5">
+        {/* chique ai cards */}
+        <div className="w-full grid lg:grid-cols-4 sm:grid-cols-2 gap-5">
           {cardItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className="w-full flex flex-col gap-4 bg-[#F8F8F8] p-6 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
+              className="w-full flex flex-col gap-4 bg-[#F8F8F8] xl:p-6 p-4 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
@@ -105,8 +104,6 @@ const ChiqueAI = () => {
           ))}
         </div>
       </div>
-    </div>
   );
 };
-
 export default ChiqueAI;
