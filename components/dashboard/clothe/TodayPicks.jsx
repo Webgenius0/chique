@@ -7,10 +7,12 @@ import { RiDownloadCloudFill } from "react-icons/ri";
 import { marqueData } from "@/data/db";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
+import { useRouter } from "next/navigation";
 
 const TodayPicks = () => {
   const [temperature, setTemperature] = useState(24);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   const API_KEY = "YOUR_API_KEY";
   const city = "Dhaka";
@@ -84,7 +86,11 @@ const TodayPicks = () => {
         <p className="text-[28px] text-primary-dark font-primary font-bold text-center">
           Add an item to your closet
         </p>
-        <button className="w-fit flex gap-2 items-center px-20 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary">
+
+        <button
+          onClick={() => router.push("/dashboard/add-item")}
+          className="w-fit flex gap-2 items-center px-20 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary cursor-pointer"
+        >
           <RiDownloadCloudFill className="text-xl" />
           Upload from photos
         </button>

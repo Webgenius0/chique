@@ -15,7 +15,11 @@ const Wardrobe = () => {
             key={item.id}
           >
             <div className="w-full h-[290px] overflow-hidden border border-primary-dark rounded-2xl cursor-pointer">
-              <Image src={item.image} className="w-full h-full object-cover" />
+              <Image
+                src={item.image}
+                className="w-full h-full object-cover"
+                alt={item.name}
+              />
             </div>
             <div className="w-full flex gap-4 bg-[#F8F8F8] p-4 rounded-lg">
               <div className="w-12 h-12 bg-[#EDEDED] rounded-lg p-3">

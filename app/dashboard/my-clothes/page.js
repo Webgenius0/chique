@@ -10,8 +10,8 @@ export const metadata = {
 };
 const MyClothes = () => {
   return (
-    <div className="w-full h-full py-10 px-5">
-      <div className="w-full flex gap-5">
+    <div className="w-full py-10 px-5">
+      <div className="w-full flex gap-10">
         <Wardrobe />
         <div className="max-w-[50%]">
           <TodayPicks />
