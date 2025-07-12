@@ -1,6 +1,6 @@
 "use client";
 
-import CommonBtn from "@/components/common/CommonBtn";
+import { useRouter } from "next/navigation";
 import { GiShoppingBag } from "react-icons/gi";
 
 const styleProfiles = [
@@ -63,6 +63,7 @@ const styleProfiles = [
 ];
 
 const ProfileResults = () => {
+  const router = useRouter();
   return (
     <div className="container flex flex-col gap-16 justify-center items-center py-12">
       <h1 className="text-3xl sm:text-4xl font-bold text-center font-secondary">
@@ -109,10 +110,13 @@ const ProfileResults = () => {
           </div>
         ))}
       </div>
-      <CommonBtn className="w-fit flex gap-2 rounded-lg">
+      <button
+        className="w-fit flex gap-2 rounded-lg bg-primary-dark font-primary text-white p-4 justify-center items-center cursor-pointer"
+        onClick={() => router.push("/dashboard")}
+      >
         {" "}
-        <GiShoppingBag /> Shop My Style
-      </CommonBtn>
+        <GiShoppingBag className="text-xl" /> Shop My Style
+      </button>
     </div>
   );
 };
