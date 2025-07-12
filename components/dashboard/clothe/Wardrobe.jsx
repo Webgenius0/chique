@@ -1,8 +1,12 @@
+"use client"
+
 import { wardrobeItems } from "@/data/db";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { GoFileDirectory } from "react-icons/go";
 
 const Wardrobe = () => {
+  const router = useRouter();
   return (
     <div className="w-full min-w-[50%] flex flex-col gap-6">
       <p className="text-2xl text-primary-dark font-medium font-primary">
@@ -13,6 +17,7 @@ const Wardrobe = () => {
           <div
             className="w-full flex flex-col gap-3 cursor-pointer "
             key={item.id}
+            onClick={() => router.push("/dashboard/ai-fashion")}
           >
             <div className="w-full h-[290px] overflow-hidden border border-primary-dark rounded-2xl cursor-pointer">
               <Image

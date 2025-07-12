@@ -10,6 +10,11 @@ import image3 from "@/public/images/bannerImages/image3.jpg";
 import outfit_image1 from "@/public/images/bannerImages/outfit_image1.png";
 import outfit_image2 from "@/public/images/bannerImages/outfit_image2.png";
 import outfit_image3 from "@/public/images/bannerImages/outfit_image3.png";
+import pant_image1 from "@/public/images/bannerImages/pant_image1.png";
+import pant_image2 from "@/public/images/bannerImages/pant_image2.png";
+import pant_image3 from "@/public/images/bannerImages/pant_image3.png";
+import pant_image4 from "@/public/images/bannerImages/pant_image4.png";
+import pant_image5 from "@/public/images/bannerImages/pant_image5.png";
 
 export const quizQuestions = [
   {
@@ -203,5 +208,33 @@ export const outfitData = [
     image: outfit_image3,
     title: "Perfect for 65-750F",
     subtitle: "Casual outfit for a warm day out",
+  },
+];
+
+export const pantData = [
+  {
+    id: 1,
+    image: pant_image1,
+    title: "Classic Blue Denim Jeans",
+  },
+  {
+    id: 2,
+    image: pant_image2,
+    title: "Formal Navy Dress Pants",
+  },
+  {
+    id: 3,
+    image: pant_image3,
+    title: "Khaki Chino Pants",
+  },
+  {
+    id: 4,
+    image: pant_image4,
+    title: "Cream Slim Fit Cotton Pants",
+  },
+  {
+    id: 5,
+    image: pant_image5,
+    title: "Olive Green Cargo Pants",
   },
 ];
