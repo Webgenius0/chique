@@ -53,7 +53,8 @@ const ChiqueAI = () => {
     },
   ];
   return (
-      <div className="w-full relative container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 xl:pb-20 lg:pb-16 md:pb-4">
+    <div className="w-full relative overflow-hidden">
+      <div className="w-full container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 xl:pb-20 lg:pb-16 md:pb-4">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -104,6 +105,7 @@ const ChiqueAI = () => {
           ))}
         </div>
       </div>
+    </div>
   );
 };
 export default ChiqueAI;

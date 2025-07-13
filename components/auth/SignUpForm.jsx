@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import CommonInputWrapper from "@/components/common/CommonInputWrapper";
 import { validatePassword } from "@/utils/validatePassword";
 import CommonBtn from "../common/CommonBtn";
+import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const SignUpForm = () => {
   // on submit
   const onSubmit = (data) => {
     console.log(data);
+    router.push("/auth/user-verification");
   };
   return (
     <form
@@ -89,8 +92,7 @@ const SignUpForm = () => {
         type="submit"
         className={``}
         isLoading={false}
-        link={true}
-        path="/auth/user-verification"
+      // link={true}
       >
         Sign Up
       </CommonBtn>
