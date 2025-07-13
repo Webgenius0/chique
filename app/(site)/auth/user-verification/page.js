@@ -119,5 +119,4 @@ const UserVerification = () => {
     </div>
   );
 };
-
 export default UserVerification;

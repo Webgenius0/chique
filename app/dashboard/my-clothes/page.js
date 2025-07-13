@@ -13,7 +13,7 @@ const MyClothes = () => {
     <div className="w-full overflow-hidden py-8">
       <div className="w-full flex gap-10">
         <Wardrobe />
-        <div className="max-w-[50%]">
+        <div className="max-w-[50%] w-full ">
           <TodayPicks />
           <AIStylist />
         </div>
@@ -22,5 +22,4 @@ const MyClothes = () => {
     </div>
   );
 };
-
 export default MyClothes;

@@ -19,8 +19,8 @@ const ContactForm = () => {
     console.log(data);
   };
   return (
-    <div className="bg-[#FAFAFB] max-w-[646px] w-full flex flex-col gap-8 rounded-3xl border border-[#DFE0E4] p-8 items-start justify-start">
-      <p className="text-3xl font-extrabold text-primary-dark font-secondary">Contact now</p>
+    <div className="bg-[#FAFAFB] max-w-[646px] w-full flex flex-col xl:gap-8 lg:gap-7 md:gap-5 gap-4 rounded-3xl border border-[#DFE0E4] xl:p-8 lg:p-7 md:p-6 p-4 items-start justify-start">
+      <p className="xl:text-3xl lg:text-2xl md:text-xl text-lg font-extrabold text-primary-dark font-secondary">Contact now</p>
       {/* contact now form */}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -102,7 +102,7 @@ const ContactForm = () => {
         />
 
         {/* terms and conditions */}
-        <label htmlFor="terms" className="w-full flex gap-2 cursor-pointer justify-start items-start py-5">
+        <label htmlFor="terms" className="w-full flex gap-2 cursor-pointer justify-start items-start xl:py-5 lg:py-4 md:py-3 py-2">
           <input
             type="checkbox"
             id="terms"

@@ -55,7 +55,7 @@ const Header = () => {
               className="cursor-pointer md:hidden"
               aria-label="Toggle menu"
             >
-              <MdOutlineMenuOpen className="text-2xl" />
+              <MdOutlineMenuOpen className="text-2xl text-[#0d0e10b4]" />
             </button>
             <Logo />
           </div>

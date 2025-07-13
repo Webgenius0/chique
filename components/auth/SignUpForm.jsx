@@ -1,5 +1,4 @@
 "use client";
-
 import { useForm } from "react-hook-form";
 import CommonInputWrapper from "@/components/common/CommonInputWrapper";
 import { validatePassword } from "@/utils/validatePassword";
@@ -98,5 +97,4 @@ const SignUpForm = () => {
     </form>
   );
 };
-
 export default SignUpForm;
