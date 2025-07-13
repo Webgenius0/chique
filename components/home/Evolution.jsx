@@ -9,7 +9,7 @@ import Image from "next/image";
 const Evolution = () => {
   return (
     <div className="w-full relative">
-      <div className="max-w-4xl mx-auto flex flex-col justify-center items-center gap-8 py-20">
+      <div className="max-w-4xl mx-auto flex flex-col justify-center items-center xl:gap-8 lg:gap-7 md:gap-6 sm:gap-5 gap-3 xl:py-20 lg:py-14 md:py-7 xs:py-5">
         {/* left side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -33,7 +33,7 @@ const Evolution = () => {
           text="Begin Your Style Evolution"
           className={"!font-bold !font-secondary"}
         />
-        <p className="text-xl text-center font-medium font-primary text-primary-dark">
+        <p className="md:text-xl text-sm text-center font-medium font-primary text-primary-dark px-4">
           Discover your aesthetic. Streamline your wardrobe. Dress with clarity.
         </p>
         <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-10">

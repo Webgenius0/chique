@@ -7,7 +7,7 @@ import { FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
+  // social links
   const socialLinks = [
     {
       id: 1,
@@ -18,22 +18,27 @@ const Footer = () => {
     { id: 3, icon: <FaLinkedin className="text-3xl" />, link: "https://www.linkedin.com/" },
     { id: 4, icon: <FaFacebookSquare className="text-3xl" />, link: "https://www.facebook.com/" },
   ];
-
+  // items
   const items = [
     { id: 1, name: "Home" },
     { id: 2, name: "Features" },
     { id: 3, name: "Contact" },
     { id: 4, name: "Support" },
   ];
+
+  // main ui component
   return (
-    <footer className="w-full py-10">
-      <div className="container flex flex-col gap-10 justify-start">
-        <div className="w-full flex gap-6 justify-between items-center">
-          <div className="flex flex-col text-lg gap-4 justify-start items-start">
+    <footer className="w-full lg:py-10 py-6">
+      <div className="container flex flex-col xl:gap-10 lg:gap-8 md:gap-6 gap-4 justify-start">
+          {/* lgoo & copy right wrapper*/}
+        <div className="w-full flex xs:flex-row flex-col gap-6 justify-between items-center">
+          {/* lgoo & copy right */}
+          <div className="flex flex-col text-lg md:gap-4 gap-1 xs:justify-start justify-center items-start">
             <Logo className="w-40 h-11" />
-            <p> © {currentYear} Chique AI. All rights reserved.</p>
+            <p className="text-base xs:text-xl"> © {currentYear} Chique AI. All rights reserved.</p>
           </div>
-          <div className="grid grid-cols-4 gap-3">
+          {/* social links */}
+          <div className="grid grid-cols-4 shrink-0 gap-3">
             {socialLinks.map((social) => (
               <a
                 href={social.link}
@@ -48,13 +53,13 @@ const Footer = () => {
         </div>
         <hr className="w-full border border-[#0D0E10]" />
       </div>
-      <div className="w-full flex gap-3 justify-center items-center pt-10">
+      {/* footer items */}
+      <div className="w-full flex xs:gap-3 gap-1.5 justify-center items-center xl:pt-10 lg:pt-8 md:pt-6 pt-4">
         {items.map((item, index) => (
           <div
             key={item.id}
-            className={`pr-3 ${
-              index !== items.length - 1 ? "border-r border-[#0D0E10]" : ""
-            }`}
+            className={`pr-3 ${index !== items.length - 1 ? "border-r border-[#0D0E10]" : ""
+              }`}
           >
             {item.name}
           </div>
@@ -63,5 +68,4 @@ const Footer = () => {
     </footer>
   );
 };
-
 export default Footer;

@@ -5,6 +5,7 @@ import { validatePassword } from '@/utils/validatePassword';
 import CommonBtn from '../common/CommonBtn';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import ValidationCheck from './ValidationCheck';
 
 const CreatePasswordForm = () => {
     const router = useRouter()
@@ -15,7 +16,6 @@ const CreatePasswordForm = () => {
         watch,
         formState: { errors }
     } = useForm();
-
     // password checks state
     const [passwordChecks, setPasswordChecks] = useState({
         hasUpperCase: false,
@@ -24,9 +24,8 @@ const CreatePasswordForm = () => {
         hasSpecialChar: false,
         hasMinLength: false
     });
-
     const password = watch("password");
-
+    // password characters checks
     useEffect(() => {
         if (password) {
             setPasswordChecks({
@@ -46,13 +45,14 @@ const CreatePasswordForm = () => {
             });
         }
     }, [password]);
-    // on submit
+    // form submit
     const onSubmit = (data) => {
         console.log(data);
         router.push("/auth/sign-in");
     }
+    // main ui component
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 sm:gap-6">
             {/* password */}
             <CommonInputWrapper
                 register={register}
@@ -82,54 +82,37 @@ const CreatePasswordForm = () => {
                 }}
             />
             {/* password validation */}
-            <div className="flex flex-col gap-3">
-                <p className="text-[rgba(0,0,0,0.80)]">Password must contain:</p>
-                {/* uppercase and lowercase characters check */}
-                <div className='grid grid-cols-2 gap-2'>
-                    <p className={`text-base ${passwordChecks.hasUpperCase ? 'text-[#2FA75F]' : 'text-[#FF3B3B]'}`}>
-                        <input
-                            type="checkbox"
-                            className={passwordChecks.hasUpperCase ? 'accent-green-400' : '[#FF3B3B]'}
-                            checked={passwordChecks.hasUpperCase}
-                            readOnly
-                        /> Uppercase letter
-                    </p>
-                    <p className={`text-base ${passwordChecks.hasLowerCase ? 'text-[#2FA75F]' : 'text-[#FF3B3B]'}`}>
-                        <input
-                            type="checkbox"
-                            className={passwordChecks.hasLowerCase ? 'accent-green-400' : '[#FF3B3B]'}
-                            checked={passwordChecks.hasLowerCase}
-                            readOnly
-                        /> Lowercase letter
-                    </p>
-                    <p className={`text-base ${passwordChecks.hasNumber ? 'text-[#2FA75F]' : 'text-[#FF3B3B]'}`}>
-                        <input
-                            type="checkbox"
-                            className={passwordChecks.hasNumber ? 'accent-green-400' : '[#FF3B3B]'}
-                            checked={passwordChecks.hasNumber}
-                            readOnly
-                        /> Number
-                    </p>
-                    <p className={`text-base ${passwordChecks.hasSpecialChar ? 'text-[#2FA75F]' : 'text-[#FF3B3B]'}`}>
-                        <input
-                            type="checkbox"
-                            className={passwordChecks.hasSpecialChar ? 'accent-green-400' : 'accent-[#FF3B3B]'}
-                            checked={passwordChecks.hasSpecialChar}
-                            readOnly
-                        /> Special character
-                    </p>
-                    <p className={`text-base ${passwordChecks.hasMinLength ? 'text-[#2FA75F]' : 'text-[#FF3B3B]'}`}>
-                        <input
-                            type="checkbox"
-                            className={passwordChecks.hasMinLength ? 'accent-green-400' : 'accent-[#FF3B3B]'}
-                            checked={passwordChecks.hasMinLength}
-                            readOnly
-                        /> 8+ characters
-                    </p>
+            <div className="flex flex-col gap-3 sm:gap-4">
+                <p className="text-sm sm:text-base text-gray-700">Password must contain:</p>
+                {/* validation checks grid */}
+                <div className='grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3'>
+                    <ValidationCheck
+                        isValid={passwordChecks.hasUpperCase}
+                        label="Uppercase letter"
+                    />
+                    <ValidationCheck
+                        isValid={passwordChecks.hasLowerCase}
+                        label="Lowercase letter"
+                    />
+                    <ValidationCheck
+                        isValid={passwordChecks.hasNumber}
+                        label="Number"
+                    />
+                    <ValidationCheck
+                        isValid={passwordChecks.hasSpecialChar}
+                        label="Special character"
+                    />
+                    <ValidationCheck
+                        isValid={passwordChecks.hasMinLength}
+                        label="8+ characters"
+                        className="xs:col-span-2 sm:col-span-1"
+                    />
                 </div>
             </div>
             {/* change button */}
-            <CommonBtn className={""} type='submit' >Change</CommonBtn>
+            <CommonBtn className="mt-2 sm:mt-4" type='submit'>
+                Change Password
+            </CommonBtn>
         </form>
     );
 };

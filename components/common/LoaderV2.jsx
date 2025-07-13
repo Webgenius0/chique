@@ -1,14 +1,16 @@
-/* eslint-disable no-shadow-restricted-names */
 "use client"
 import { Infinity } from 'ldrs/react'
 import 'ldrs/react/Infinity.css'
-import { useEffect } from 'react';
 
-const LoaderV2 = ({ size = 65, stroke = "7", color = "#FFF", speed = "1", strokeLength = "0.10", bgOpacity = "0.1" }) => {
-    useEffect(() => {
-        // Register the component only on client side
-        lineSpinner.register();
-    }, []);
+const LoaderV2 = ({
+    size = 65,
+    stroke = "7",
+    color = "#FFF",
+    speed = "1",
+    strokeLength = "0.10",
+    bgOpacity = "0.1"
+}) => {
+    // No need for useEffect or register with Infinity loader
     return (
         <Infinity
             size={size}
@@ -20,6 +22,4 @@ const LoaderV2 = ({ size = 65, stroke = "7", color = "#FFF", speed = "1", stroke
         />
     );
 };
-
 export default LoaderV2;
-
