@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 const ResendCode = () => {
   const [resendActive, setResendActive] = useState(false);
   const [seconds, setSeconds] = useState(25);
@@ -14,7 +13,7 @@ const ResendCode = () => {
     // resendOtp.mutate({ email: userData?.email });
   };
   return (
-    <p className="text-base text-gray-400 font-primary">
+    <p className="text-base text-gray-400 font-primary text-center">
       Don&apos;t receive the code?{" "}
       {resendActive ? (
         <span

@@ -13,7 +13,7 @@ const CommonBtn = ({
     onclick,
     disabled = false,
 }) => {
-    const commonStyle = "w-full cursor-pointer bg-primary-dark rounded-4xl xs:p-4 p-3 flex justify-center min-h-[60px] items-center lg:text-xl md:font-semibold font-medium text-white capitalize"
+    const commonStyle = "w-full cursor-pointer bg-primary-dark rounded-4xl xs:p-4 flex justify-center min-h-[60px] items-center lg:text-xl md:font-semibold font-medium text-white capitalize"
     return (
         <>
             {link ? (
@@ -33,5 +33,4 @@ const CommonBtn = ({
         </>
     );
 };
-
 export default CommonBtn;

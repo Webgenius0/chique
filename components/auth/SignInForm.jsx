@@ -60,7 +60,7 @@ const SignInForm = () => {
       />
 
       {/* terms and forgot password */}
-      <div className="flex justify-between">
+      <div className="flex xs:flex-row flex-col gap-2 xs:gap-0 justify-between">
         {/* terms */}
         <label
           htmlFor="terms"

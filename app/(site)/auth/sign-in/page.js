@@ -13,7 +13,7 @@ export const metadata = {
 
 const SignIn = () => {
     return (
-        <div className="container min-h-screen py-32 flex justify-center items-center ">
+        <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-4 flex justify-center items-center ">
             <AuthWrapper>
                 <div className="w-full flex flex-col gap-4 justify-start items-center">
                     {/* Header */}
@@ -35,5 +35,4 @@ const SignIn = () => {
         </div>
     )
 }
-
 export default SignIn

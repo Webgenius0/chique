@@ -88,7 +88,7 @@ const SignUpForm = () => {
       {/* submit button */}
       <CommonBtn
         type="submit"
-        className={`mt-4`}
+        className={``}
         isLoading={false}
         link={true}
         path="/auth/user-verification"

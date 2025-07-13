@@ -6,6 +6,7 @@ import { FaEyeSlash, FaEye } from "react-icons/fa6";
 import { Select } from "antd";
 import { Controller } from "react-hook-form";
 import { cn } from "@/lib/utils";
+
 const CommonInputWrapper = ({
   wrapperClass,
   inputClass,
@@ -31,7 +32,6 @@ const CommonInputWrapper = ({
 }) => {
   const [show, setShow] = useState(false);
   const errorMessage = errors[register_as]?.message;
-  // Function to normalize the value to always return primitive values
   const normalizeValue = (val) => {
     if (selectMode === "multiple" || selectMode === "tags") {
       if (Array.isArray(val)) {
@@ -41,27 +41,34 @@ const CommonInputWrapper = ({
     }
     return typeof val === 'object' ? val?.value : val;
   };
-  // Normalize the initial value
   const normalizedValue = normalizeValue(value);
+
   return (
     <div
       className={cn(
-        "w-full flex flex-col gap-2 justify-start items-start text-lg text-primary-dark",
+        "w-full flex flex-col gap-1 sm:gap-2 text-base sm:text-lg text-primary-dark",
         wrapperClass
       )}
     >
       {/* Label */}
       {label && (
         <label
-          className={cn("capitalize font-medium", labeClass)}
+          className={cn("capitalize font-medium text-sm sm:text-base", labeClass)}
           htmlFor={register_as}
         >
           {label}
         </label>
       )}
-      <div className={cn('w-full border px-6 py-4 flex gap-2 rounded-xl border-common-border bg-white', innerWrapper)}>
-        {/* left icon */}
-        {icon && <div className="shrink-0 w-fit"> {icon} </div>}
+
+      <div className={cn(
+        'w-full border px-4 sm:px-6 py-3 md:py-4 flex gap-2 rounded-lg sm:rounded-xl border-common-border bg-white',
+        innerWrapper
+      )}>
+        {/* Left icon */}
+        {icon && <div className="shrink-0 w-fit flex items-center"> 
+          {React.cloneElement(icon, { className: "text-lg sm:text-xl" })}
+        </div>}
+
         {/* Textarea */}
         {type === "textarea" ? (
           <textarea
@@ -70,18 +77,13 @@ const CommonInputWrapper = ({
             name={name}
             defaultValue={value}
             className={cn(
-              "w-full border-none capitalize outline-none resize-none min-h-48 ",
+              "w-full border-none outline-none resize-none min-h-32 sm:min-h-48 text-sm sm:text-base",
               textareaClass
             )}
             {...register(register_as, validationRules)}
           />
         ) : type === "select" ? (
-          <div
-            className={cn(
-              "w-full !text-lg",
-              selectClass
-            )}
-          >
+          <div className={cn("w-full text-sm sm:text-base", selectClass)}>
             <Controller
               control={control}
               name={register_as}
@@ -97,16 +99,15 @@ const CommonInputWrapper = ({
                   value={normalizeValue(field.value)}
                   onChange={(selectedValue, option) => {
                     if (selectMode === "multiple" || selectMode === "tags") {
-                      // For multiple select, return array of values
                       field.onChange(selectedValue);
                     } else {
-                      // For single select, return just the value (not the object)
                       field.onChange(option?.value || selectedValue);
                     }
                   }}
-                  className="w-full bg-transparent border-none capitalize outline-none placeholder:text-dark"
+                  className="w-full bg-transparent border-none capitalize outline-none placeholder:text-dark text-sm sm:text-base"
                   showSearch
                   allowClear
+                  dropdownClassName="text-sm sm:text-base"
                 />
               )}
             />
@@ -120,23 +121,30 @@ const CommonInputWrapper = ({
             defaultValue={value}
             readOnly={readOnly}
             className={cn(
-              "w-full border-none  outline-none",
+              "w-full border-none outline-none text-sm sm:text-base",
               inputClass
             )}
             {...register(register_as, validationRules)}
           />
         )}
+
         {/* Eye Icon for Password */}
         {type === "password" && (
           <button
             type="button"
             onClick={() => setShow((prevState) => !prevState)}
-            className={`cursor-pointer`}
+            className="cursor-pointer flex items-center"
+            aria-label={show ? "Hide password" : "Show password"}
           >
-            {show ? <FaEye className="sm:text-2xl text-xl" /> : <FaEyeSlash className="sm:text-2xl text-xl" />}
+            {show ? (
+              <FaEye className="text-lg sm:text-xl" />
+            ) : (
+              <FaEyeSlash className="text-lg sm:text-xl" />
+            )}
           </button>
         )}
       </div>
+
       {/* Error Message */}
       {errorMessage && <ErrorText error={errorMessage} />}
     </div>
