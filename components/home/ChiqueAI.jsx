@@ -53,7 +53,7 @@ const ChiqueAI = () => {
     },
   ];
   return (
-      <div className="w-full container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 pb-20">
+      <div className="w-full relative container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 xl:pb-20 lg:pb-16 md:pb-4">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -64,7 +64,7 @@ const ChiqueAI = () => {
           }}
           animate={{ x: 0, opacity: 1, rotateX: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute right-0 -bottom-5 w-[300px] md:w-[400px] lg:w-[300px]"
+          className="absolute right-0 -bottom-5 w-[300px] md:w-[400px] lg:w-[300px] "
         >
           <Image
             src={layer_image}

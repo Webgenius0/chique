@@ -38,8 +38,8 @@ const About = () => {
     },
   ];
   return (
-    <div id="about" className="w-full  relative">
-      <div className="container flex flex-col gap-14 py-20 px-28">
+    <div id="about" className="w-full relative">
+      <div className="container flex flex-col xl:gap-14 lg:gap-8 gap-5 xl:py-20 md:pt-10 pt-5 xl:px-28">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -63,19 +63,18 @@ const About = () => {
           text="Who It's For"
           className={"!font-bold !font-secondary"}
         />
-        <div className="w-full grid grid-cols-2 gap-20">
+        {/* about cards */}
+        <div className="w-full grid sm:grid-cols-2 xl:gap-20 lg:gap-10 gap-5">
           {items.map((item) => (
-            <div key={item.id}>
-              <div className="w-full flex gap-4 justify-center">
-                <div className="text-2xl">{item.icon}</div>
-                <div className="w-full flex flex-col gap-3 -mt-1">
-                  <p className="text-3xl font-bold font-secondary text-primary-dark">
-                    {item.title}
-                  </p>
-                  <p className="text-base font-light font-primary text-primary-dark">
-                    {item.subtitle}
-                  </p>
-                </div>
+            <div key={item.id} className="w-full flex md:gap-4 gap-2 justify-center">
+              <div className="md:text-2xl text-lg">{item.icon}</div>
+              <div className="w-full flex flex-col md:gap-3 gap-1.5 -mt-1">
+                <p className="xl:text-3xl lg:text-xl text-lg md:font-bold font-semibold font-secondary text-primary-dark">
+                  {item.title}
+                </p>
+                <p className="md:text-base text-sm font-light font-primary text-primary-dark">
+                  {item.subtitle}
+                </p>
               </div>
             </div>
           ))}
@@ -84,5 +83,4 @@ const About = () => {
     </div>
   );
 };
-
 export default About;
