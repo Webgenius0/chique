@@ -47,7 +47,7 @@ const SideBar = ({ isOpen = false, onClose }) => {
     >
       {/* LOGO */}
       <div className="w-full h-20 shrink-0 sticky top-0 flex justify-center items-center border-b p-2 overflow-hidden border-b-primary-dark">
-        <Logo className="w-full h-full justify-center mr-3" />
+        <Logo className="w-full h-full justify-center md:mr-3 -mr-12" />
         {/* cross button  */}
         <button
           onClick={onClose}
