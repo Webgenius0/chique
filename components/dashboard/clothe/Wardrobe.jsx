@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { wardrobeItems } from "@/data/db";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ const Wardrobe = () => {
           <div
             className="w-full flex flex-col gap-3 cursor-pointer "
             key={item.id}
-            onClick={() => router.push("/dashboard/ai-fashion")}
+            onClick={() => router.push(`/dashboard/ai-fashion/${item.id}`)}
           >
             <div className="w-full h-[290px] overflow-hidden border border-primary-dark rounded-2xl cursor-pointer">
               <Image
