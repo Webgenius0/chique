@@ -47,6 +47,7 @@ const ClothingUploader = () => {
               or take a photo with your camera
             </p>
             <button
+            type="button"
               onClick={triggerFileInput}
               className="mt-4 px-6 py-2 bg-black text-white rounded-md text-base font-primary font-medium cursor-pointer"
             >

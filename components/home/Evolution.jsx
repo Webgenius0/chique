@@ -1,5 +1,4 @@
 "use client";
-
 import CommonBtn from "../common/CommonBtn";
 import CommonSectionTitle from "../common/CommonSectionTitle";
 import { motion } from "framer-motion";
@@ -36,12 +35,15 @@ const Evolution = () => {
         <p className="md:text-xl text-sm text-center font-medium font-primary text-primary-dark px-4">
           Discover your aesthetic. Streamline your wardrobe. Dress with clarity.
         </p>
-        <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
+        <CommonBtn
+          link={true}
+          path="/dashboard"
+          className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-10"
+        >
           Try Chique Al
         </CommonBtn>
       </div>
     </div>
   );
 };
-
 export default Evolution;

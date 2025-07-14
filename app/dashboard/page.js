@@ -12,7 +12,6 @@ const Dashboard = () => {
       <MessageScreen />
       <SendMessage />
     </div>
-  )
-}
-
-export default Dashboard
+  );
+};
+export default Dashboard;

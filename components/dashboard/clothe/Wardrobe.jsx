@@ -1,5 +1,4 @@
 "use client"
-
 import { wardrobeItems } from "@/data/db";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,7 +11,7 @@ const Wardrobe = () => {
       <p className="text-2xl text-primary-dark font-medium font-primary">
         Add New Item to Your Wardrobe
       </p>
-      <div className="w-full grid grid-cols-3 gap-4">
+      <div className="w-full grid 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-3 sm:grid-cols-2 gap-4">
         {wardrobeItems.map((item) => (
           <div
             className="w-full flex flex-col gap-3 cursor-pointer "

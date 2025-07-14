@@ -84,7 +84,7 @@ const ChiqueAI = () => {
           {cardItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className="w-full flex flex-col gap-4 bg-[#F8F8F8] xl:p-6 p-4 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
+              className="w-full flex flex-col md:gap-4 gap-1 bg-[#F8F8F8] xl:p-6 p-4 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
@@ -92,7 +92,7 @@ const ChiqueAI = () => {
               viewport={{ once: true, amount: 0.4 }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl p-[18px] cursor-pointer">
+              <div className="bg-[#F4F4F4] lg:w-[60px] w-10 lg:h-[60px] h-10 rounded-full lg:text-2xl text-xl flex items-center justify-center cursor-pointer">
                 {item.icon}
               </div>
               <p className="text-lg font-bold font-secondary text-primary-dark">

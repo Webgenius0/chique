@@ -34,7 +34,7 @@ const Footer = () => {
         <div className="w-full flex xs:flex-row flex-col gap-6 justify-between items-center">
           {/* lgoo & copy right */}
           <div className="flex flex-col text-lg md:gap-4 gap-1 xs:justify-start justify-center items-start">
-            <Logo className="w-40 h-11" />
+            <Logo className="xl:w-40 md:w-30 h-11" />
             <p className="text-base xs:text-xl"> © {currentYear} Chique AI. All rights reserved.</p>
           </div>
           {/* social links */}
@@ -44,7 +44,7 @@ const Footer = () => {
                 href={social.link}
                 key={social.id}
                 target="_blank"
-                className="w-full h-full  overflow-hidden"
+                className="w-[30px] h-[30px]  overflow-hidden"
               >
                 {social.icon}
               </a>

@@ -61,12 +61,12 @@ const Hero = () => {
           text="Your Personal Style Assistant"
           className="text-start font-secondary !font-semibold"
         />
-        <p className="md:text-xl text-base font-primary text-primary-dark font-normal text-center md:text-start">
+        <p className="md:text-xl text-base font-primary text-primary-dark font-normal text-center lg:text-start">
           Discover your unique style, organize your wardrobe, and get
           personalized fashion advice with Chique Al.
         </p>
 
-        <div className="w-full mt-2 flex gap-3 md:justify-start md:items-start justify-center">
+        <div className="w-full mt-2 flex gap-3 lg:justify-start md:items-start justify-center">
           <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
             Try Chique Al
           </CommonBtn>
