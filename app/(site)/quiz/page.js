@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation"; // ✅ Import useRouter
 import Progressbar from "@/components/quiz/Progressbar";
@@ -42,10 +41,10 @@ const Quiz = () => {
   const currentAnswer = answers[currentQuestion.id];
 
   return (
-    <div className="container flex flex-col gap-6 sm:py-16 xs:py-12 py-10">
+    <div className="max-w-6xl mx-auto flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5 sm:py-16 xs:py-12 py-10 px-4">
       {/* Title Section */}
-      <div className="w-full flex flex-col gap-5 pb-16">
-        <p className="text-center font-secondary text-primary-dark text-5xl font-semibold">
+      <div className="w-full flex flex-col lg:gap-5 md:gap-4 gap-1.5 2xl:pb-16 xl:pb-14 lg:pb-12 md:pb-10 sm:pb-8 pb-2">
+        <p className="text-center font-secondary text-primary-dark 2xl:text-5xl xl:text-4xl lg:text-3xl xs:text-2xl text-[22px] font-semibold">
           Discover Your Personal Style
         </p>
         <p className="text-base font-primary text-primary-dark text-center">
@@ -66,37 +65,34 @@ const Quiz = () => {
       />
 
       {/* Navigation Buttons */}
-      <div className="px-44 mt-6 flex justify-between items-center">
-        {current > 0 && (
+      <div className="mt-6 flex justify-between items-center w-full gap-4">
+        {/* Previous Button */}
+        <div className={`${current > 0 ? "block" : "invisible"}`}>
           <button
             onClick={previous}
-            className="cursor-pointer border px-4 py-2 rounded text-primary hover:bg-gray-100"
+            className="cursor-pointer border border-primary-dark px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-primary-dark hover:bg-gray-50 active:bg-gray-100 transition-colors text-sm sm:text-base"
           >
             {"< Previous"}
           </button>
-        )}
-
-        <div className={current === 0 ? "ml-auto" : ""}>
-          <button
-            onClick={next}
-            className={`cursor-pointer px-4 py-2 rounded text-white
-              ${
-                currentQuestion.is_required && !currentAnswer
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-primary-dark hover:bg-primary"
-              }
-            `}
-            disabled={currentQuestion.is_required && !currentAnswer}
-          >
-            {current === quizQuestions.length - 1
-              ? "Get My Style Results"
-              : "Next >"}
-          </button>
         </div>
+
+        {/* Next Button*/}
+        <button
+          onClick={next}
+          className={`cursor-pointer px-4 py-2 sm:px-6 sm:py-3 rounded-lg text-white transition-colors text-sm sm:text-base ml-auto ${
+            currentQuestion.is_required && !currentAnswer
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-primary-dark hover:bg-primary active:bg-primary-dark"
+          }
+    `}
+          disabled={currentQuestion.is_required && !currentAnswer}
+        >
+          {current === quizQuestions.length - 1
+            ? "Get My Style Results"
+            : "Next >"}
+        </button>
       </div>
     </div>
   );
 };
-
 export default Quiz;
-

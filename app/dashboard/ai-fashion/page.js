@@ -1,5 +1,4 @@
 "use client";
-
 import { pantData } from "@/data/db";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -11,7 +10,7 @@ const AiFashion = () => {
       <p className="text-2xl font-semibold font-primary text-primary-dark">
         Pants
       </p>
-      <div className="w-full grid grid-cols-5 gap-5">
+      <div className="w-full grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 xs:grid-cols-2 gap-5">
         {pantData.map((item) => (
           <div
             onClick={() => router.push("/dashboard/ai-style")}
@@ -34,5 +33,4 @@ const AiFashion = () => {
     </div>
   );
 };
-
 export default AiFashion;

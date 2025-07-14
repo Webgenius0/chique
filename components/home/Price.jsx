@@ -61,7 +61,7 @@ const Price = () => {
   ];
   return (
     <div id="pricing" className="w-full relative">
-      <div className="container flex flex-col xl:gap-10 lg:gap-10 gap-5 xl:py-20 lg:py-14 md:py-7 py-5">
+      <div className="container flex flex-col xl:gap-10 lg:gap-10 gap-5 xl:py-20 lg:py-14 py-10">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -81,7 +81,7 @@ const Price = () => {
             priority
           />
         </motion.div>
-        <div className="w-full flex flex-col md:gap-4 gap-2.5 text-center items-center">
+        <div className="w-full flex flex-col md:gap-4 gap-1 text-center items-center">
           <div className="flex gap-2 justify-center items-center">
             <FaStar />
             <p className="md:text-lg text-primary-dark font-primary font-semibold">

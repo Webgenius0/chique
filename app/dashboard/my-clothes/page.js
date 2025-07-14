@@ -11,9 +11,9 @@ export const metadata = {
 const MyClothes = () => {
   return (
     <div className="w-full overflow-hidden py-8">
-      <div className="w-full flex gap-10">
+      <div className="w-full lg:flex 2xl:gap-10 gap-5">
         <Wardrobe />
-        <div className="max-w-[50%] w-full ">
+        <div className="3xl:max-w-[750px] w-full shrink-0 ">
           <TodayPicks />
           <AIStylist />
         </div>
