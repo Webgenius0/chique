@@ -1,38 +1,44 @@
-import AuthSubText from "@/components/auth/AuthSubText"
-import AuthTitle from "@/components/auth/AuthTitle"
-import AuthWrapper from "@/components/auth/AuthWrapper"
-import Or from "@/components/auth/Or"
-import SignInForm from "@/components/auth/SignInForm"
-import SocialAuth from "@/components/auth/SocialAuth"
-import Link from "next/link"
+import AuthSubText from "@/components/auth/AuthSubText";
+import AuthTitle from "@/components/auth/AuthTitle";
+import AuthWrapper from "@/components/auth/AuthWrapper";
+import Or from "@/components/auth/Or";
+import SignInForm from "@/components/auth/SignInForm";
+import SocialAuth from "@/components/auth/SocialAuth";
+import Link from "next/link";
 
 export const metadata = {
-    title: 'Chique | Sign In',
-    description: 'Securely access your Chique account to manage your style profile, wardrobe, and personalized recommendations.',
-}
+  title: "Chique | Sign In",
+  description:
+    "Securely access your Chique account to manage your style profile, wardrobe, and personalized recommendations.",
+};
 
 const SignIn = () => {
-    return (
-        <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-4 flex justify-center items-center ">
-            <AuthWrapper>
-                <div className="w-full flex flex-col gap-4 justify-start items-center">
-                    {/* Header */}
-                    <div className="w-full flex flex-col">
-                        <AuthTitle title="Log in" />
-                        <div className="flex gap-1 justify-center items-center">
-                            <AuthSubText text="Don’t have an account?" />
-                            <Link className="underline font-semibold text-primary-dark" href={"/auth/sign-up"}> Sign up</Link>
-                        </div>
-                    </div>
-                    {/* Social */}
-                    <SocialAuth />
-                    {/* Or */}
-                    <Or />
-                    {/* Form */}
-                    <SignInForm />
-                </div>
-            </AuthWrapper>
+  return (
+    <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-8 flex justify-center items-center ">
+      <AuthWrapper>
+        <div className="w-full flex flex-col gap-4 justify-start items-center">
+          {/* Header */}
+          <div className="w-full flex flex-col">
+            <AuthTitle title="Log in" />
+            <div className="flex 3xs:flex-row flex-col 3xs:gap-1 justify-center items-center">
+              <AuthSubText text="Don’t have an account?" />
+              <Link
+                className="underline font-semibold text-primary-dark"
+                href={"/auth/sign-up"}
+              >
+                <span className="xs:!text-lg !text-base">Sign up</span>
+              </Link>
+            </div>
+          </div>
+          {/* Social */}
+          <SocialAuth />
+          {/* Or */}
+          <Or />
+          {/* Form */}
+          <SignInForm />
         </div>
-    )
-}
-export default SignIn
+      </AuthWrapper>
+    </div>
+  );
+};
+export default SignIn;

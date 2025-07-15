@@ -14,19 +14,19 @@ export const metadata = {
 // main component
 const SignUp = () => {
   return (
-    <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-4 flex justify-center items-center">
+    <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-8 flex justify-center items-center">
       <AuthWrapper>
         <div className="w-full flex flex-col lg:gap-4 gap-3 justify-start items-center">
           {/* Header */}
           <div className="w-full flex flex-col">
             <AuthTitle title="Sign Up" />
-            <div className="flex gap-1 justify-center items-center">
+            <div className="flex 3xs:flex-row flex-col 3xs:gap-1 justify-center items-center">
               <AuthSubText text="You have an account?" />
               <Link
                 className="underline font-semibold text-primary-dark"
                 href={"/auth/sign-in"}
               >
-                <span className="xs:!text-base !text-xs">Log In</span>
+                <span className="xs:!text-lg !text-base">Log In</span>
               </Link>
             </div>
           </div>

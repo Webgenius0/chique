@@ -83,7 +83,7 @@ const CreatePasswordForm = () => {
             />
             {/* password validation */}
             <div className="flex flex-col gap-3 sm:gap-4">
-                <p className="text-sm sm:text-base text-gray-700">Password must contain:</p>
+                <p className="text-base text-gray-700">Password must contain:</p>
                 {/* validation checks grid */}
                 <div className='grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3'>
                     <ValidationCheck
