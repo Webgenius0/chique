@@ -61,7 +61,7 @@ const CommonInputWrapper = ({
       )}
 
       <div className={cn(
-        'w-full border px-4 sm:px-6 py-3 md:py-4 flex gap-2 rounded-lg sm:rounded-xl border-common-border bg-white',
+        'w-full border px-4 sm:px-6 py-3 sm:py-4 flex gap-2 rounded-lg sm:rounded-xl border-common-border bg-white',
         innerWrapper
       )}>
         {/* Left icon */}

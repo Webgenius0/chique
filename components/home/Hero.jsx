@@ -9,7 +9,7 @@ import left_image from "@/public/images/bannerImages/leftFlower.png";
 
 const Hero = () => {
   return (
-    <div className="relative w-full xl:h-[750px] lg:h-[600px] md:h-[380px] h-[600px] overflow-hidden bg-white"> 
+    <div className="relative w-full xl:h-[750px] lg:h-[600px] md:h-[380px] h-[600px] overflow-hidden bg-white">
       {/* Left Flower Image with Animation */}
       <motion.div
         initial={{
@@ -69,9 +69,6 @@ const Hero = () => {
         <div className="w-full mt-2 flex gap-3 lg:justify-start md:items-start justify-center">
           <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
             Try Chique Al
-          </CommonBtn>
-          <CommonBtn className="rounded-lg bg-white text-primary-dark border text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
-            Learn More
           </CommonBtn>
         </div>
       </motion.div>

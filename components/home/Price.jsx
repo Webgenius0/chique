@@ -89,7 +89,7 @@ const Price = () => {
             </p>
           </div>
           <CommonTitle
-            text="Plans & Pricing"
+            text="Subscription"
             className={"font-secondary lg:!text-4xl sm:text-3xl text-2xl"}
           />
           <p className="md:text-lg xs:text-base text-sm text-primary-dark font-primary font-normal text-center">
