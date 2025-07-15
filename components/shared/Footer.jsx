@@ -11,12 +11,12 @@ const Footer = () => {
   const socialLinks = [
     {
       id: 1,
-      icon: <FaInstagram className="text-3xl" />,
+      icon: <FaInstagram className="sm:text-3xl text-2xl" />,
       link: "https://www.instagram.com/accounts/emailsignup/",
     },
-    { id: 2, icon: <FaTwitter className="text-3xl" />, link: "https://x.com/home" },
-    { id: 3, icon: <FaLinkedin className="text-3xl" />, link: "https://www.linkedin.com/" },
-    { id: 4, icon: <FaFacebookSquare className="text-3xl" />, link: "https://www.facebook.com/" },
+    { id: 2, icon: <FaTwitter className="sm:text-3xl text-2xl" />, link: "https://x.com/home" },
+    { id: 3, icon: <FaLinkedin className="sm:text-3xl text-2xl" />, link: "https://www.linkedin.com/" },
+    { id: 4, icon: <FaFacebookSquare className="sm:text-3xl text-2xl" />, link: "https://www.facebook.com/" },
   ];
   // items
   const items = [
@@ -31,20 +31,20 @@ const Footer = () => {
     <footer className="w-full lg:py-10 py-6">
       <div className="container flex flex-col xl:gap-10 lg:gap-8 md:gap-6 gap-4 justify-start">
           {/* lgoo & copy right wrapper*/}
-        <div className="w-full flex xs:flex-row flex-col gap-6 justify-between items-center">
+        <div className="w-full flex xs:flex-row flex-col sm:gap-6 xs:gap-2 gap-4 justify-between xs:items-center">
           {/* lgoo & copy right */}
           <div className="flex flex-col text-lg md:gap-4 gap-1 xs:justify-start justify-center items-start">
-            <Logo className="xl:w-40 md:w-30 h-11" />
-            <p className="text-base xs:text-xl"> © {currentYear} Chique AI. All rights reserved.</p>
+            <Logo className="xl:w-[160px] xs:w-[130px] w-24 xs:h-14 h-10" />
+            <p className="text-base sm:text-xl"> © {currentYear} Chique AI. All rights reserved.</p>
           </div>
           {/* social links */}
-          <div className="grid grid-cols-4 shrink-0 gap-3">
+          <div className="w-fit grid grid-cols-4 shrink-0 gap-3">
             {socialLinks.map((social) => (
               <a
                 href={social.link}
                 key={social.id}
                 target="_blank"
-                className="w-[30px] h-[30px]  overflow-hidden"
+                className="sm:w-[30px] w-6 sm:h-[30px] h-6 overflow-hidden"
               >
                 {social.icon}
               </a>

@@ -15,15 +15,15 @@ const WelcomePage = () => {
   return (
     <div className="container min-h-screen py-32 flex justify-center items-center">
       <AuthWrapper>
-        <div className="flex flex-col items-center justify-center gap-6">
+        <div className="flex flex-col items-center justify-center xs:gap-6 gap-4">
           {/* logo icon */}
-          <div className="size-14">
+          <div className="xs:w-14 w-10">
             <Image alt="Logo" src={logo} className="w-full h-full" />
           </div>
           {/* welcome header */}
           <div className="space-y-2">
             <AuthTitle title="Welcome to Chique" />
-            <AuthSubText text="Your Chique.AI personal assistant" />
+            <AuthSubText className=" text-center" text="Your Chique.AI personal assistant" />
           </div>
           {/* welcome text */}
           <AuthSubText

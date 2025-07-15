@@ -90,7 +90,7 @@ const SignUpForm = () => {
       {/* submit button */}
       <CommonBtn
         type="submit"
-        className={``}
+        className={` mt-4`}
         isLoading={false}
       // link={true}
       >

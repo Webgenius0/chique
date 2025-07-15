@@ -15,12 +15,12 @@ const Header = () => {
 
   const sidebarVariants = {
     open: { x: 0, opacity: 1 },
-    closed: { x: "-100%", opacity: 0 }
+    closed: { x: "-100%", opacity: 0 },
   };
 
   const overlayVariants = {
     open: { opacity: 1, pointerEvents: "auto" },
-    closed: { opacity: 0, pointerEvents: "none" }
+    closed: { opacity: 0, pointerEvents: "none" },
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Header = () => {
             <Logo />
           </div>
           <NavItems />
-          <div className="flex sm:gap-5 gap-3 justify-end items-center shrink-0">
+          <div className="hidden md:flex sm:gap-5 gap-3 justify-end items-center shrink-0">
             <Link href={"/auth/sign-up"}>Sign Up</Link>
             <Link
               href={"/auth/sign-in"}
@@ -97,10 +97,27 @@ const Header = () => {
               </div>
               {/* mobile navigation items */}
               <div className="flex flex-col space-y-4">
-                <Link href="/" onClick={toggleSidebar}>Home</Link>
-                <Link href="/#about" onClick={toggleSidebar}>About</Link>
-                <Link href="/#pricing" onClick={toggleSidebar}>Pricing</Link>
-                <Link href="/contact" onClick={toggleSidebar}>Contact</Link>
+                <Link href="/" onClick={toggleSidebar}>
+                  Home
+                </Link>
+                <Link href="/#about" onClick={toggleSidebar}>
+                  About
+                </Link>
+                <Link href="/#pricing" onClick={toggleSidebar}>
+                  Pricing
+                </Link>
+                <Link href="/contact" onClick={toggleSidebar}>
+                  Contact
+                </Link>
+                <div className="md:hidden flex flex-col sm:gap-5 gap-3 justify-end items-start shrink-0">
+                  <Link href={"/auth/sign-up"}>Sign Up</Link>
+                  <Link
+                    href={"/auth/sign-in"}
+                    className="rounded-sm px-5 sm:py-2 py-1.5 font-semibold flex justify-center items-center border border-primary-dark"
+                  >
+                    Log In
+                  </Link>
+                </div>
               </div>
             </motion.div>
 

@@ -46,14 +46,14 @@ const CommonInputWrapper = ({
   return (
     <div
       className={cn(
-        "w-full flex flex-col gap-1 sm:gap-2 text-base sm:text-lg text-primary-dark",
+        "w-full flex flex-col gap-2 text-lg text-primary-dark",
         wrapperClass
       )}
     >
       {/* Label */}
       {label && (
         <label
-          className={cn("capitalize font-medium text-sm sm:text-base", labeClass)}
+          className={cn("capitalize font-medium text-base", labeClass)}
           htmlFor={register_as}
         >
           {label}
@@ -61,7 +61,7 @@ const CommonInputWrapper = ({
       )}
 
       <div className={cn(
-        'w-full border px-4 sm:px-6 py-3 md:py-4 flex gap-2 rounded-lg sm:rounded-xl border-common-border bg-white',
+        'w-full border px-4 sm:px-6 py-3 sm:py-4 flex gap-2 rounded-lg sm:rounded-xl border-common-border bg-white',
         innerWrapper
       )}>
         {/* Left icon */}
@@ -77,7 +77,7 @@ const CommonInputWrapper = ({
             name={name}
             defaultValue={value}
             className={cn(
-              "w-full border-none outline-none resize-none min-h-32 sm:min-h-48 text-sm sm:text-base",
+              "w-full border-none outline-none resize-none min-h-32 sm:min-h-48 text-base",
               textareaClass
             )}
             {...register(register_as, validationRules)}
@@ -104,10 +104,10 @@ const CommonInputWrapper = ({
                       field.onChange(option?.value || selectedValue);
                     }
                   }}
-                  className="w-full bg-transparent border-none capitalize outline-none placeholder:text-dark text-sm sm:text-base"
+                  className="w-full bg-transparent border-none capitalize outline-none placeholder:text-dark text-base"
                   showSearch
                   allowClear
-                  dropdownClassName="text-sm sm:text-base"
+                  dropdownClassName="text-base"
                 />
               )}
             />
@@ -121,7 +121,7 @@ const CommonInputWrapper = ({
             defaultValue={value}
             readOnly={readOnly}
             className={cn(
-              "w-full border-none outline-none text-sm sm:text-base",
+              "w-full border-none outline-none text-base",
               inputClass
             )}
             {...register(register_as, validationRules)}
@@ -137,9 +137,9 @@ const CommonInputWrapper = ({
             aria-label={show ? "Hide password" : "Show password"}
           >
             {show ? (
-              <FaEye className="text-lg sm:text-xl" />
+              <FaEye className="text-xl" />
             ) : (
-              <FaEyeSlash className="text-lg sm:text-xl" />
+              <FaEyeSlash className="text-xl" />
             )}
           </button>
         )}

@@ -64,3 +64,7 @@ ant select
   width: 64px;
   height: 56px;
 }
+
+.input {
+  background-color: black;
+}

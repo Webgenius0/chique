@@ -41,11 +41,11 @@ const ResetVerification = () => {
   //     },
   //   });
   //   // final submit
-    const handleSubmit = () => {
-      if (otp.length !== 4)
-        return toast.error("Please enter a valid 4-digit code");
-      // confirmSignUp.mutate({ otp, email: verify_email });
-    };
+  const handleSubmit = () => {
+    if (otp.length !== 4)
+      return toast.error("Please enter a valid 4-digit code");
+    // confirmSignUp.mutate({ otp, email: verify_email });
+  };
 
   //   // Resend OTP mutation
   //   const resendOtp = useMutation({
@@ -81,13 +81,13 @@ const ResetVerification = () => {
   //   }, [seconds]);
 
   return (
-    <div className="container min-h-screen py-32 flex justify-center items-center">
+    <div className="container min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-8 flex justify-center items-center">
       <AuthWrapper>
         <div className="w-full flex flex-col gap-4 justify-start items-center">
           {/* Header */}
           <div className="w-full flex flex-col gap-3 items-center">
             <AuthTitle title="Verification Code" />
-            <h5 className="text-center text-xl text-gray-400 font-primary">
+            <h5 className="text-center xs:text-xl 3xs:text-lg text-base text-gray-400 font-primary">
               Enter verification code sent to your email address <br />
               <span>{"farokafs100@gmail.com" || "--"}</span>
             </h5>

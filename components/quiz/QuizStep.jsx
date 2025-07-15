@@ -27,7 +27,7 @@ const QuizStep = ({ number, question, options, onSelect, selectedOption }) => {
               className="
                 w-4 h-4 sm:w-5 sm:h-5 
                 rounded-full border-gray-400 
-                text-primary-dark focus:ring-primary-dark 
+                text-primary-dark focus:ring-primary-dark bg-primary-dark
                 shrink-0 mt-0.5 sm:mt-0
               "
             />

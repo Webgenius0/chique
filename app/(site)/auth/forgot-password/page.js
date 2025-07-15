@@ -22,7 +22,7 @@ const ForgotPassword = () => {
     router.push("/auth/reset-verification");
   };
   return (
-    <div className="container min-h-screen py-32 flex justify-center items-center">
+    <div className="container min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-8 flex justify-center items-center">
       <AuthWrapper>
         <div className="w-full flex flex-col gap-4 justify-start items-center">
           {/* Header */}
