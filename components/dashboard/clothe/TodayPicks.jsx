@@ -7,58 +7,31 @@ import { RiDownloadCloudFill } from "react-icons/ri";
 import { marqueData } from "@/data/db";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const TodayPicks = () => {
-  const [temperature, setTemperature] = useState(24);
-  const [loading, setLoading] = useState(true);
-  const router = useRouter();
-
-  const API_KEY = "YOUR_API_KEY";
-  const city = "Dhaka";
-
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const res = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${API_KEY}`
-        );
-        const data = await res.json();
-        setTemperature(data.main.temp);
-        setLoading(false);
-      } catch (err) {
-        console.error("Error fetching weather:", err);
-        setLoading(false);
-      }
-    };
-
-    fetchWeather();
-  }, []);
-
   return (
-    <div className="w-full flex flex-col gap-10">
+    <div className="w-full flex flex-col gap-6">
       {/* Top Weather Row */}
-      <div className="w-full flex justify-between">
-        <div className="w-fit flex items-center gap-3 text-primary-dark">
-          <MdOutlineWbSunny className="text-[#0984E2] text-2xl" />
+      <div className="w-full flex  justify-between">
+        <div className="flex items-center gap-3 text-primary-dark">
+          <MdOutlineWbSunny size={24} className="text-[#0984E2]" />
           <p className="text-primary-dark text-base font-medium">
-            {loading ? "Loading..." : `${Math.round(temperature)}°C`}
+            24°C
           </p>
         </div>
-        <div className="w-fit flex items-center gap-3 text-primary-dark">
-          <BsThermometerSun className="text-primary-dark text-2xl" />
+        <div className="flex items-center gap-3 text-primary-dark">
+          <BsThermometerSun size={24} className="text-primary-dark" />
           <p className="text-primary-dark text-base font-medium">
             Partly Cloudy
           </p>
         </div>
       </div>
-
-      {/* Title */}
+      {/* Marquee */}
       <div className="w-full flex flex-col gap-5">
         <p className="text-primary-dark text-2xl font-medium font-primary">
           Today’s Picks
         </p>
-
         {/* Marquee Section */}
         <Marquee pauseOnHover={true} gradient={false} speed={40}>
           {marqueData.map((item) => (
@@ -86,14 +59,10 @@ const TodayPicks = () => {
         <p className="text-[28px] text-primary-dark font-primary font-bold text-center">
           Add an item to your closet
         </p>
-
-        <button
-          onClick={() => router.push("/dashboard/add-item")}
-          className="w-fit flex gap-2 items-center px-20 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary cursor-pointer"
-        >
+        <Link href="/dashboard/my-clothes/add-item" className="w-fit flex gap-2 items-center px-20 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary cursor-pointer">
           <RiDownloadCloudFill className="text-xl" />
           Upload from photos
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -3,17 +3,19 @@ import { pantData } from "@/data/db";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const AiFashion = () => {
+const AiFashion = ({ params }) => {
+  const { category } = params;
   const router = useRouter();
+  console.log(params);
   return (
-    <div className="w-full flex flex-col gap-6 py-8">
+    <div className="w-full flex flex-col gap-6 pt-3">
       <p className="text-2xl font-semibold font-primary text-primary-dark">
         Pants
       </p>
       <div className="w-full grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 xs:grid-cols-2 gap-5">
         {pantData.map((item) => (
           <div
-            onClick={() => router.push("/dashboard/ai-style")}
+            onClick={() => router.push(`/dashboard/my-clothes/${category}/${item.id}`)}
             key={item.id}
             className="w-full flex flex-col gap-3 cursor-pointer"
           >

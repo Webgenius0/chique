@@ -143,40 +143,44 @@ export const quizQuestions = [
 
 export const wardrobeItems = [
   {
-    id: 1,
+    id: "1",
+    category: "pants",
+    name: "Slim Fit Jeans",
     image: wardrobe_image1,
-    name: "Pant",
-    number: 12,
+    description: "Comfortable slim fit jeans for everyday wear",
+    color: "Blue",
+    size: "M",
+    number: 5
   },
   {
-    id: 2,
+    id: "2",
+    category: "shirts",
+    name: "Casual Button-Up",
     image: wardrobe_image2,
-    name: "T-Shirt",
-    number: 12,
+    description: "Lightweight button-up shirt for casual occasions",
+    color: "White",
+    size: "L",
+    number: 8
   },
   {
-    id: 3,
+    id: "3",
+    category: "t-shirts",
+    name: "Casual Button-Up",
     image: wardrobe_image3,
-    name: "Skirts",
-    number: 12,
+    description: "Lightweight button-up shirt for casual occasions",
+    color: "White",
+    size: "L",
+    number: 8
   },
   {
-    id: 4,
+    id: "4",
+    category: "jokers",
+    name: "Casual Button-Up",
     image: wardrobe_image4,
-    name: "Skirts",
-    number: 12,
-  },
-  {
-    id: 5,
-    image: wardrobe_image5,
-    name: "Classic Trench Coat",
-    number: 12,
-  },
-  {
-    id: 6,
-    image: wardrobe_image6,
-    name: "Classic Trench Coat",
-    number: 12,
+    description: "Lightweight button-up shirt for casual occasions",
+    color: "White",
+    size: "L",
+    number: 8
   },
 ];
 

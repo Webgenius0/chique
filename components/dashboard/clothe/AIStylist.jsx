@@ -18,12 +18,11 @@ const AIStylist = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 pt-20">
+    <div className="flex w-full flex-col gap-4">
       {/* Title */}
       <p className="text-lg font-semibold text-gray-800">Ask AI stylist</p>
-
       {/* Prompt Buttons */}
-      <div className="flex flex-wrap gap-2">
+      <div className="flex w-full flex-wrap gap-2">
         {prompts.map((prompt, index) => (
           <button
             key={index}
@@ -34,7 +33,6 @@ const AIStylist = () => {
           </button>
         ))}
       </div>
-
       {/* Ask input (also navigates to dashboard) */}
       <button
         onClick={() => router.push("/dashboard")}
