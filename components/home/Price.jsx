@@ -61,7 +61,7 @@ const Price = () => {
   ];
   return (
     <div id="pricing" className="w-full relative">
-      <div className="container flex flex-col gap-10  xl:py-20py-14">
+      <div className="container flex flex-col xs:gap-10 gap-5 xl:py-20">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -81,7 +81,7 @@ const Price = () => {
             priority
           />
         </motion.div>
-        <div className="w-full flex flex-col gap-4 text-center items-center">
+        <div className="w-full flex flex-col md:gap-4 gap-2 text-center items-center">
           <div className="flex gap-2 justify-center items-center">
             <FaStar />
             <p className="text-lg text-primary-dark font-primary font-semibold">
@@ -90,18 +90,18 @@ const Price = () => {
           </div>
           <CommonTitle
             text="Subscription"
-            className={"font-secondary !text-4xl"}
+            className={"font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"}
           />
           <p className="text-lg text-primary-dark font-primary font-normal text-center">
             Pay by the month or the year, and cancel at any time.
           </p>
         </div>
         {/* cards */}
-        <div className="w-full grid grid-cols-4 gap-6">
+        <div className="w-full grid lg:grid-cols-4 xs:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
           {cardItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className="w-full flex flex-col gap-8 border rounded-[20px] py-6 px-5 hover:bg-[#B1B0B0] transition duration-500"
+              className="w-full flex flex-col sm:gap-8 gap-5 border rounded-[20px] py-6 px-5 hover:bg-[#B1B0B0] transition duration-500"
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
@@ -112,7 +112,7 @@ const Price = () => {
               <CommonBtn className="rounded-[100px] text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
                 {item.buttonText}
               </CommonBtn>
-              <p className="text-2xl font-semibold text-primary-dark font-primary border-b pb-8">
+              <p className="text-2xl font-semibold text-primary-dark font-primary border-b sm:pb-8 pb-5">
                 ${item.price} <span className="text-sm">/ Month</span>
               </p>
               <ul className="space-y-4">

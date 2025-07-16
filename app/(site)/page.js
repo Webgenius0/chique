@@ -17,8 +17,8 @@ const Home = () => {
       <ChiqueAI />
       <WhyCreated />
       <About />
-      {/* <Price />
-      <Evolution /> */}
+      <Price />
+      {/* <Evolution /> */}
     </div>
   );
 };

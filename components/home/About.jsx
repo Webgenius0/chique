@@ -39,7 +39,7 @@ const About = () => {
   ];
   return (
     <div id="about" className="w-full relative">
-      <div className="container flex flex-col gap-14 py-20 pt-10 px-28">
+      <div className="container flex flex-col xl:gap-14 xs:gap-8 gap-5 py-20 pt-10 xl:px-28">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -64,12 +64,12 @@ const About = () => {
           className={"!font-bold !font-secondary"}
         />
         {/* about cards */}
-        <div className="w-full grid grid-cols-2 gap-20">
+        <div className="w-full grid sm:grid-cols-2 grid-cols-1 xl:gap-20 md:gap-10 gap-6">
           {items.map((item) => (
             <div key={item.id} className="w-full flex gap-4 justify-center">
               <div className="text-2xl">{item.icon}</div>
-              <div className="w-full flex flex-col gap-3 -mt-1">
-                <p className="text-3xl font-bold font-secondary text-primary-dark">
+              <div className="w-full flex flex-col xs:gap-3 gap-1 -mt-1">
+                <p className="xl:text-3xl md:text-2xl 3xs:text-xl text-lg font-bold font-secondary text-primary-dark">
                   {item.title}
                 </p>
                 <p className="text-base font-light font-primary text-primary-dark">

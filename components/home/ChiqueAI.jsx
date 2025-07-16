@@ -65,7 +65,7 @@ const ChiqueAI = () => {
           }}
           animate={{ x: 0, opacity: 1, rotateX: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute 2xl:right-0 right-30 -bottom-5 2xl:w-[300px] w-[300px]  "
+          className="absolute 2xl:right-0 right-30 lg:-bottom-5 bottom-3 w-[300px]"
         >
           <Image
             src={layer_image}
