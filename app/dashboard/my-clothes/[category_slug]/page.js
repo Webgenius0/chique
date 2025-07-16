@@ -11,8 +11,8 @@ const AiFashion = ({ params }) => {
   const unwrappedParams = use(params);
   const { category_slug } = unwrappedParams;
   return (
-    <div className="w-full flex flex-col gap-6 pt-3">
-      <p className="text-2xl font-semibold font-primary text-primary-dark">
+    <div className="w-full flex flex-col xs:gap-6 gap-4 xs:py-10 py-5">
+      <p className="xs:text-2xl text-xl font-semibold font-primary text-primary-dark">
         Pants
       </p>
       <CategoryItems category_slug={category_slug} />
