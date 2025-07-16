@@ -6,6 +6,7 @@ import CommonBtn from "../common/CommonBtn";
 import CommonTitle from "../common/CommonTitle";
 import right_image from "@/public/images/bannerImages/rightFlower.png";
 import left_image from "@/public/images/bannerImages/leftFlower.png";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -25,6 +26,7 @@ const Hero = () => {
         <Image
           src={left_image}
           alt="Left Flower"
+          aria-hidden="true"
           className="object-contain w-full h-auto"
           priority
         />
@@ -45,6 +47,7 @@ const Hero = () => {
         <Image
           src={right_image}
           alt="Right Flower"
+          aria-hidden="true"
           className="object-contain w-full h-auto"
           priority
         />
@@ -65,11 +68,13 @@ const Hero = () => {
           Discover your unique style, organize your wardrobe, and get
           personalized fashion advice with Chique Al.
         </p>
-
+        {/* navigate to dashboard chat page */}
         <div className="w-full mt-2 flex gap-3 lg:justify-start md:items-start justify-center">
-          <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
-            Try Chique Al
-          </CommonBtn>
+          <Link href="/dashboard">
+            <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
+              Try Chique Al
+            </CommonBtn>
+          </Link>
         </div>
       </motion.div>
     </div>
