@@ -15,8 +15,6 @@ const SendMessage = () => {
         { id: 2, message: "Help me style this outfit" },
         { id: 3, message: "Suggest casual weekend looks" },
         { id: 4, message: "What colors work with my skin tone?" },
-        { id: 5, message: "How to accessorize this dress?" },
-        { id: 6, message: "Office outfit ideas" },
     ]
 
     const handleSendText = () => {

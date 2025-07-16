@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
-import Logo from "../common/Logo";
 import { usePathname } from "next/navigation";
 import { BsChatDots } from "react-icons/bs";
-import { PiCoatHangerBold } from "react-icons/pi";
-import { PiSignOutBold } from "react-icons/pi";
+import { GrCoatCheck } from "react-icons/gr";
 import { FaGlobeAmericas } from "react-icons/fa";
-import { IoIosTime } from "react-icons/io";
+import { MdOutlineMessage } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import { PiSignOutBold } from "react-icons/pi";
 import DashboardLogo from "../common/DashboardLogo";
 
 const SideBar = ({ isOpen = false, onClose }) => {
@@ -21,7 +20,7 @@ const SideBar = ({ isOpen = false, onClose }) => {
     {
       path: "/dashboard/my-clothes",
       name: "My Clothes",
-      icon: <PiCoatHangerBold />,
+      icon: <GrCoatCheck />,
     },
     {
       path: "/dashboard/explore",
@@ -31,7 +30,7 @@ const SideBar = ({ isOpen = false, onClose }) => {
     {
       path: "/dashboard/feedback",
       name: "Feedback",
-      icon: <IoIosTime />,
+      icon: <MdOutlineMessage />,
     },
   ];
   return (
@@ -50,12 +49,15 @@ const SideBar = ({ isOpen = false, onClose }) => {
       <div className="w-full h-20 shrink-0 sticky top-0 flex justify-start items-center border-b overflow-hidden border-b-primary-dark">
         <DashboardLogo className="w-full h-full justify-center" />
         {/* cross button  */}
-        <button onClick={onClose} className="xl:hidden text-primary-dark -ml-10">
+        <button
+          onClick={onClose}
+          className="xl:hidden text-primary-dark -ml-10"
+        >
           <RxCross2 className="text-3xl" />
         </button>
       </div>
       {/* NAV ITEMS */}
-      <nav className="w-full pl-6 py-8 h-screen flex flex-col justify-start gap-3 overflow-y-auto ">
+      <nav className="w-full pl-6 py-8 h-screen flex flex-col justify-start gap-1 overflow-y-auto ">
         {navItems.map((item) => {
           const isActive = pathname === item.path;
           return (

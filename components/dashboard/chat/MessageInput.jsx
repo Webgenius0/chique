@@ -33,7 +33,7 @@ const MessageInput = ({
                     onChange={onTextChange}
                     onKeyPress={onKeyPress}
                     placeholder="Type your fashion question..."
-                    className="w-full p-3 pr-12 rounded-lg border border-gray-300 focus:border-primary-dark  outline-none transition-all"
+                    className="w-full xs:p-3 p-2 xs:pr-12 xs:text-base text-sm rounded-lg border border-gray-300 focus:border-primary-dark  outline-none transition-all"
                 />
             </div>
 
@@ -42,7 +42,7 @@ const MessageInput = ({
                 type="button"
                 onClick={onSend}
                 disabled={!hasContent}
-                className={`w-12 h-12 rounded-lg shrink-0 flex border justify-center items-center transition-colors ${hasContent
+                className={`xs:w-12 w-10 xs:h-12 h-10 rounded-lg shrink-0 flex border justify-center items-center transition-colors ${hasContent
                         ? "bg-primary-dark hover:bg-primary-darker text-white"
                         : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     }`}
