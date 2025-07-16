@@ -21,139 +21,134 @@ const AnalysisForm = () => {
     console.log(data);
   };
   return (
-    <div className="w-full flex flex-col gap-6">
-      <p className="text-2xl text-primary-dark font-special font-medium">
-        Al Analysis Results
-      </p>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full flex gap-6">
-        <ClothingUploader />
-        <div className="w-full flex flex-col gap-3">
-          <div className="w-full grid grid-cols-2 gap-5">
-            {/* clothe */}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="clothe"
-              placeholder="Clothing Type"
-              register_as="clothe"
-              label="Clothing Type"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-            {/* Category*/}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="category"
-              placeholder="Category"
-              register_as="category"
-              label="Category"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-            {/* Material */}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="material"
-              placeholder="Material"
-              register_as="material"
-              label="Material"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-            {/* Pattern */}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="pattern"
-              placeholder="Pattern"
-              register_as="patern"
-              label="Pattern"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-            {/* Color */}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="Color"
-              placeholder="Color"
-              register_as="color"
-              label="Color"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-            {/* Season */}
-            <CommonInputWrapper
-              register={register}
-              errors={errors}
-              type="text"
-              name="season"
-              placeholder="Season"
-              register_as="season"
-              label="Season"
-              validationRules={{
-                required: "This field is required",
-              }}
-            />
-          </div>
-          {/* item name */}
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex gap-6">
+      <ClothingUploader />
+      <div className="w-full flex flex-col gap-3">
+        <div className="w-full grid grid-cols-2 gap-5">
+          {/* clothe */}
           <CommonInputWrapper
             register={register}
             errors={errors}
             type="text"
-            name="item_name"
-            placeholder="Item name"
-            register_as="item_name"
-            label="Item name"
+            name="clothe"
+            placeholder="Clothing Type"
+            register_as="clothe"
+            label="Clothing Type"
             validationRules={{
               required: "This field is required",
             }}
           />
-          {/* Where did you buy this */}
+          {/* Category*/}
           <CommonInputWrapper
             register={register}
             errors={errors}
             type="text"
-            name="buy"
-            placeholder="Enter store name or location"
-            register_as="buy"
-            label="Where did you buy this?"
+            name="category"
+            placeholder="Category"
+            register_as="category"
+            label="Category"
             validationRules={{
               required: "This field is required",
-             
             }}
           />
-          {/* Link*/}
+          {/* Material */}
           <CommonInputWrapper
             register={register}
             errors={errors}
             type="text"
-            name="link"
-            placeholder="Enter link here"
-            register_as="link"
-            label="Link to item (optional)"
+            name="material"
+            placeholder="Material"
+            register_as="material"
+            label="Material"
+            validationRules={{
+              required: "This field is required",
+            }}
           />
-
-          {/* error terms */}
-          {errors.terms && <ErrorText error={errors?.terms?.message} />}
-
-          {/* send message button */}
-          <CommonBtn className={"rounded-xl mt-3"}>Save</CommonBtn>
+          {/* Pattern */}
+          <CommonInputWrapper
+            register={register}
+            errors={errors}
+            type="text"
+            name="pattern"
+            placeholder="Pattern"
+            register_as="patern"
+            label="Pattern"
+            validationRules={{
+              required: "This field is required",
+            }}
+          />
+          {/* Color */}
+          <CommonInputWrapper
+            register={register}
+            errors={errors}
+            type="text"
+            name="Color"
+            placeholder="Color"
+            register_as="color"
+            label="Color"
+            validationRules={{
+              required: "This field is required",
+            }}
+          />
+          {/* Season */}
+          <CommonInputWrapper
+            register={register}
+            errors={errors}
+            type="text"
+            name="season"
+            placeholder="Season"
+            register_as="season"
+            label="Season"
+            validationRules={{
+              required: "This field is required",
+            }}
+          />
         </div>
-      </form>
-    </div>
+        {/* item name */}
+        <CommonInputWrapper
+          register={register}
+          errors={errors}
+          type="text"
+          name="item_name"
+          placeholder="Item name"
+          register_as="item_name"
+          label="Item name"
+          validationRules={{
+            required: "This field is required",
+          }}
+        />
+        {/* Where did you buy this */}
+        <CommonInputWrapper
+          register={register}
+          errors={errors}
+          type="text"
+          name="buy"
+          placeholder="Enter store name or location"
+          register_as="buy"
+          label="Where did you buy this?"
+          validationRules={{
+            required: "This field is required",
+
+          }}
+        />
+        {/* Link*/}
+        <CommonInputWrapper
+          register={register}
+          errors={errors}
+          type="text"
+          name="link"
+          placeholder="Enter link here"
+          register_as="link"
+          label="Link to item (optional)"
+        />
+
+        {/* error terms */}
+        {errors.terms && <ErrorText error={errors?.terms?.message} />}
+
+        {/* send message button */}
+        <CommonBtn className={"rounded-xl mt-3"}>Save</CommonBtn>
+      </div>
+    </form>
   );
 };
 

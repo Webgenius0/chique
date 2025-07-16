@@ -15,22 +15,22 @@ const SideBar = ({ isOpen = false, onClose }) => {
     {
       path: "/dashboard",
       name: "Chat",
-      icon: <BsChatDots className="text-2xl" />,
+      icon: <BsChatDots  />,
     },
     {
       path: "/dashboard/my-clothes",
       name: "My Clothes",
-      icon: <PiCoatHangerBold className="text-2xl" />,
+      icon: <PiCoatHangerBold  />,
     },
     {
       path: "/dashboard/explore",
       name: "Explore",
-      icon: <FaGlobeAmericas className="text-2xl" />,
+      icon: <FaGlobeAmericas  />,
     },
     {
       path: "/dashboard/feedback",
       name: "Feedback",
-      icon: <IoIosTime className="text-3xl" />,
+      icon: <IoIosTime  />,
     },
   ];
   return (
