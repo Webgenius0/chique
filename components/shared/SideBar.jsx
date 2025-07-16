@@ -8,6 +8,7 @@ import { PiSignOutBold } from "react-icons/pi";
 import { FaGlobeAmericas } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
 import { RxCross2 } from "react-icons/rx";
+import DashboardLogo from "../common/DashboardLogo";
 
 const SideBar = ({ isOpen = false, onClose }) => {
   const pathname = usePathname();
@@ -15,22 +16,22 @@ const SideBar = ({ isOpen = false, onClose }) => {
     {
       path: "/dashboard",
       name: "Chat",
-      icon: <BsChatDots  />,
+      icon: <BsChatDots />,
     },
     {
       path: "/dashboard/my-clothes",
       name: "My Clothes",
-      icon: <PiCoatHangerBold  />,
+      icon: <PiCoatHangerBold />,
     },
     {
       path: "/dashboard/explore",
       name: "Explore",
-      icon: <FaGlobeAmericas  />,
+      icon: <FaGlobeAmericas />,
     },
     {
       path: "/dashboard/feedback",
       name: "Feedback",
-      icon: <IoIosTime  />,
+      icon: <IoIosTime />,
     },
   ];
   return (
@@ -46,14 +47,11 @@ const SideBar = ({ isOpen = false, onClose }) => {
         `}
     >
       {/* LOGO */}
-      <div className="w-full h-20 shrink-0 sticky top-0 flex justify-center items-center border-b p-2 overflow-hidden border-b-primary-dark">
-        <Logo className="w-full h-full justify-center md:mr-3 -mr-12" />
+      <div className="w-full h-20 shrink-0 sticky top-0 flex justify-start items-center border-b overflow-hidden border-b-primary-dark">
+        <DashboardLogo className="w-full h-full justify-center" />
         {/* cross button  */}
-        <button
-          onClick={onClose}
-          className="xl:hidden text-2xl text-primary-dark"
-        >
-          <RxCross2 />
+        <button onClick={onClose} className="xl:hidden text-primary-dark -ml-10">
+          <RxCross2 className="text-3xl" />
         </button>
       </div>
       {/* NAV ITEMS */}
