@@ -1,6 +1,5 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { GiShoppingBag } from "react-icons/gi";
+import ShopButton from "@/components/common/ShopButton";
+
 const styleProfiles = [
   {
     title: "A-Dominant: Elegant Minimalist / Parisian Classic",
@@ -60,11 +59,9 @@ const styleProfiles = [
   },
 ];
 const ProfileResults = () => {
-  const router = useRouter();
-
   return (
-    <div className="container px-4 md:px-6 flex flex-col gap-5 lg:gap-10 items-center py-8 sm:py-12">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center font-secondary text-primary-dark">
+    <div className="container px-4 md:px-6 flex flex-col xl:gap-10 sm:gap-8 gap-5 items-center xl:py-12 xs:py-10 py-8">
+      <h1 className=" xl:text-4xl sm:text-3xl text-2xl font-bold text-center font-secondary text-primary-dark">
         Your Style Profile Results
       </h1>
 
@@ -75,14 +72,14 @@ const ProfileResults = () => {
             key={idx}
             className="border rounded-lg md:rounded-xl p-4 xl:p-6 shadow-sm hover:shadow-md transition-all bg-white"
           >
-            <p className="text-lg sm:text-xl md:text-[22px] font-secondary font-semibold text-primary-dark mb-2 sm:mb-4">
+            <p className=" xl:text-[22px] xs:text-xl text-lg font-secondary font-semibold text-primary-dark mb-2 sm:mb-4">
               {profile.title}
             </p>
-            <p className="text-sm sm:text-base font-primary font-medium text-primary-dark/90 mb-3 sm:mb-4">
+            <p className="text-base font-primary font-medium text-primary-dark/90 mb-3 sm:mb-4">
               {profile.subtitle}
             </p>
             {/* list */}
-            <ul className="text-xs sm:text-sm text-gray-700 space-y-1 mb-3">
+            <ul className="text-sm text-gray-700 space-y-1 mb-3">
               {profile.points.map((point, i) => (
                 <li key={i} className="flex items-start gap-2">
                   <span className="text-primary-dark mt-0.5 sm:mt-1">✔</span>
@@ -93,14 +90,14 @@ const ProfileResults = () => {
               ))}
             </ul>
             {/* keywords */}
-            <p className="text-sm sm:text-base text-primary-dark font-primary mb-1 sm:mb-2">
+            <p className="text-base text-primary-dark font-primary mb-1 sm:mb-2">
               Keywords:
             </p>
             <div className="flex flex-wrap gap-1 sm:gap-2">
               {profile.keywords.map((kw, i) => (
                 <span
                   key={i}
-                  className="text-[10px] xs:text-xs bg-gray-100 px-2 py-0.5 sm:py-1 rounded-full text-primary-dark font-primary"
+                  className="text-xs bg-gray-100 px-2 py-0.5 sm:py-1 rounded-full text-primary-dark font-primary"
                 >
                   {kw}
                 </span>
@@ -109,13 +106,7 @@ const ProfileResults = () => {
           </div>
         ))}
       </div>
-      <button
-        className="w-full sm:w-fit flex gap-2 rounded-lg bg-primary-dark font-primary text-white px-6 py-3 sm:py-4 justify-center items-center cursor-pointer hover:bg-primary-dark/90 transition-colors"
-        onClick={() => router.push("/dashboard")}
-      >
-        <GiShoppingBag className="text-lg sm:text-xl" />
-        <span>Shop My Style</span>
-      </button>
+      <ShopButton />
     </div>
   );
 };

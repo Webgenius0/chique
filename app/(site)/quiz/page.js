@@ -43,8 +43,8 @@ const Quiz = () => {
   return (
     <div className="max-w-6xl mx-auto flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5 sm:py-16 xs:py-12 py-10 px-4">
       {/* Title Section */}
-      <div className="w-full flex flex-col lg:gap-5 md:gap-4 gap-1.5 2xl:pb-16 xl:pb-14 lg:pb-12 md:pb-10 sm:pb-8 pb-2">
-        <p className="text-center font-secondary text-primary-dark 2xl:text-5xl xl:text-4xl lg:text-3xl xs:text-2xl text-[22px] font-semibold">
+      <div className="w-full flex flex-col lg:gap-5 md:gap-4 gap-1.5 xl:pb-16 md:pb-12 xs:pb-10 pb-8">
+        <p className="text-center font-secondary text-primary-dark xl:text-5xl md:text-4xl xs:text-3xl text-2xl font-semibold">
           Discover Your Personal Style
         </p>
         <p className="text-base font-primary text-primary-dark text-center">
@@ -65,7 +65,7 @@ const Quiz = () => {
       />
 
       {/* Navigation Buttons */}
-      <div className="mt-6 flex justify-between items-center w-full gap-4">
+      <div className="xs:mt-6 mt-3 flex justify-between items-center w-full gap-4">
         {/* Previous Button */}
         <div className={`${current > 0 ? "block" : "invisible"}`}>
           <button

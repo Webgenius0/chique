@@ -8,7 +8,7 @@ import Image from "next/image";
 const WhyCreated = () => {
   return (
     <div className="w-full relative overflow-hidden">
-      <div className="max-w-4xl mx-auto flex flex-col gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 py-5 xl:py-20">
+      <div className="max-w-4xl mx-auto flex flex-col xl:gap-8 gap-5 px-6 xl:py-20 md:py-12 py-5 ">
         {/* Left side layer Flower Image with Animation - Responsive */}
         <motion.div
           initial={{
@@ -19,7 +19,7 @@ const WhyCreated = () => {
           }}
           animate={{ x: 0, opacity: 1, rotateX: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute left-0 bottom-0 w-[150px] xs:w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px]"
+          className="absolute left-0 lg:-bottom-8 bottom-0 2xl:w-[400px] xl:w-[300px] xs:w-[250px] w-[200px]"
         >
           <Image
             src={layer_image}
@@ -38,7 +38,7 @@ const WhyCreated = () => {
         </div>
 
         {/* Description - Responsive */}
-        <p className="text-sm xs:text-base sm:text-lg text-center font-light font-primary text-primary-dark px-2 sm:px-4 md:px-8 lg:px-12">
+        <p className=" sm:text-lg text-base text-center font-light font-primary text-primary-dark">
           Despite full wardrobes and endless options, many still ask the same
           question: "What should I wear?" Chique AI was built to bring styling,
           clarity, and smart shopping into one elegant experience.

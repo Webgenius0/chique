@@ -14,7 +14,7 @@ const AiStyle = ({ params }) => {
   return (
     <div className="w-full flex flex-col justify-center items-center xl:py-20 lg:py-16 md:py-12 xs:py-8 py-4">
       <div className="w-full max-w-[360px] flex flex-col gap-3">
-        <div className="w-full h-[550px] overflow-hidden rounded-2xl border p-4">
+        <div className="w-full xs:h-[550px] 3xs:h-[400px] h-[300px] overflow-hidden rounded-2xl border 3xs:p-4 p-1.5">
           <Image
             src={image}
             alt="image"
@@ -32,3 +32,5 @@ const AiStyle = ({ params }) => {
   );
 };
 export default AiStyle;
+
+// xs:h-[360px] 3xs:h-[300px] h-[250px]

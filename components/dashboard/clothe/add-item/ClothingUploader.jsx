@@ -25,10 +25,10 @@ const ClothingUploader = () => {
   const triggerFileInput = () => inputRef.current.click();
 
   return (
-    <div className="w-full max-w-[50%] flex flex-col gap-6">
+    <div className="w-full lg:max-w-[50%] flex flex-col gap-6">
       {/* Upload Section */}
       <div
-        className="border-1 border-dashed border-primary-dark rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer text-center min-h-[330px]"
+        className="border-1 border-dashed border-primary-dark rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer text-center 3xs:min-h-[330px] h-[300px]"
         onClick={triggerFileInput}
       >
         {preview ? (
@@ -40,7 +40,7 @@ const ClothingUploader = () => {
         ) : (
           <>
             <RiDownloadCloudFill className="text-6xl text-primary-dark mb-4" />
-            <p className="text-xl font-medium text-primary-dark font-secondary">
+            <p className="xs:text-xl text-lg font-medium text-primary-dark font-secondary">
               Drop your clothing item photo here or click to upload
             </p>
             <p className="text-base text-primary-dark font-primary">
@@ -70,7 +70,7 @@ const ClothingUploader = () => {
         <p className="text-xl font-semibold text-primary-dark font-primary mb-3">
           Preview
         </p>
-        <div className="border-1 border-dashed border-primary-dark rounded-xl h-[330px] flex items-center justify-center overflow-hidden bg-gray-50">
+        <div className="border-1 border-dashed border-primary-dark rounded-xl 3xs:h-[330px] h-[300px] flex items-center justify-center overflow-hidden bg-gray-50">
           {preview ? (
             <img
               src={preview}

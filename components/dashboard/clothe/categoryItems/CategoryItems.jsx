@@ -7,14 +7,14 @@ import { use } from "react"; // Import the use hook
 const CategoryItems = ({ category_slug }) => {
     const router = useRouter();
     return (
-        <div className="w-full grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 xs:grid-cols-2 gap-5">
+        <div className="w-full grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 xs:gap-5 gap-3">
             {pantData.map((item) => (
                 <div
                     onClick={() => router.push(`/dashboard/my-clothes/${category_slug}/${item.id}`)}
                     key={item.id}
                     className="w-full flex flex-col gap-3 cursor-pointer"
                 >
-                    <div className="w-full h-[360px] overflow-hidden rounded-2xl border p-4">
+                    <div className="w-full xs:h-[360px] 3xs:h-[300px] h-[250px] overflow-hidden rounded-2xl border 3xs:p-4 p-1.5">
                         <Image
                             src={item.image}
                             alt={item.title}
@@ -23,7 +23,7 @@ const CategoryItems = ({ category_slug }) => {
                             height={360}
                         />
                     </div>
-                    <p className="text-base text-primary-dark font-primary font-medium bg-[#F8F8F8] p-2 rounded-lg">
+                    <p className="2xs:text-base text-sm text-primary-dark font-primary font-medium bg-[#F8F8F8] p-2 rounded-lg">
                         {item.title}
                     </p>
                 </div>

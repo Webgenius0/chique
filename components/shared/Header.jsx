@@ -2,9 +2,11 @@
 import Link from "next/link";
 import Logo from "../common/Logo";
 import NavItems from "./NavItems";
-import { MdOutlineMenuOpen, MdClose } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { IoMenu } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
+import SidebarLogo from "../common/SidebarLogo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,17 +49,17 @@ const Header = () => {
   return (
     <>
       {/* desktop header */}
-      <header className="w-full md:py-3 py-2 text-base font-secondary capitalize border-b font-medium backdrop-blur-md border-[#2E2125] sticky top-0 bg-background z-[500]">
+      <header className="w-full sm:py-4 py-3 text-base font-secondary capitalize border-b font-medium backdrop-blur-md border-[#2E2125] sticky top-0 bg-background z-[500]">
         <div className="container flex gap-6 justify-between items-center">
-          <div className="flex items-center gap-2">
+          <div className="md:w-fit w-full flex items-center md:gap-2 justify-between">
+            <Logo />
             <button
               onClick={toggleSidebar}
               className="cursor-pointer md:hidden"
               aria-label="Toggle menu"
             >
-              <MdOutlineMenuOpen className="text-2xl text-[#0d0e10b4]" />
+              <IoMenu className="text-4xl text-[#0d0e10b4]" />
             </button>
-            <Logo />
           </div>
           <NavItems />
           <div className="hidden md:flex sm:gap-5 gap-3 justify-end items-center shrink-0">
@@ -85,18 +87,18 @@ const Header = () => {
               className="fixed inset-y-0 left-0 w-full bg-background z-[1000] shadow-lg p-4"
             >
               {/* logo and close button */}
-              <div className="flex justify-between items-center mb-4">
-                <Logo />
+              <div className="w-full flex justify-between items-center mb-4">
+                <SidebarLogo />
                 <button
                   onClick={toggleSidebar}
                   className="cursor-pointer"
                   aria-label="Close menu"
                 >
-                  <MdClose className="text-2xl" />
+                  <RxCross2 className="text-3xl" />
                 </button>
               </div>
               {/* mobile navigation items */}
-              <div className="flex flex-col space-y-4">
+              <div className="flex flex-col space-y-4 px-2">
                 <Link href="/" onClick={toggleSidebar}>
                   Home
                 </Link>
@@ -111,12 +113,7 @@ const Header = () => {
                 </Link>
                 <div className="md:hidden flex flex-col sm:gap-5 gap-3 justify-end items-start shrink-0">
                   <Link href={"/auth/sign-up"}>Sign Up</Link>
-                  <Link
-                    href={"/auth/sign-in"}
-                    className="rounded-sm px-5 sm:py-2 py-1.5 font-semibold flex justify-center items-center border border-primary-dark"
-                  >
-                    Log In
-                  </Link>
+                  <Link href={"/auth/sign-in"}>Log In</Link>
                 </div>
               </div>
             </motion.div>

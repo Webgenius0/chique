@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
-import Logo from "../common/Logo";
 import { usePathname } from "next/navigation";
 import { BsChatDots } from "react-icons/bs";
-import { PiCoatHangerBold } from "react-icons/pi";
-import { PiSignOutBold } from "react-icons/pi";
+import { GrCoatCheck } from "react-icons/gr";
 import { FaGlobeAmericas } from "react-icons/fa";
-import { IoIosTime } from "react-icons/io";
+import { MdOutlineMessage } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
+import { PiSignOutBold } from "react-icons/pi";
+import DashboardLogo from "../common/DashboardLogo";
 
 const SideBar = ({ isOpen = false, onClose }) => {
   const pathname = usePathname();
@@ -15,22 +15,22 @@ const SideBar = ({ isOpen = false, onClose }) => {
     {
       path: "/dashboard",
       name: "Chat",
-      icon: <BsChatDots  />,
+      icon: <BsChatDots />,
     },
     {
       path: "/dashboard/my-clothes",
       name: "My Clothes",
-      icon: <PiCoatHangerBold  />,
+      icon: <GrCoatCheck />,
     },
     {
       path: "/dashboard/explore",
       name: "Explore",
-      icon: <FaGlobeAmericas  />,
+      icon: <FaGlobeAmericas />,
     },
     {
       path: "/dashboard/feedback",
       name: "Feedback",
-      icon: <IoIosTime  />,
+      icon: <MdOutlineMessage />,
     },
   ];
   return (
@@ -46,18 +46,18 @@ const SideBar = ({ isOpen = false, onClose }) => {
         `}
     >
       {/* LOGO */}
-      <div className="w-full h-20 shrink-0 sticky top-0 flex justify-center items-center border-b p-2 overflow-hidden border-b-primary-dark">
-        <Logo className="w-full h-full justify-center md:mr-3 -mr-12" />
+      <div className="w-full h-20 shrink-0 sticky top-0 flex justify-start items-center border-b overflow-hidden border-b-primary-dark">
+        <DashboardLogo className="w-full h-full justify-center" />
         {/* cross button  */}
         <button
           onClick={onClose}
-          className="xl:hidden text-2xl text-primary-dark"
+          className="xl:hidden text-primary-dark -ml-10"
         >
-          <RxCross2 />
+          <RxCross2 className="text-3xl" />
         </button>
       </div>
       {/* NAV ITEMS */}
-      <nav className="w-full pl-6 py-8 h-screen flex flex-col justify-start gap-3 overflow-y-auto ">
+      <nav className="w-full pl-6 py-8 h-screen flex flex-col justify-start gap-1 overflow-y-auto ">
         {navItems.map((item) => {
           const isActive = pathname === item.path;
           return (

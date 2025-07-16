@@ -54,7 +54,7 @@ const ChiqueAI = () => {
   ];
   return (
     <div className="w-full relative overflow-hidden">
-      <div className="w-full container flex flex-col xl:gap-14 lg:gap-10 md:gap-7 gap-5 xl:pb-20 lg:pb-16 md:pb-4">
+      <div className="w-full container flex flex-col xl:gap-14 gap-8 pb-20">
         {/* Right side layer Flower Image with Animation */}
         <motion.div
           initial={{
@@ -65,7 +65,7 @@ const ChiqueAI = () => {
           }}
           animate={{ x: 0, opacity: 1, rotateX: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute right-0 -bottom-5 w-[300px] md:w-[400px] lg:w-[300px] "
+          className="absolute 2xl:right-0 right-30 lg:-bottom-5 bottom-3 w-[300px]"
         >
           <Image
             src={layer_image}
@@ -80,11 +80,11 @@ const ChiqueAI = () => {
           className={"!font-bold !font-secondary"}
         />
         {/* chique ai cards */}
-        <div className="w-full grid lg:grid-cols-4 sm:grid-cols-2 gap-5">
+        <div className="w-full grid lg:grid-cols-4 3xs:grid-cols-2 grid-cols-1 sm:gap-5 gap-3">
           {cardItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className="w-full flex flex-col md:gap-4 gap-1 bg-[#F8F8F8] xl:p-6 p-4 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
+              className="w-full flex flex-col sm:gap-4 gap-2 bg-[#F8F8F8] sm:p-6 p-3 rounded-lg hover:bg-primary-dark/20 transition-all duration-500"
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
@@ -92,10 +92,10 @@ const ChiqueAI = () => {
               viewport={{ once: true, amount: 0.4 }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="bg-[#F4F4F4] lg:w-[60px] w-10 lg:h-[60px] h-10 rounded-full lg:text-2xl text-xl flex items-center justify-center cursor-pointer">
+              <div className="bg-[#F4F4F4] w-[60px] h-[60px] rounded-full text-2xl flex items-center justify-center cursor-pointer">
                 {item.icon}
               </div>
-              <p className="text-lg font-bold font-secondary text-primary-dark">
+              <p className="xs:text-lg text-base font-bold font-secondary text-primary-dark">
                 {item.title}
               </p>
               <p className="text-sm font-light font-primary text-primary-dark">

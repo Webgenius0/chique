@@ -29,7 +29,7 @@ const TodayPicks = () => {
       </div>
       {/* Marquee */}
       <div className="w-full flex flex-col gap-5">
-        <p className="text-primary-dark text-2xl font-medium font-primary">
+        <p className="text-primary-dark xs:text-2xl text-xl font-medium font-primary">
           Today’s Picks
         </p>
         {/* Marquee Section */}
@@ -56,10 +56,10 @@ const TodayPicks = () => {
         </Marquee>
       </div>
       <div className="w-full flex flex-col gap-4 items-center">
-        <p className="text-[28px] text-primary-dark font-primary font-bold text-center">
+        <p className="xs:text-[28px] text-xl text-primary-dark font-primary font-bold text-center">
           Add an item to your closet
         </p>
-        <Link href="/dashboard/my-clothes/add-item" className="w-fit flex gap-2 items-center px-20 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary cursor-pointer">
+        <Link href="/dashboard/my-clothes/add-item" className="w-fit flex gap-2 items-center xs:px-20 px-5 rounded-lg border py-3 text-base text-primary-dark font-medium font-primary cursor-pointer">
           <RiDownloadCloudFill className="text-xl" />
           Upload from photos
         </Link>

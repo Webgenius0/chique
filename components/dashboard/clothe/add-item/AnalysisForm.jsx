@@ -21,10 +21,10 @@ const AnalysisForm = () => {
     console.log(data);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex gap-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex lg:flex-row flex-col gap-6">
       <ClothingUploader />
       <div className="w-full flex flex-col gap-3">
-        <div className="w-full grid grid-cols-2 gap-5">
+        <div className="w-full grid lg:grid-cols-2 grid-cols-1 gap-5">
           {/* clothe */}
           <CommonInputWrapper
             register={register}

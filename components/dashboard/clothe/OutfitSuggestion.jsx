@@ -10,7 +10,7 @@ const OutfitSuggestion = () => {
   return (
     <div className="w-full flex flex-col gap-6 justify-start">
       <div className="w-full flex justify-between">
-        <p className="text-2xl text-primary-dark font-medium font-primary">
+        <p className="xs:text-2xl text-xl text-primary-dark font-medium font-primary">
           Al Outfit Suggestions
         </p>
         <div className="w-fit flex items-center gap-3 text-primary-dark">
@@ -20,7 +20,7 @@ const OutfitSuggestion = () => {
           </p>
         </div>
       </div>
-      <div className="w-full grid grid-cols-3 gap-5">
+      <div className="w-full grid md:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-5">
         {outfitData.map((item) => (
           <div key={item.id} className="w-full  bg-[#FAFAFB] rounded-lg p-4">
             <div className="w-full h-[220px] overflow-hidden">
@@ -31,7 +31,7 @@ const OutfitSuggestion = () => {
               />
             </div>
             <div className="w-full flex flex-col gap-1 bg-[#F5F6F7] py-3">
-              <p className="text-xl text-primary-dark font-primary">
+              <p className="xs:text-xl text-lg text-primary-dark font-primary">
                 {item.title}
               </p>
               <p className="text-base text-[#2B2B2B] font-primary">
