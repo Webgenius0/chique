@@ -12,13 +12,13 @@ export const metadata = {
 };
 const Home = () => {
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-10">
       <Hero />
       <ChiqueAI />
       <WhyCreated />
       <About />
       <Price />
-      {/* <Evolution /> */}
+      <Evolution />
     </div>
   );
 };

@@ -64,7 +64,7 @@ const Hero = () => {
           text="Your Personal Style Assistant"
           className="!text-start font-secondary !font-semibold "
         />
-        <p className="sm:text-xl xs:text-lg text-base font-primary text-primary-dark font-normal text-start">
+        <p className="sm:text-xl xs:text-lg text-base font-primary text-primary-dark font-normal text-start xs:mt-0 mt-2">
           Discover your unique style, organize your wardrobe, and get
           personalized fashion advice with Chique Al.
         </p>
