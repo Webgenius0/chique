@@ -14,11 +14,11 @@ const Home = () => {
   return (
     <div className="w-full">
       <Hero />
-      <ChiqueAI />
+      {/* <ChiqueAI />
       <WhyCreated />
       <About />
       <Price />
-      <Evolution />
+      <Evolution /> */}
     </div>
   );
 };

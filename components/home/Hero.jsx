@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative w-full xl:h-[750px] lg:h-[600px] md:h-[380px] h-[600px] overflow-hidden bg-white">
+    <div className="relative w-full xl:h-[750px] lg:h-[600px] h-[700px] overflow-hidden bg-white">
       {/* Left Flower Image with Animation */}
       <motion.div
         initial={{
@@ -21,7 +21,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute left-0 xl:bottom-0 w-[250px] lg:w-[400px] xl:w-[500px]"
+        className="absolute left-0 lg:bottom-0 -top-20 w-[250px] lg:w-[350px] xl:w-[500px]"
       >
         <Image
           src={left_image}
@@ -42,7 +42,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute right-0 bottom-0 w-[250px] lg:w-[370px] xl:w-[500px]" // lg:top-[100px] xl:bottom-0 xs:h-[380px] h-[300px]
+        className="absolute right-0 lg:bottom-0 md:bottom-5 sm:-bottom-10 xs:bottom-8 2xs:bottom-5 bottom-25 xl:w-[500px] lg:w-[350px] 2xs:w-[250px] w-[200px]" // lg:top-[100px] xl:bottom-0 xs:h-[380px] h-[300px]
       >
         <Image
           src={right_image}
@@ -58,18 +58,18 @@ const Hero = () => {
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1.4, delay: 0.3, ease: "easeOut" }}
-        className="w-full relative px-4 z-10 max-w-xl mx-auto xl:pt-60 lg:pt-40 pt-28 flex flex-col lg:gap-6 gap-3 justify-center items-center"
+        className="w-full relative px-4 z-10 max-w-xl mx-auto pt-60 flex flex-col md:gap-6 xs:gap-3 gap-1 justify-center items-start"
       >
         <CommonTitle
           text="Your Personal Style Assistant"
-          className="text-start font-secondary !font-semibold"
+          className="!text-start font-secondary !font-semibold "
         />
-        <p className="md:text-xl text-base font-primary text-primary-dark font-normal text-center lg:text-start">
+        <p className="sm:text-xl xs:text-lg text-base font-primary text-primary-dark font-normal text-start">
           Discover your unique style, organize your wardrobe, and get
           personalized fashion advice with Chique Al.
         </p>
         {/* navigate to dashboard chat page */}
-        <div className="w-full mt-2 flex gap-3 lg:justify-start md:items-start justify-center">
+        <div className="w-full mt-2 flex gap-3 justify-start">
           <Link href="/dashboard">
             <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
               Try Chique Al

@@ -19,7 +19,7 @@ const WhyCreated = () => {
           }}
           animate={{ x: 0, opacity: 1, rotateX: 0 }}
           transition={{ duration: 1.4, ease: "easeOut" }}
-          className="absolute left-0 bottom-0 w-[150px] xs:w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px]"
+          className="absolute left-0 -bottom-8 w-[150px] xs:w-[200px] sm:w-[250px] md:w-[300px] lg:w-[350px] xl:w-[400px]"
         >
           <Image
             src={layer_image}
