@@ -14,8 +14,8 @@ const Home = () => {
   return (
     <div className="w-full">
       <Hero />
-      {/* <ChiqueAI />
-      <WhyCreated />
+      <ChiqueAI />
+      {/* <WhyCreated />
       <About />
       <Price />
       <Evolution /> */}

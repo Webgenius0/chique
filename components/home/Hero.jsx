@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative w-full xl:h-[750px] lg:h-[600px] h-[700px] overflow-hidden bg-white">
+    <div className="relative w-full xl:h-[750px] lg:h-[600px] sm:h-[700px] h-[650px] overflow-hidden bg-white">
       {/* Left Flower Image with Animation */}
       <motion.div
         initial={{
@@ -21,7 +21,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute left-0 lg:bottom-0 -top-20 w-[250px] lg:w-[350px] xl:w-[500px]"
+        className="absolute left-0 lg:bottom-0 lg:top-0 md:-top-10 -top-20 w-[250px] lg:w-[350px] xl:w-[500px]"
       >
         <Image
           src={left_image}
@@ -42,7 +42,7 @@ const Hero = () => {
         }}
         animate={{ x: 0, opacity: 1, rotateX: 0 }}
         transition={{ duration: 1.4, ease: "easeOut" }}
-        className="absolute right-0 lg:bottom-0 md:bottom-5 sm:-bottom-10 xs:bottom-8 2xs:bottom-5 bottom-25 xl:w-[500px] lg:w-[350px] 2xs:w-[250px] w-[200px]" // lg:top-[100px] xl:bottom-0 xs:h-[380px] h-[300px]
+        className="absolute right-0 lg:bottom-0 md:bottom-5 sm:bottom-10 2xs:bottom-0 3xs:bottom-15 bottom-12 xl:w-[500px] lg:w-[350px] 2xs:w-[250px] w-[200px]" // lg:top-[100px] xl:bottom-0 xs:h-[380px] h-[300px]
       >
         <Image
           src={right_image}
