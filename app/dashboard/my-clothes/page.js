@@ -10,10 +10,10 @@ export const metadata = {
 };
 const MyClothes = () => {
   return (
-    <div className="w-full flex flex-col gap-10 pt-3">
-      <div className="w-full justify-between items-start flex gap-10">
+    <div className="w-full flex flex-col gap-10 xs:py-10 py-5">
+      <div className="w-full flex lg:flex-row flex-col justify-between items-start 2xl:gap-10 lg:gap-6 gap-10">
         <Wardrobe />
-        <div className="w-[700px] gap-20 flex flex-col justify-start items-start shrink-0">
+        <div className="2xl:w-[700px] lg:w-[450px] w-full flex flex-col sm:gap-20 gap-10 justify-start items-start shrink-0">
           <TodayPicks />
           <AIStylist />
         </div>
