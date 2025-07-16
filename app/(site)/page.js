@@ -15,9 +15,9 @@ const Home = () => {
     <div className="w-full">
       <Hero />
       <ChiqueAI />
-      {/* <WhyCreated />
+      <WhyCreated />
       <About />
-      <Price />
+      {/* <Price />
       <Evolution /> */}
     </div>
   );
