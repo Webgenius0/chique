@@ -100,12 +100,6 @@ const Price = () => {
           />
         </motion.div>
         <div className="w-full flex flex-col md:gap-4 gap-2 text-center items-center">
-          <div className="flex gap-2 justify-center items-center">
-            <FaStar />
-            <p className="text-lg text-primary-dark font-primary font-semibold">
-              Pricing
-            </p>
-          </div>
           <CommonTitle
             text="Subscription"
             className={
