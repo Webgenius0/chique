@@ -105,8 +105,8 @@ const Header = () => {
                 <Link href="/#about" onClick={toggleSidebar}>
                   About
                 </Link>
-                <Link href="/#pricing" onClick={toggleSidebar}>
-                  Pricing
+                <Link href="/#subscriptions" onClick={toggleSidebar}>
+                  Subscriptions
                 </Link>
                 <Link href="/contact" onClick={toggleSidebar}>
                   Contact

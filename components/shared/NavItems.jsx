@@ -7,7 +7,7 @@ const NavItems = () => {
   const navItems = [
     { name: "Home", path: "/" },
     { name: "About", path: "/#about" },
-    { name: "Pricing", path: "/#pricing" },
+    { name: "Subscription", path: "/#subscriptions" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -21,9 +21,8 @@ const NavItems = () => {
         >
           {item.name}
           <span
-            className={`absolute bottom-0 left-0 h-0.5 bg-primary-dark transition-all duration-300 ${
-              pathname === item.path ? "w-full" : "w-0"
-            }`}
+            className={`absolute bottom-0 left-0 h-0.5 bg-primary-dark transition-all duration-300 ${pathname === item.path ? "w-full" : "w-0"
+              }`}
           />
         </Link>
       ))}
