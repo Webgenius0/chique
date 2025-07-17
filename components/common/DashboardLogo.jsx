@@ -14,7 +14,11 @@ const DashboardLogo = ({ className = "" }) => {
       href={"/"}
     >
       <div className="w-40 h-10 -ml-14 overflow-hidden">
-        <img src={image.src} alt="Logo" className="w-full h-full object-cover" />
+        <img
+          src={image.src}
+          alt="Logo"
+          className="w-full h-full object-cover"
+        />
       </div>
     </Link>
   );
