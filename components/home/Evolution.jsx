@@ -4,6 +4,7 @@ import CommonSectionTitle from "../common/CommonSectionTitle";
 import { motion } from "framer-motion";
 import layer_image from "@/public/images/bannerImages/layer_image5.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Evolution = () => {
   return (
@@ -35,13 +36,11 @@ const Evolution = () => {
         <p className="sm:text-xl text-lg text-center font-medium font-primary text-primary-dark px-4">
           Discover your aesthetic. Streamline your wardrobe. Dress with clarity.
         </p>
-        <CommonBtn
-          link={true}
-          path="/dashboard"
-          className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-10"
-        >
-          Try Chique Al
-        </CommonBtn>
+        <Link href="/dashboard">
+          <CommonBtn className="rounded-lg text-nowrap w-fit !min-h-10 !p-2.5 !px-4">
+            Try Chique Al
+          </CommonBtn>
+        </Link>
       </div>
     </div>
   );
