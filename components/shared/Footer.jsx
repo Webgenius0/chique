@@ -1,11 +1,16 @@
+"use client"
+
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import Logo from "../common/Logo";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
   // social links
   const socialLinks = [
     {
@@ -31,10 +36,10 @@ const Footer = () => {
   ];
   // items
   const items = [
-    { id: 1, name: "Home" },
-    { id: 2, name: "Features" },
-    { id: 3, name: "Contact" },
-    { id: 4, name: "Support" },
+    { name: "Home", path: "/" },
+    { name: "About", path: "/#about" },
+    { name: "Subscription", path: "/#subscriptions" },
+    { name: "Contact", path: "/contact" },
   ];
 
   // main ui component
@@ -69,15 +74,19 @@ const Footer = () => {
       </div>
       {/* footer items */}
       <div className="w-full flex xs:gap-3 gap-1.5 justify-center items-center xl:pt-10 lg:pt-8 md:pt-6 pt-4">
-        {items.map((item, index) => (
-          <div
-            key={item.id}
-            className={`pr-3 ${
-              index !== items.length - 1 ? "border-r border-[#0D0E10]" : ""
-            }`}
+        {items.map((item) => (
+          <Link
+            key={item.path}
+            href={item.path}
+            className={`relative py-1 !font-secondary `}
           >
             {item.name}
-          </div>
+            <span
+              className={`absolute bottom-0 left-0 h-0.5 bg-primary-dark transition-all duration-300 ${
+                pathname === item.path ? "w-full" : "w-0"
+              }`}
+            />
+          </Link>
         ))}
       </div>
     </footer>

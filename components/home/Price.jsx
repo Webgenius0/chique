@@ -59,6 +59,12 @@ const Price = () => {
       subtitle: ["Premium AI Stying", "Team Features", "Dedicated Styles"],
     },
   ];
+
+  const extraTips = [
+    { id: 1, Price: 49.99 },
+    { id: 2, Price: 149.99 },
+    { id: 3, Price: 299.99 },
+  ];
   return (
     <div id="subscriptions" className="w-full relative">
       <div className="container flex flex-col xs:gap-10 gap-5 xl:py-20">
@@ -90,7 +96,9 @@ const Price = () => {
           </div>
           <CommonTitle
             text="Subscription"
-            className={"font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"}
+            className={
+              "font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"
+            }
           />
           <p className="text-lg text-primary-dark font-primary font-normal text-center">
             Pay by the month or the year, and cancel at any time.
@@ -109,7 +117,7 @@ const Price = () => {
               viewport={{ once: true, amount: 0 }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <CommonBtn className="rounded-[100px] text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
+              <CommonBtn className="rounded-[100px] font-primary text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
                 {item.buttonText}
               </CommonBtn>
               <p className="text-2xl font-semibold text-primary-dark font-primary border-b sm:pb-8 pb-5">
@@ -123,11 +131,37 @@ const Price = () => {
                   </li>
                 ))}
               </ul>
-              <CommonBtn className="rounded-[100px] text-nowrap !min-h-10 !p-2.5 !px-10">
+              <CommonBtn className="rounded-[100px] font-primary text-nowrap !min-h-10 !p-2.5 !px-10">
                 Get Started
               </CommonBtn>
             </motion.div>
           ))}
+        </div>
+        {/* Tip for Extra Profit Section */}
+        <div className="w-fit sm:p-5 p-3 mx-auto sm:mt-10 mt-5 flex flex-col sm:gap-5 gap-3 items-center text-center border border-primary-dark rounded-2xl hover:bg-[#B1B0B0] transition duration-500">
+          <p className="xl:text-4xl sm:text-3xl text-2xl font-semibold font-secondary text-primary-dark">
+            Tip for Extra Profit
+          </p>
+          <p className="sm:text-2xl xs:text-xl text-lg text-gray-600 max-w-xl font-primary">
+            Offer yearly plans with 2 months free:
+          </p>
+          <div className="flex flex-col items-start gap-3 font-primary">
+            <p className="sm:text-2xl text-xl">
+              Regular: <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">$ 49.99</span>
+              /year
+            </p>
+            <p className="sm:text-2xl text-xl">
+              Pro:{" "}
+              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
+                $ 149.99
+              </span>
+              /year
+            </p>
+            <p className="sm:text-2xl text-xl">
+              Plus: <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">$ 299.99</span>
+              /year
+            </p>
+          </div>
         </div>
       </div>
     </div>
