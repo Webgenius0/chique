@@ -12,7 +12,7 @@ const NavBar = ({ setIsOpen }) => {
             case "/dashboard/my-clothes": return "My Clothes"
             case "/dashboard/explore": return "Explore"
             case "/dashboard/feedback": return "Feed Back"
-            default: return "Chat" // default case
+            default: return "" // default case
         }
     }
     return (
