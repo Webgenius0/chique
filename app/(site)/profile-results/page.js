@@ -3,8 +3,7 @@ import ShopButton from "@/components/common/ShopButton";
 const styleProfiles = [
   {
     title: "A-Dominant: Elegant Minimalist / Parisian Classic",
-    subtitle:
-      "Likes fun coverage, wears neutrals. proritizes elegance, structur",
+    subtitle: " → Style is polished, modest, timeless, and clean.",
     points: [
       "Likes full coverage",
       "Wears neutrals",
@@ -15,8 +14,7 @@ const styleProfiles = [
   },
   {
     title: "B-Dominant: Soft Modest / Romantic Feminine",
-    subtitle:
-      "Loves modesty with light fabrics, earthy or soft colors, chocs...",
+    subtitle: " → Style is delicate, comfortable, and elegant.",
     points: [
       "Loves modesty with light fabrics",
       "Chooses comfort and femininity",
@@ -26,8 +24,7 @@ const styleProfiles = [
   },
   {
     title: "C-Dominant: Trend-Aware Feminine / Confident Cool",
-    subtitle:
-      "Okay with light skin show, wears bold or pastel colors, choos...",
+    subtitle: " → Style is feminine but bold, modern, expressive.",
     points: [
       "Okay with light skin show",
       "Wears bold or pastel colors",
@@ -38,7 +35,7 @@ const styleProfiles = [
   },
   {
     title: "D-Dominant: Bold $ Street-Chic / Creative Edge",
-    subtitle: "Oversized or mix styles, bold colors or leather/denim, Choos...",
+    subtitle: " → Style is fun, layered, expressive, fashion-forward.",
     points: [
       "Oversized or mix styles",
       "Bold colors or leather/denim",
@@ -48,14 +45,13 @@ const styleProfiles = [
   },
   {
     title: "E or F Mix: Mixed Style or Still Exploring",
-    subtitle:
-      "Mix Of modesty and boldness, likes trying everything, may need...",
+    subtitle: " → Try hybrid styles like “Modest Trendy” or “Boho Classy”",
     points: [
       "Mix of modesty and boldness",
       "Likes trying everything",
       "May need time to define preferences",
     ],
-    keywords: ["Modest Trendy", "Boho Easy", "capsule outfits"],
+    tips: "Tip: Build capsule outfits with a mix of fabrics and styles until they feel “right.”",
   },
 ];
 const ProfileResults = () => {
@@ -75,9 +71,7 @@ const ProfileResults = () => {
             <p className=" xl:text-[22px] xs:text-xl text-lg font-secondary font-semibold text-primary-dark mb-2 sm:mb-4">
               {profile.title}
             </p>
-            <p className="text-base font-primary font-medium text-primary-dark/90 mb-3 sm:mb-4">
-              {profile.subtitle}
-            </p>
+
             {/* list */}
             <ul className="text-sm text-gray-700 space-y-1 mb-3">
               {profile.points.map((point, i) => (
@@ -89,20 +83,37 @@ const ProfileResults = () => {
                 </li>
               ))}
             </ul>
-            {/* keywords */}
-            <p className="text-base text-primary-dark font-primary mb-1 sm:mb-2">
-              Keywords:
+            <p className="text-base font-primary font-medium text-primary-dark/90 mb-3 sm:mb-4">
+              {profile.subtitle}
             </p>
+            {/* keywords */}
+            {profile.keywords && (
+              <p className="text-base text-primary-dark font-primary mb-1 sm:mb-2">
+                Keywords:
+              </p>
+            )}
+
             <div className="flex flex-wrap gap-1 sm:gap-2">
-              {profile.keywords.map((kw, i) => (
-                <span
-                  key={i}
-                  className="text-xs bg-gray-100 px-2 py-0.5 sm:py-1 rounded-full text-primary-dark font-primary"
-                >
-                  {kw}
-                </span>
-              ))}
+              {/* keywords */}
+              {profile.keywords && profile.keywords.length > 0 && (
+                <>
+                  <p className="text-base text-primary-dark font-primary mb-1 sm:mb-2">
+                    Keywords:
+                  </p>
+                  <div className="flex flex-wrap gap-1 sm:gap-2">
+                    {profile.keywords.map((kw, i) => (
+                      <span
+                        key={i}
+                        className="text-xs bg-gray-100 p-2 rounded-full text-primary-dark font-primary"
+                      >
+                        {kw}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
+            <p>{profile.tips}</p>
           </div>
         ))}
       </div>

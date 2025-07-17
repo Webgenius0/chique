@@ -1,11 +1,11 @@
 "use client";
 import { FaStar } from "react-icons/fa";
-import { FaCircleCheck } from "react-icons/fa6";
 import CommonTitle from "../common/CommonTitle";
 import CommonBtn from "../common/CommonBtn";
 import { motion } from "framer-motion";
 import layer_image from "@/public/images/bannerImages/layer_image4.png";
 import Image from "next/image";
+import { TiTick } from "react-icons/ti";
 
 const flipVariants = {
   hidden: { rotateY: 180, opacity: 0 },
@@ -24,41 +24,59 @@ const Price = () => {
   const cardItems = [
     {
       id: 1,
-      icon: <FaCircleCheck />,
       buttonText: "Free",
       price: 0,
-      subtitle: ["Basic AI Style", "5 Virtual Outfits", "Community Support"],
+      subtitle: [
+        "Upload up to 5 phots total",
+        "Make 3 outfit shopping searches",
+        "No MY Closet access",
+        "Limited AI usage",
+        "Ads included",
+        "Best for: Trying the platform with no commitment",
+      ],
     },
     {
       id: 2,
-      icon: <FaCircleCheck />,
       buttonText: "Regular",
-      price: 9.99,
+      price: 4.99,
       subtitle: [
-        "Advanced AI Styling",
-        "20 Virtual Outfits",
-        "Piority Support",
+        "Upload up to 15 photos per day",
+        "Make 15 outfit shopping searches per day",
+        "Unlimited AI chat",
+        "No My Closet access",
+        "No ads",
+        "Best for: Casual users who want more features and a clean, ad-free experience",
       ],
     },
     {
       id: 3,
-      icon: <FaCircleCheck />,
       buttonText: "Plus",
-      price: 19.99,
+      price: 14.99,
       subtitle: [
-        "Premium AI Stying",
-        "Unimited Virtual Outfits",
-        "24/7 Suppoted",
+        "Upload up to 25 photos per day",
+        "Make 25 outfit shopping searches per day",
+        "Full accress to My Closet",
+        "Unlimited AI chat",
+        "No ads",
+        "Best for: Fashion lovers who want to organize their style and use the full AI experience daily",
       ],
     },
     {
       id: 4,
-      icon: <FaCircleCheck />,
       buttonText: "Pro",
-      price: 49.99,
-      subtitle: ["Premium AI Stying", "Team Features", "Dedicated Styles"],
+      price: 30,
+      subtitle: [
+        "Unlimited photo uploads",
+        "Unlimited outfit shopping searches",
+        "Full access to My Closet",
+        "Unlimited AI chat",
+        "No ads",
+        "Premium experience with everything unlocked",
+        "Best for: Stylists, influencers, or serious users who want total freedom",
+      ],
     },
   ];
+
   return (
     <div id="subscriptions" className="w-full relative">
       <div className="container flex flex-col xs:gap-10 gap-5 xl:py-20">
@@ -90,7 +108,9 @@ const Price = () => {
           </div>
           <CommonTitle
             text="Subscription"
-            className={"font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"}
+            className={
+              "font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"
+            }
           />
           <p className="text-lg text-primary-dark font-primary font-normal text-center">
             Pay by the month or the year, and cancel at any time.
@@ -109,7 +129,7 @@ const Price = () => {
               viewport={{ once: true, amount: 0 }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <CommonBtn className="rounded-[100px] text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
+              <CommonBtn className="rounded-[100px] font-primary text-nowrap w-fit !min-h-10 !p-2.5 !px-10">
                 {item.buttonText}
               </CommonBtn>
               <p className="text-2xl font-semibold text-primary-dark font-primary border-b sm:pb-8 pb-5">
@@ -118,16 +138,50 @@ const Price = () => {
               <ul className="space-y-4">
                 {item?.subtitle?.map((subtitle, index) => (
                   <li key={index} className=" flex gap-2 items-center text-sm">
-                    <FaCircleCheck />
+                    <div className="min-w-6 h-6 rounded-full bg-primary-dark p-0.5">
+                      <TiTick className="text-white text-xl" />
+                    </div>
                     <span className="text-sm font-primary">{subtitle}</span>
                   </li>
                 ))}
               </ul>
-              <CommonBtn className="rounded-[100px] text-nowrap !min-h-10 !p-2.5 !px-10">
+              <CommonBtn className="rounded-[100px] font-primary text-nowrap !min-h-10 !p-2.5 !px-10">
                 Get Started
               </CommonBtn>
             </motion.div>
           ))}
+        </div>
+        {/* Tip for Extra Profit Section */}
+        <div className="w-fit sm:p-5 p-3 mx-auto sm:mt-10 mt-5 flex flex-col sm:gap-5 gap-3 items-center text-center border border-primary-dark rounded-2xl hover:bg-[#B1B0B0] transition duration-500">
+          <p className="xl:text-4xl sm:text-3xl text-2xl font-semibold font-secondary text-primary-dark">
+            Tip for Extra Profit
+          </p>
+          <p className="sm:text-2xl xs:text-xl text-lg text-gray-600 max-w-xl font-primary">
+            Offer yearly plans with 2 months free:
+          </p>
+          <div className="flex flex-col items-start gap-3 font-primary">
+            <p className="sm:text-2xl text-xl">
+              Regular:{" "}
+              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
+                $ 49.99
+              </span>
+              /year
+            </p>
+            <p className="sm:text-2xl text-xl">
+              Pro:{" "}
+              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
+                $ 149.99
+              </span>
+              /year
+            </p>
+            <p className="sm:text-2xl text-xl">
+              Plus:{" "}
+              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
+                $ 299.99
+              </span>
+              /year
+            </p>
+          </div>
         </div>
       </div>
     </div>
