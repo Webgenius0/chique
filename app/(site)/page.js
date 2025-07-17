@@ -7,9 +7,59 @@ import WhyCreated from "@/components/home/WhyCreated";
 
 export const metadata = {
   title: "Chique | Home",
-  description:
-    "Your Personal Style Assistant.Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique Al.",
+  description: "Your Personal Style Assistant. Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique AI.",
+
+  // Open Graph (Facebook) meta tags
+  openGraph: {
+    title: "Chique | Home",
+    description: "Your Personal Style Assistant. Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique AI.",
+    url: "https://chique-dev.netlify.app/", // Your actual URL
+    siteName: "Chique",
+    images: [
+      {
+        url: "/images/meta_images/facebook_meta.png", // Local path (inside `public`)
+        width: 1200, // Recommended OG image size
+        height: 630,
+        alt: "Chique - Your Personal Style Assistant",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  // Twitter Card meta tags
+  twitter: {
+    card: "summary_large_image",
+    title: "Chique | Home",
+    description: "Your Personal Style Assistant. Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique AI.",
+    images: ["/images/meta_images/facebook_meta.png"], // Same or different image for Twitter
+    site: "@yourtwitterhandle", // Replace with your Twitter handle
+    creator: "@yourtwitterhandle", // Replace with your Twitter handle
+  },
+
+  // Additional meta tags
+  metadataBase: new URL("https://chique-dev.netlify.app"), // Must match your domain
+  alternates: {
+    canonical: "/",
+  },
+  themeColor: "#ffffff",
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
+
 const Home = () => {
   return (
     <div className="w-full flex flex-col gap-10">
@@ -22,4 +72,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
