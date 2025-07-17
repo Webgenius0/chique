@@ -115,7 +115,7 @@ const Price = () => {
           {cardItems.map((item, index) => (
             <motion.div
               key={item.id}
-              className="w-full flex flex-col sm:gap-8 gap-5 border rounded-[20px] py-6 px-5 hover:bg-[#B1B0B0] transition duration-500"
+              className="w-full flex flex-col justify-between sm:gap-8 gap-5 border rounded-[20px] py-6 px-5 hover:bg-[#B1B0B0] transition duration-500"
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
