@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoMenu } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
-import SidebarLogo from "../common/SidebarLogo";
+// import SidebarLogo from "../common/SidebarLogo";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,7 +88,7 @@ const Header = () => {
             >
               {/* logo and close button */}
               <div className="w-full flex justify-between items-center mb-4">
-                <SidebarLogo />
+                <Logo />
                 <button
                   onClick={toggleSidebar}
                   className="cursor-pointer"
