@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import CommonTitle from "../common/CommonTitle";
 import CommonBtn from "../common/CommonBtn";
@@ -14,20 +15,27 @@ const flipVariants = {
     opacity: 1,
     transition: {
       duration: 0.1,
-      delay: index * 0.2, // staggered delay
+      delay: index * 0.2,
       ease: "easeOut",
     },
   }),
 };
 
 const Price = () => {
+  const [billingType, setBillingType] = useState("monthly");
+
+  const handleToggle = (type) => {
+    setBillingType(type);
+  };
+
   const cardItems = [
     {
       id: 1,
       buttonText: "Free",
-      price: 0,
+      monthlyPrice: 0,
+      yearlyPrice: 0,
       subtitle: [
-        "Upload up to 5 phots total",
+        "Upload up to 5 photos total",
         "Make 3 outfit shopping searches",
         "No MY Closet access",
         "Limited AI usage",
@@ -38,7 +46,8 @@ const Price = () => {
     {
       id: 2,
       buttonText: "Regular",
-      price: 4.99,
+      monthlyPrice: 4.99,
+      yearlyPrice: 49.99,
       subtitle: [
         "Upload up to 15 photos per day",
         "Make 15 outfit shopping searches per day",
@@ -51,11 +60,12 @@ const Price = () => {
     {
       id: 3,
       buttonText: "Plus",
-      price: 14.99,
+      monthlyPrice: 14.99,
+      yearlyPrice: 149.99,
       subtitle: [
         "Upload up to 25 photos per day",
         "Make 25 outfit shopping searches per day",
-        "Full accress to My Closet",
+        "Full access to My Closet",
         "Unlimited AI chat",
         "No ads",
         "Best for: Fashion lovers who want to organize their style and use the full AI experience daily",
@@ -64,7 +74,8 @@ const Price = () => {
     {
       id: 4,
       buttonText: "Pro",
-      price: 30,
+      monthlyPrice: 30,
+      yearlyPrice: 299.99,
       subtitle: [
         "Unlimited photo uploads",
         "Unlimited outfit shopping searches",
@@ -99,18 +110,51 @@ const Price = () => {
             priority
           />
         </motion.div>
+
+        {/* Title + Toggle */}
         <div className="w-full flex flex-col md:gap-4 gap-2 text-center items-center">
           <CommonTitle
             text="Subscription"
-            className={
-              "font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"
-            }
+            className="font-secondary md:text-4xl sm:text-3xl xs:text-2xl text-xl"
           />
           <p className="text-lg text-primary-dark font-primary font-normal text-center">
             Pay by the month or the year, and cancel at any time.
           </p>
+
+          {/* Monthly/Yearly Toggle */}
+          <div className="relative flex items-center w-[243px] h-[50px] bg-white/5 rounded-full border">
+            {/* Slider */}
+            <div
+              className={`absolute w-1/2 h-full bg-[#0D0E10] rounded-full transition-all duration-300 ease-in-out ${
+                billingType === "yearly"
+                  ? "translate-x-[120px]"
+                  : "translate-x-0"
+              }`}
+            ></div>
+
+            {/* Monthly Button */}
+            <button
+              onClick={() => handleToggle("monthly")}
+              className={`z-10 w-1/2 h-full rounded-full text-center font-medium transition-all duration-300 cursor-pointer ${
+                billingType === "monthly" ? "text-white" : "text-black"
+              }`}
+            >
+              Monthly
+            </button>
+
+            {/* Yearly Button */}
+            <button
+              onClick={() => handleToggle("yearly")}
+              className={`z-10 w-1/2 h-full rounded-full text-center font-medium transition-all duration-300 cursor-pointer ${
+                billingType === "yearly" ? "text-white" : "text-black"
+              }`}
+            >
+              Yearly
+            </button>
+          </div>
         </div>
-        {/* cards */}
+
+        {/* Pricing Cards */}
         <div className="w-full grid lg:grid-cols-4 xs:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
           {cardItems.map((item, index) => (
             <motion.div
@@ -119,7 +163,7 @@ const Price = () => {
               variants={flipVariants}
               initial="hidden"
               whileInView="visible"
-              custom={index} // this is passed to variants for delay
+              custom={index}
               viewport={{ once: true, amount: 0 }}
               style={{ transformStyle: "preserve-3d" }}
             >
@@ -127,11 +171,17 @@ const Price = () => {
                 {item.buttonText}
               </CommonBtn>
               <p className="text-2xl font-semibold text-primary-dark font-primary border-b sm:pb-8 pb-5">
-                ${item.price} <span className="text-sm">/ Month</span>
+                $
+                {billingType === "monthly"
+                  ? item.monthlyPrice
+                  : item.yearlyPrice}
+                <span className="text-sm">
+                  / {billingType === "monthly" ? "Month" : "Year"}
+                </span>
               </p>
               <ul className="space-y-4">
                 {item?.subtitle?.map((subtitle, index) => (
-                  <li key={index} className=" flex gap-2 items-center text-sm">
+                  <li key={index} className="flex gap-2 items-center text-sm">
                     <div className="min-w-6 h-6 rounded-full bg-primary-dark p-0.5">
                       <TiTick className="text-white text-xl" />
                     </div>
@@ -145,40 +195,9 @@ const Price = () => {
             </motion.div>
           ))}
         </div>
-        {/* Tip for Extra Profit Section */}
-        <div className="w-fit sm:p-5 p-3 mx-auto sm:mt-10 mt-5 flex flex-col sm:gap-5 gap-3 items-center text-center border border-primary-dark rounded-2xl hover:bg-[#B1B0B0] transition duration-500">
-          <p className="xl:text-4xl sm:text-3xl text-2xl font-semibold font-secondary text-primary-dark">
-            Tip for Extra Profit
-          </p>
-          <p className="sm:text-2xl xs:text-xl text-lg text-gray-600 max-w-xl font-primary">
-            Offer yearly plans with 2 months free:
-          </p>
-          <div className="flex flex-col items-start gap-3 font-primary">
-            <p className="sm:text-2xl text-xl">
-              Regular:{" "}
-              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
-                $ 49.99
-              </span>
-              /year
-            </p>
-            <p className="sm:text-2xl text-xl">
-              Pro:{" "}
-              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
-                $ 149.99
-              </span>
-              /year
-            </p>
-            <p className="sm:text-2xl text-xl">
-              Plus:{" "}
-              <span className="sm:text-3xl xs:text-2xl text-xl font-semibold">
-                $ 299.99
-              </span>
-              /year
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
+
 export default Price;
