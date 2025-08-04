@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import image from "../../public/images/logo/logo.png";
+import image from "@/public/images/logo/logo.png";
 
 const DashboardLogo = ({ className = "" }) => {
   return (

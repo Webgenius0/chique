@@ -242,3 +242,42 @@ export const pantData = [
     title: "Olive Green Cargo Pants",
   },
 ];
+
+
+export const testimonials = [
+  {
+    id: 1,
+    review: 'Up maids me an ample stood given. Certainty say suffering his him collected intention promotion.',
+    name: 'Chris Evans',
+    image: "https://i.pravatar.cc/300",
+    rating: 5,
+  },
+  {
+    id: 2,
+    review: 'Up maids me an ample stood given. Certainty say suffering his him collected intention promotion.',
+    name: 'Chris Evans',
+    image: "https://i.pravatar.cc/300",
+    rating: 5,
+  },
+  {
+    id: 3,
+    review: 'Up maids me an ample stood given. Certainty say suffering his him collected intention promotion.',
+    name: 'Chris Evans',
+    image: "https://i.pravatar.cc/300",
+    rating: 5,
+  },
+  {
+    id: 4,
+    review: 'Up maids me an ample stood given. Certainty say suffering his him collected intention promotion.',
+    name: 'Chris Evans',
+    image: "https://i.pravatar.cc/300",
+    rating: 5,
+  },
+  {
+    id: 5,
+    review: 'Up maids me an ample stood given. Certainty say suffering his him collected intention promotion.',
+    name: 'Chris Evans',
+    image: "https://i.pravatar.cc/300",
+    rating: 5,
+  }
+]

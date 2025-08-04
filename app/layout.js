@@ -3,10 +3,15 @@ import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Toaster } from 'react-hot-toast';
 
+// Add this new viewport export
+export const viewport = {
+    themeColor: 'black',
+};
+
 export const metadata = {
     title: "Chique",
     description: "Your Personal Style Assistant. Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique AI.",
-
+    // Removed themeColor from here
     // Open Graph (Facebook) meta tags
     openGraph: {
         title: "Chique",
@@ -27,19 +32,17 @@ export const metadata = {
     // Twitter Card meta tags
     twitter: {
         card: "summary_large_image",
-        title: "Chique | Home",
+        title: "Chique",
         description: "Your Personal Style Assistant. Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique AI.",
         images: ["/images/meta_images/facebook_meta.png"], // Same or different image for Twitter
         site: "@yourtwitterhandle", // Replace with your Twitter handle
         creator: "@yourtwitterhandle", // Replace with your Twitter handle
     },
-
     // Additional meta tags
     metadataBase: new URL("https://chique-dev.netlify.app"), // Must match your domain
     alternates: {
         canonical: "/",
     },
-    themeColor: "#ffffff",
     robots: {
         index: true,
         follow: true,
@@ -51,16 +54,8 @@ export const metadata = {
         },
     },
     icons: {
-        icon: "/favicon.ico",
-        shortcut: "/favicon-16x16.png",
-        apple: "/apple-touch-icon.png",
     },
 };
-
-
-
-
-
 
 // Primary - DM Sans (all weights)
 const primaryFont = DM_Sans({
@@ -99,5 +94,3 @@ export default function RootLayout({ children }) {
         </html>
     );
 }
-
-

@@ -1,3 +1,4 @@
+"use client"
 import LoaderV2 from "./LoaderV2"
 const ScreenLoading = () => {
     return (

@@ -1,11 +1,8 @@
-import React from 'react';
+import ScreenLoading from "@/components/common/ScreenLoading";
 
-const DashboadLoading = () => {
+export default function Loading() {
+    // Or a custom loading skeleton component
     return (
-        <div>
-            
-        </div>
-    );
-};
-
-export default DashboadLoading;
+        <ScreenLoading />
+    )
+}
