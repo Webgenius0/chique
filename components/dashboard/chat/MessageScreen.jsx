@@ -119,9 +119,9 @@ const MessageScreen = () => {
                         </div>
 
                         {/* Message content */}
-                        <div className={`rounded-lg p-3 ${message.sender === 'user'
-                            ? 'bg-blue-100 rounded-tr-none'
-                            : 'bg-gray-100 rounded-tl-none'
+                        <div className={`rounded-lg border p-3 ${message.sender === 'user'
+                            ? 'rounded-tr-none'
+                            : ' rounded-tl-none'
                             }`}>
                             {message.type === 'text' ? (
                                 <p className="text-gray-800">{message.content}</p>
@@ -142,8 +142,7 @@ const MessageScreen = () => {
                             )}
 
                             {/* Timestamp - now hydration-safe */}
-                            <p className={`text-xs mt-1 ${message.sender === 'user' ? 'text-blue-600' : 'text-gray-500'
-                                }`}
+                            <p className={`text-xs mt-1 font-semibold text-gray-800`}
                                 suppressHydrationWarning
                             >
                                 {formatTime(message.timestamp)}
