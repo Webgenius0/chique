@@ -6,12 +6,13 @@ export const metadata = {
   description: 'Manage your style profile, wardrobe, and personalized recommendations on Chique.',
 }
 
-const Dashboard = () => {
+export default async function Dashboard() {
+
+  // main render
   return (
     <div className="w-full h-full flex flex-col justify-start items-center gap-3 relative ">
       <MessageScreen />
       <SendMessage />
     </div>
   );
-};
-export default Dashboard;
+}

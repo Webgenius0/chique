@@ -1,4 +1,3 @@
-import UnderConstruction from "@/components/dashboard/UnderConstruction"
 
 export const metadata = {
     title: 'Chique | Feed Back',
@@ -7,8 +6,8 @@ export const metadata = {
 
 const FeedBack = () => {
     return (
-        <div className="w-full flex justify-center items-center h-full">
-            <UnderConstruction pageName="Feed Back" />
+        <div className="w-full flex flex-col xs:gap-6 gap-4 xs:py-10 py-5 border">
+            
         </div>
     )
 }

@@ -10,7 +10,7 @@ const ClientDashboard = ({ children }) => {
       <SideBar isOpen={isOpen} onClose={() => setIsOpen(false)} />
       <div className="w-full h-full flex flex-col justify-start overflow-y-auto">
         <NavBar setIsOpen={setIsOpen} />
-        <main className="w-full h-[calc(100vh-80px)] px-5 py-3 overflow-y-auto">
+        <main className="w-full relative h-[calc(100vh-80px)] px-5 py-3 overflow-y-auto">
           {children}
         </main>
       </div>

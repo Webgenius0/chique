@@ -1,12 +1,16 @@
-'use client' // Error boundaries must be Client Components
- 
-export default function GlobalError({ error, reset }) {
+'use client'
+
+import ErrorScreen from "@/components/common/ErrorScreen"
+
+// Error boundaries must be Client Components
+export default function Error({ error, reset }) {
   return (
     // global-error must include html and body tags
     <html>
       <body>
-        <h2>Something went wrong!</h2>
-        <button onClick={() => reset()}>Try again</button>
+        <div className='w-full h-screen  flex justify-center items-center'>
+          <ErrorScreen reset={reset} error={error} />
+        </div>
       </body>
     </html>
   )

@@ -13,7 +13,7 @@ const CommonBtn = ({
     onclick,
     disabled = false,
 }) => {
-    const commonStyle = "w-full cursor-pointer bg-primary-dark rounded-4xl px-4 sm:px-6 py-3 sm:py-4 flex justify-center sm:min-h-[60px] items-center lg:text-xl md:font-semibold font-medium text-white capitalize"
+    const commonStyle = "w-full cursor-pointer bg-primary-dark rounded-4xl px-4 sm:px-6 py-3 sm:py-4 flex justify-center min-h-[60px] items-center lg:text-xl md:font-semibold font-medium text-white relative capitalize"
     return (
         <>
             {link ? (
@@ -27,7 +27,7 @@ const CommonBtn = ({
                     onClick={onclick}
                     className={cn(commonStyle, className)}
                 >
-                    {isLoading ? <Loader size={24} color="white" speed={1} /> : children}
+                    {isLoading ? <Loader className={``} /> : children}
                 </button>
             )}
         </>
