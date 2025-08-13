@@ -13,7 +13,7 @@ const TodayPicks = () => {
   return (
     <div className="w-full flex flex-col gap-6">
       {/* Top Weather Row */}
-      <div className="w-full flex  justify-between">
+      <div className="w-full flex justify-between">
         <div className="flex items-center gap-3 text-primary-dark">
           <MdOutlineWbSunny size={24} className="text-[#0984E2]" />
           <p className="text-primary-dark text-base font-medium">

@@ -2,7 +2,6 @@
 import { wardrobeItems } from "@/data/db";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { GoFileDirectory } from "react-icons/go";
 
 const Wardrobe = () => {
@@ -12,7 +11,7 @@ const Wardrobe = () => {
       <p className="xs:text-2xl text-xl text-primary-dark font-medium font-primary">
         Add New Item to Your Wardrobe
       </p>
-      <div className="w-full grid 2xl:grid-cols-3 grid-cols-2  gap-4">
+      <div className="w-full grid 3xl:grid-cols-3 grid-cols-2  gap-4">
         {wardrobeItems.map((item) => (
           <Link
             className="w-full flex flex-col gap-3 cursor-pointer "

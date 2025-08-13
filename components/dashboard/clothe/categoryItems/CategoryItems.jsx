@@ -2,12 +2,11 @@
 import { pantData } from "@/data/db"
 import Image from "next/image"
 import { useRouter } from "next/navigation";
-import { use } from "react"; // Import the use hook
 
 const CategoryItems = ({ category_slug }) => {
     const router = useRouter();
     return (
-        <div className="w-full grid xl:grid-cols-5 lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 xs:gap-5 gap-3">
+        <div className="w-full grid lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 xs:gap-5 gap-3">
             {pantData.map((item) => (
                 <div
                     onClick={() => router.push(`/dashboard/my-clothes/${category_slug}/${item.id}`)}
