@@ -32,6 +32,7 @@ const Header = () => {
     };
   }, []);
 
+  // main component
   return (
     <>
       {/* desktop header */}

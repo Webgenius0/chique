@@ -1,13 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { BsChatDots } from "react-icons/bs";
-import { GrCoatCheck } from "react-icons/gr";
-import { FaGlobeAmericas } from "react-icons/fa";
-import { MdOutlineMessage } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
-import { PiSignOutBold } from "react-icons/pi";
 import DashboardLogo from "../common/DashboardLogo";
-import NavLink from "../common/NavLink";
 import { useState } from "react";
 import { Modal } from "antd";
 import SideBarItems from "./SideBarItems";

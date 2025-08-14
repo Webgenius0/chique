@@ -31,13 +31,13 @@ const SideBarItems = ({ setIsModalOpen }) => {
     ];
     // nav 
     return (
-        <nav className="w-full pl-6 py-8 h-screen flex flex-col justify-start gap-1 overflow-y-auto">
+        <nav className="w-full pl-3 py-8 h-screen flex flex-col justify-start gap-1 overflow-y-auto">
             {navItems.map((item) => (
                 <NavLink
                     key={item.path}
                     href={item.path}
                     end={item.end}
-                    className="w-full rounded-tl-lg text-xl rounded-bl-lg px-4 py-3 flex justify-start items-center gap-3 transition-colors duration-300"
+                    className="w-full rounded-tl-sm text-xl rounded-bl-sm px-4 py-3 flex justify-start items-center gap-3 transition-colors duration-300"
                     activeClassName="bg-primary-dark text-white"
                     inactiveClassName="text-primary-dark hover:bg-primary-dark hover:text-white"
                 >
@@ -49,7 +49,7 @@ const SideBarItems = ({ setIsModalOpen }) => {
             {/* Sign Out Button */}
             <button
                 onClick={() => setIsModalOpen(true)}
-                className="w-full cursor-pointer text-left text-primary-dark hover:bg-primary-dark hover:text-white rounded-tl-lg text-xl rounded-bl-lg px-4 py-3 flex justify-start items-center gap-3 transition-colors duration-300"
+                className="w-full cursor-pointer text-left text-primary-dark hover:bg-primary-dark hover:text-white rounded-tl-sm text-xl rounded-bl-sm px-4 py-3 flex justify-start items-center gap-3 transition-colors duration-300"
             >
                 <span className="text-2xl shrink-0">
                     <PiSignOutBold className="text-[26px]" />

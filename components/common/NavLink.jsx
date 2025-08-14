@@ -8,6 +8,7 @@ const NavLink = ({
     className = "",
     activeClassName = "",
     inactiveClassName = "",
+    onClick,
     end = false,
     exact = false,
     ...props
@@ -26,7 +27,7 @@ const NavLink = ({
         }`.trim();
 
     return (
-        <Link href={href} className={combinedClassName} {...props}>
+        <Link href={href} prefetch={true} className={combinedClassName} onClick={onClick} {...props}>
             {children}
         </Link>
     );

@@ -44,19 +44,19 @@ const FeedBackList = () => {
     // client side component
     return (
         <div className="w-full flex flex-col gap-6 justify-start items-start ">
-            <h2 className="text-3xl font-bold capitalize">Previous Review</h2>
-            <div className="w-full flex flex-col gap-6">
+            <h2 className="sm:text-3xl text-xl font-bold capitalize">Previous Review</h2>
+            <div className="w-full flex flex-col gap-4 sm:gap-6">
                 {data.map((item) => (
-                    <div className="w-full flex gap-5 justify-start items-start">
-                        <div className="size-14 border rounded-full shrink-0 overflow-hidden">
+                    <div key={item.id} className="w-full flex sm:gap-5 gap-3 justify-start items-start">
+                        <div className="sm:size-14 size-10 border rounded-full shrink-0 overflow-hidden">
                             <img src={item.avatar} alt={item.name} className="w-full h-full object-cover" />
                         </div>
-                        <div className="w-full flex flex-col gap-2">
-                            <div className="flex items-center gap-3 justify-start">
-                                <p className="text-xl font-semibold">{item.name}</p>
-                                <StarRating className="text-lg" rating={item.rate} />
+                        <div className="w-full flex flex-col gap-1 sm:gap-2">
+                            <div className="flex items-center gap-2 sm:gap-3 justify-start">
+                                <p className="sm:text-xl text-lg font-semibold">{item.name}</p>
+                                <StarRating className="sm:text-lg text-base" rating={item.rate} />
                             </div>
-                            <p className="text-lg">{item.review}</p>
+                            <p className="text-base sm:text-lg">{item.review}</p>
                         </div>
                     </div>
                 ))}

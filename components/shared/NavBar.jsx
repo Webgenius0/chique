@@ -17,7 +17,7 @@ const NavBar = ({ setIsOpen }) => {
     }
     return (
         <div className="w-full shrink-0 px-5 py-2 flex justify-start items-center gap-4 h-20 border-b border-primary-dark">
-            <button onClick={handleToggle} type="button" className="cursor-pointer">
+            <button onClick={handleToggle} type="button" className="cursor-pointer xl:hidden block">
                 <FaBars className="text-2xl text-primary-dark" />
             </button>
             <h1 className="text-2xl font-bold capitalize text-primary-dark font-secondary">

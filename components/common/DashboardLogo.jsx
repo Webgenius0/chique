@@ -11,6 +11,7 @@ const DashboardLogo = ({ className = "" }) => {
         "w-fit h-14 flex justify-start items-center overflow-hidden",
         className
       )}
+      prefetch={true}
       href={"/"}
     >
       <div className="w-40 h-10 -ml-14 overflow-hidden">

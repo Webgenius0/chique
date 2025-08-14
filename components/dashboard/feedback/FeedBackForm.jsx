@@ -20,8 +20,8 @@ const FeedBackForm = () => {
     }
     // form
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl mx-auto flex flex-col gap-6 justify-start items-center">
-            <h1 className="text-3xl text-black font-semibold capitalize text-center">Give Review</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl mx-auto flex flex-col gap-3 sm:gap-6 justify-start items-center">
+            <h1 className="sm:text-3xl text-2xl font-bold capitalize">Give Review</h1>
             <div className="w-full flex justify-between items-center gap-3">
                 <p className="font-medium capitalize text-xl">Select Rating</p>
                 <Rate tooltips={desc} onChange={setValue} value={value} />

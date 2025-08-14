@@ -17,6 +17,7 @@ const NavItems = () => {
         <Link
           key={item.path}
           href={item.path}
+          prefetch={true}
           className={`relative py-1 !font-secondary `}
         >
           {item.name}
