@@ -2,6 +2,7 @@ import { DM_Sans, Playfair_Display, Poppins } from 'next/font/google';
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Toaster } from 'react-hot-toast';
+import { Providers } from './providers';
 
 // Add this new viewport export
 export const viewport = {
@@ -88,7 +89,9 @@ export default function RootLayout({ children }) {
             <body suppressHydrationWarning>
                 <Toaster position="top-center" />
                 <AntdRegistry>
-                    {children}
+                    <Providers>
+                        {children}
+                    </Providers>
                 </AntdRegistry>
             </body>
         </html>

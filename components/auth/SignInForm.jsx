@@ -1,33 +1,50 @@
 "use client";
 import { useForm } from "react-hook-form";
 import CommonInputWrapper from "../common/CommonInputWrapper";
-import { validatePassword } from "@/utils/validatePassword";
 import Link from "next/link";
 import CommonBtn from "../common/CommonBtn";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import ErrorText from "../common/ErrorText";
+import axios from "axios";
 
 const SignInForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      terms: true, // Set default checked state here
+      terms: true,
     },
   });
-  const router = useRouter();
-  // on submit
+
+  const login = useMutation({
+    mutationKey: ["login"],
+    mutationFn: async (data) => {
+      const response = await axios.post("http://riaky.softvencefsd.xyz/api/login", data, {
+        withCredentials: true,
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message || "Logged in successfully");
+      router.push("/dashboard");
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || "Login failed");
+    },
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
-    router.push("/dashboard");
+    login.mutate(data);
   };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col gap-3"
-    >
-      {/* email */}
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
       <CommonInputWrapper
         register={register}
         errors={errors}
@@ -44,7 +61,6 @@ const SignInForm = () => {
           },
         }}
       />
-      {/* password */}
       <CommonInputWrapper
         register={register}
         errors={errors}
@@ -55,51 +71,35 @@ const SignInForm = () => {
         label="Password:"
         validationRules={{
           required: "Password field is required",
-          validate: validatePassword,
         }}
       />
 
-      {/* terms and forgot password */}
       <div className="flex xs:flex-row flex-col gap-2 xs:gap-0 justify-between">
-        {/* terms */}
-        <label
-          htmlFor="terms"
-          className="flex gap-2 cursor-pointer justify-start items-center"
-        >
+        <label htmlFor="terms" className="flex gap-2 cursor-pointer items-center">
           <input
             type="checkbox"
             id="terms"
             defaultChecked
-            className={`w-4 h-4 ${
-              errors.terms ? "accent-red-500" : "accent-primary-dark"
-            }`}
+            className={`w-4 h-4 ${errors.terms ? "accent-red-500" : "accent-primary-dark"}`}
             {...register("terms", {
               required: "You must accept the terms to continue",
             })}
           />
-          <span
-            className={`text-base capitalize ${
-              errors.terms ? "text-red-500" : ""
-            }`}
-          >
+          <span className={`text-base capitalize ${errors.terms ? "text-red-500" : ""}`}>
             Remember me
           </span>
         </label>
-        {/* error terms */}
         {errors.terms && <ErrorText error={errors?.terms?.message} />}
-        {/* forgot password */}
-        <Link
-          href="/auth/forgot-password"
-          className="text-[##0D0E10] text-base underline"
-        >
+        <Link href="/auth/forgot-password" className="text-[#0D0E10] text-base underline">
           Forget your password
         </Link>
       </div>
-      {/* submit button */}
-      <CommonBtn type="submit" className={`mt-4`} isLoading={false}>
+
+      <CommonBtn type="submit" className="mt-4" isLoading={login.isLoading}>
         Log in
       </CommonBtn>
     </form>
   );
 };
+
 export default SignInForm;
