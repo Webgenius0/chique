@@ -6,8 +6,7 @@ import Cookies from "js-cookie";
 import { useState } from "react";
 const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
 export function AuthProvider({ children }) {
-    const [accessToken, setToken] = useState(() => Cookies.get(ACCESS_TOKEN_KEY) || null);
-
+    const [accessToken, setAccessToken] = useState(() => Cookies.get(ACCESS_TOKEN_KEY) || null);
     const { data: userData, refetch: userRefetch, isFetching } = useQuery({
         queryKey: ["userData"],
         queryFn: async () => {
@@ -23,7 +22,8 @@ export function AuthProvider({ children }) {
             } catch (error) {
                 console.error("Error fetching user data:", error);
                 if (error.response?.status === 401) {
-
+                    Cookies.remove(ACCESS_TOKEN_KEY);
+                    setAccessToken(null);
                 }
                 return null;
             }

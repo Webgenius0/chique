@@ -1,11 +1,17 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useAxios } from "./axios.hook";
 import Cookies from "js-cookie";
+import { useUser } from "./get-user.hook";
+import { useRouter } from "next/navigation";
 
 export const useAuth = () => {
     const axiosPublic = useAxios();
+    const { userRefetch } = useUser();
+    const queryClient = useQueryClient();
+    const router = useRouter();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
+
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
@@ -18,13 +24,17 @@ export const useAuth = () => {
             Cookies.set(ACCESS_TOKEN_KEY, data?.data?.chique_auth_token, {
                 expires: data?.data?.expires_in_minutes / (60 * 24), // Convert to days
             });
-            // Add redirect logic here
-            navigate('/dashboard');
+            queryClient.invalidateQueries({
+                queryKey: ["userData"],
+                exact: false,
+            });
+            router.push("/dashboard");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
         },
     });
+
     // ------------------- // Register mutation // -------------------
     const register = useMutation({
         mutationKey: ["register"],
@@ -40,7 +50,8 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "Registration failed");
         },
     });
-    // ------------------- // verify registered user mutation // -------------------
+
+    // ------------------- // Verify registered user mutation // -------------------
     const verifyOtp = useMutation({
         mutationKey: ["verifyOtp"],
         mutationFn: async (data) => {
@@ -54,15 +65,20 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "OTP verification failed");
         },
     });
-    // ------------------- // logout  user mutation // -------------------
-    const logOutMutation = useMutation({
+
+    // ------------------- // Logout user mutation // -------------------
+    const logout = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
             try {
-                const response = await axiosPublic.post("/logout",
-                    {},
+                const token = Cookies.get(ACCESS_TOKEN_KEY);
+                const response = await axiosPublic.post(
+                    "/logout",
+                    {}, // empty body
                     {
-                        withCredentials: true
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
                 );
                 return response?.data;
@@ -72,21 +88,20 @@ export const useAuth = () => {
             }
         },
         onSuccess: (response) => {
-            toast.success(response?.message || "Logged out successfully");
+            toast.success(response?.data || "Logged out successfully");
+            router.push("/auth/sign-in"); // Redirect to home
+            Cookies.remove(ACCESS_TOKEN_KEY);
         },
         onError: (error) => {
-            console.log(error);
+            console.error(error);
+            Cookies.remove(ACCESS_TOKEN_KEY);
+            router.push("/auth/sign-in"); // Redirect to home
             toast.success("Logged out successfully"); // still show success
         },
         onSettled: () => {
             queryClient.clear();
         },
     });
-    const logout = async () => {
-        await logOutMutation.mutateAsync();
-    };
 
-
-    // all return
     return { login, register, verifyOtp, logout };
 };

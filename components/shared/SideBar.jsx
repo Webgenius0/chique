@@ -5,6 +5,7 @@ import DashboardLogo from "../common/DashboardLogo";
 import { useState } from "react";
 import { Modal } from "antd";
 import SideBarItems from "./SideBarItems";
+import SignOutModal from "./SignOutModal";
 
 const SideBar = ({ isOpen = false, onClose }) => {
   const router = useRouter();
@@ -43,28 +44,7 @@ const SideBar = ({ isOpen = false, onClose }) => {
         centered
         className="bg-white rounded-lg"
       >
-        <div className="w-full flex flex-col gap-4 justify-start items-center py-6">
-          <p className="text-center xs:text-4xl text-2xl text-primary-dark font-semibold">
-            Sign Out
-          </p>
-          <p className="text-center text-primary-dark xs:text-xl text-lg font-semibold">
-            Do you want to log out?
-          </p>
-          <div className="flex justify-center gap-3">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="3xs:px-10 px-5 3xs:py-2 py-1.5 border hover:bg-primary-dark xs:text-lg text-base hover:text-white transition-all duration-300 ease-in-out border-primary text-black rounded-[100px] cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleLogout}
-              className="3xs:px-10 px-5 3xs:py-2 py-1.5 border border-primary hover:bg-primary-dark xs:text-lg text-base hover:text-white text-black transition-all duration-300 ease-in-out rounded-[100px] cursor-pointer"
-            >
-              Log Out
-            </button>
-          </div>
-        </div>
+        <SignOutModal setIsModalOpen={setIsModalOpen} />
       </Modal>
     </aside>
   );
