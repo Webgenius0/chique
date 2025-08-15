@@ -5,7 +5,7 @@ export function middleware(request) {
     const path = request.nextUrl.pathname
     const isPublicPath = path === '/auth/sign-in' || path === '/auth/sign-up'
     // Get token name from environment variable with fallback
-    const tokenName = process.env.AUTH_TOKEN_NAME || 'accessToken'
+    const tokenName = process.env.AUTH_TOKEN_NAME || ''
     const token = request.cookies.get(tokenName)?.value
     // Redirect logic
     if (!token && path.startsWith('/dashboard')) {

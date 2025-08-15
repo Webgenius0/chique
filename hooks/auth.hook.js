@@ -1,23 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useAxios } from "./axios.hook";
-import { useRouter } from "next/router";
 
 export const useAuth = () => {
     const { axiosPublic } = useAxios();
-    const router = useRouter();
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/login", data, {
-                withCredentials: true,
-            });
+            const response = await axiosPublic.post("/login", data);
             return response.data;
         },
         onSuccess: (data) => {
             toast.success(data?.message || "Logged in successfully");
-            router.push("/dashboard");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
@@ -52,6 +47,39 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "OTP verification failed");
         },
     });
+    // ------------------- // logout  user mutation // -------------------
+    const logOutMutation = useMutation({
+        mutationKey: ["logout"],
+        mutationFn: async () => {
+            try {
+                const response = await axiosPublic.post("/logout",
+                    {},
+                    {
+                        withCredentials: true
+                    }
+                );
+                return response?.data;
+            } catch (error) {
+                console.error("Logout API error:", error);
+                return null;
+            }
+        },
+        onSuccess: (response) => {
+            toast.success(response?.message || "Logged out successfully");
+        },
+        onError: (error) => {
+            console.log(error);
+            toast.success("Logged out successfully"); // still show success
+        },
+        onSettled: () => {
+            queryClient.clear();
+        },
+    });
+    const logout = async () => {
+        await logOutMutation.mutateAsync();
+    };
 
-    return { login, register, verifyOtp };
+
+    // all return
+    return { login, register, verifyOtp, logout };
 };

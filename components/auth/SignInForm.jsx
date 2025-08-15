@@ -3,15 +3,11 @@ import { useForm } from "react-hook-form";
 import CommonInputWrapper from "../common/CommonInputWrapper";
 import Link from "next/link";
 import CommonBtn from "../common/CommonBtn";
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
 import ErrorText from "../common/ErrorText";
-import axios from "axios";
+import { useAuth } from "@/hooks/auth.hook";
 
 const SignInForm = () => {
-  const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -21,26 +17,12 @@ const SignInForm = () => {
       terms: true,
     },
   });
-
-  const login = useMutation({
-    mutationKey: ["login"],
-    mutationFn: async (data) => {
-      const response = await axios.post("http://riaky.softvencefsd.xyz/api/login", data, {
-        withCredentials: true,
-      });
-      return response.data;
-    },
-    onSuccess: (data) => {
-      toast.success(data?.message || "Logged in successfully");
-      router.push("/dashboard");
-    },
-    onError: (error) => {
-      toast.error(error.response?.data?.message || "Login failed");
-    },
-  });
-
-  const onSubmit = (data) => {
-    login.mutate(data);
+  const router = useRouter()
+  const { login } = useAuth();
+  // on submit
+  const onSubmit = async (data) => {
+    await login.mutateAsync(data);
+    router.push("/dashboard");
   };
 
   return (
@@ -95,7 +77,7 @@ const SignInForm = () => {
         </Link>
       </div>
 
-      <CommonBtn type="submit" className="mt-4" isLoading={login.isLoading}>
+      <CommonBtn type="submit" className="mt-4" isLoading={login.isPending}>
         Log in
       </CommonBtn>
     </form>
