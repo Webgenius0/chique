@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { useAxios } from "./axios.hook";
 
 export const useAuth = () => {
-    const { axiosPublic } = useAxios();
+    const axiosPublic = useAxios();
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
