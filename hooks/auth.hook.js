@@ -12,6 +12,22 @@ export const useAuth = () => {
     const router = useRouter();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
 
+    /**
+     * -----------------------------
+     * Reusable Cookie Setter
+     * -----------------------------
+     * @param {string} token - Access token
+     * @param {number} expiresInMinutes - Expiry time in minutes
+     */
+    const setAuthCookie = (token, expiresInMinutes) => {
+        Cookies.set(ACCESS_TOKEN_KEY, token, {
+            expires: expiresInMinutes / (60 * 24), // days
+            path: "/", // available everywhere
+            secure: process.env.NODE_ENV === "production", // required for HTTPS in production
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // cross-site support in prod
+        });
+    };
+
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
@@ -22,10 +38,8 @@ export const useAuth = () => {
         onSuccess: (data) => {
             toast.success(data?.message || "Logged in successfully");
             const token = data?.data?.chique_auth_token;
-            Cookies.set(ACCESS_TOKEN_KEY, token, {
-                expires: data?.data?.expires_in_minutes / (60 * 24),
-            });
-            setAccessToken(token); // 👈 updates state, triggers re-fetch
+            setAuthCookie(token, data?.data?.expires_in_minutes);
+            setAccessToken(token);
             router.push("/dashboard");
         },
         onError: (error) => {
@@ -58,6 +72,13 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "OTP verified successfully");
+
+            // If token is returned here, store it immediately
+            if (data?.data?.chique_auth_token) {
+                setAuthCookie(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
+                setAccessToken(data?.data?.chique_auth_token);
+                router.push("/dashboard");
+            }
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "OTP verification failed");
@@ -66,10 +87,10 @@ export const useAuth = () => {
 
     // ------------------- // Logout user mutation // -------------------
     const onLogout = () => {
-        Cookies.remove(ACCESS_TOKEN_KEY);
+        Cookies.remove(ACCESS_TOKEN_KEY, { path: "/" });
         router.push('/auth/sign-in');
-    }
-    // Logout mutation
+    };
+
     const logout = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
@@ -77,7 +98,7 @@ export const useAuth = () => {
                 const token = Cookies.get(ACCESS_TOKEN_KEY);
                 const response = await axiosPublic.post(
                     "/logout",
-                    {}, // empty body
+                    {},
                     {
                         headers: {
                             Authorization: `Bearer ${token}`,
@@ -97,7 +118,7 @@ export const useAuth = () => {
         onError: (error) => {
             console.error(error);
             onLogout();
-            toast.success("Logged out successfully"); // still show success
+            toast.success("Logged out successfully");
         },
         onSettled: () => {
             queryClient.clear();
@@ -105,5 +126,5 @@ export const useAuth = () => {
         },
     });
 
-    return { login, register, verifyOtp, logout, onLogout };
+    return { login, register, verifyOtp, logout, onLogout, setAuthCookie };
 };
