@@ -1,11 +1,14 @@
 import { useAuth } from '@/hooks/auth.hook';
+import { useUser } from '@/hooks/get-user.hook';
 import React from 'react'
 
 const SignOutModal = ({ setIsModalOpen }) => {
     const { logout } = useAuth();
+    const { setAccessToken } = useUser(); // 👈 to clear access token after logout
     const handleLogout = async () => {
         await logout.mutateAsync();
         setIsModalOpen(false);
+        setAccessToken(null); 
     }
     // content
     return (

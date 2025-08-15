@@ -8,9 +8,9 @@ export function Providers({ children }) {
 
     return (
         <QueryClientProvider client={queryClient}>
-                <AuthProvider>
-                    {children}
-                </AuthProvider>
+            <AuthProvider>
+                {children}
+            </AuthProvider>
         </QueryClientProvider>
     )
 }

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export const useAuth = () => {
     const axiosPublic = useAxios();
-    const { userRefetch } = useUser();
+    const { setAccessToken } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
@@ -21,13 +21,11 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "Logged in successfully");
-            Cookies.set(ACCESS_TOKEN_KEY, data?.data?.chique_auth_token, {
-                expires: data?.data?.expires_in_minutes / (60 * 24), // Convert to days
+            const token = data?.data?.chique_auth_token;
+            Cookies.set(ACCESS_TOKEN_KEY, token, {
+                expires: data?.data?.expires_in_minutes / (60 * 24),
             });
-            queryClient.invalidateQueries({
-                queryKey: ["userData"],
-                exact: false,
-            });
+            setAccessToken(token); // 👈 updates state, triggers re-fetch
             router.push("/dashboard");
         },
         onError: (error) => {
@@ -67,6 +65,11 @@ export const useAuth = () => {
     });
 
     // ------------------- // Logout user mutation // -------------------
+    const onLogout = () => {
+        Cookies.remove(ACCESS_TOKEN_KEY);
+        router.push('/auth/sign-in');
+    }
+    // Logout mutation
     const logout = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
@@ -89,19 +92,18 @@ export const useAuth = () => {
         },
         onSuccess: (response) => {
             toast.success(response?.data || "Logged out successfully");
-            router.push("/auth/sign-in"); // Redirect to home
-            Cookies.remove(ACCESS_TOKEN_KEY);
+            onLogout();
         },
         onError: (error) => {
             console.error(error);
-            Cookies.remove(ACCESS_TOKEN_KEY);
-            router.push("/auth/sign-in"); // Redirect to home
+            onLogout();
             toast.success("Logged out successfully"); // still show success
         },
         onSettled: () => {
             queryClient.clear();
+            onLogout();
         },
     });
 
-    return { login, register, verifyOtp, logout };
+    return { login, register, verifyOtp, logout, onLogout };
 };
