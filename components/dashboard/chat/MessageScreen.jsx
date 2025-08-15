@@ -1,10 +1,12 @@
 "use client"
 import { BsPersonFill, BsRobot, BsX } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { useUser } from "@/hooks/get-user.hook";
 
 const MessageScreen = () => {
     const [messages, setMessages] = useState([]);
     const [isMounted, setIsMounted] = useState(false);
+
     useEffect(() => {
         setIsMounted(true);
         // Initialize with comprehensive sample conversation

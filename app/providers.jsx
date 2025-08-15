@@ -1,5 +1,6 @@
 'use client'
 
+import { AuthProvider } from '@/providers/AuthProvider'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 export function Providers({ children }) {
@@ -7,7 +8,9 @@ export function Providers({ children }) {
 
     return (
         <QueryClientProvider client={queryClient}>
-            {children}
+                <AuthProvider>
+                    {children}
+                </AuthProvider>
         </QueryClientProvider>
     )
 }

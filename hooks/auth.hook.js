@@ -1,9 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { useAxios } from "./axios.hook";
+import Cookies from "js-cookie";
 
 export const useAuth = () => {
     const axiosPublic = useAxios();
+    const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
@@ -13,6 +15,11 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "Logged in successfully");
+            Cookies.set(ACCESS_TOKEN_KEY, data?.data?.chique_auth_token, {
+                expires: data?.data?.expires_in_minutes / (60 * 24), // Convert to days
+            });
+            // Add redirect logic here
+            navigate('/dashboard');
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
