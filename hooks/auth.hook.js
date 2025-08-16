@@ -12,13 +12,7 @@ export const useAuth = () => {
     const router = useRouter();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
 
-    /**
-     * -----------------------------
-     * Reusable Cookie Setter
-     * -----------------------------
-     * @param {string} token - Access token
-     * @param {number} expiresInMinutes - Expiry time in minutes
-     */
+    // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {
         Cookies.set(ACCESS_TOKEN_KEY, token, {
             expires: expiresInMinutes / (60 * 24), // days
@@ -72,7 +66,6 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "OTP verified successfully");
-
             // If token is returned here, store it immediately
             if (data?.data?.chique_auth_token) {
                 setAuthCookie(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
@@ -112,7 +105,7 @@ export const useAuth = () => {
             }
         },
         onSuccess: (response) => {
-            toast.success(response?.data || "Logged out successfully");
+            toast.success(response?.message || "Logged out successfully");
             onLogout();
         },
         onError: (error) => {

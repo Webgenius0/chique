@@ -8,13 +8,8 @@ import SideBarItems from "./SideBarItems";
 import SignOutModal from "./SignOutModal";
 
 const SideBar = ({ isOpen = false, onClose }) => {
-  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleLogout = () => {
-    setIsModalOpen(false);
-    router.push("/"); // Navigate to home
-  };
   // side bar component
   return (
     <aside
@@ -25,7 +20,7 @@ const SideBar = ({ isOpen = false, onClose }) => {
       `}
     >
       {/* LOGO */}
-      <div className="w-full h-20 shrink-0 sticky top-0 flex justify-start items-center border-b overflow-hidden border-b-primary-dark">
+      <div className="w-full h-20 shrink-0  sticky top-0 flex justify-start items-center border-b overflow-hidden border-b-primary-dark">
         <DashboardLogo className="w-full h-full justify-center" />
         <button
           onClick={onClose}

@@ -15,23 +15,20 @@ export function middleware(request) {
     // If no token and trying to access a protected route, redirect to login
     if (!token && path.startsWith('/dashboard')) {
         const loginUrl = new URL('/auth/sign-in', request.url);
-        loginUrl.searchParams.set('redirect', path); // optional: redirect back after login
         return NextResponse.redirect(loginUrl);
     }
-
     // If logged in and trying to access login/signup, redirect to dashboard
     if (token && isPublicPath) {
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
-
     // Allow the request if nothing matched above
     return NextResponse.next();
 }
 
 export const config = {
     matcher: [
-        '/dashboard/:path*', // All dashboard pages require login
-        '/auth/sign-in',     // Protect login from being accessed when logged in
-        '/auth/sign-up',     // Protect signup from being accessed when logged in
+        '/dashboard/:path*',
+        '/auth/sign-in',   
+        '/auth/sign-up',   
     ],
 };

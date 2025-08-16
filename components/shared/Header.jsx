@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 import { IoMenu } from "react-icons/io5";
 import MobileSideBar from "./MobileSideBar";
 import { useUser } from "@/hooks/get-user.hook";
-
+import default_user_image from "@/public/images/default.jpg"
+import { FaUser } from "react-icons/fa6";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { userData, isLoggedIn } = useUser(); // 👈 get user info
@@ -26,6 +27,7 @@ const Header = () => {
     };
   }, []);
 
+  // header component
   return (
     <>
       {/* desktop header */}
@@ -49,16 +51,23 @@ const Header = () => {
           {/* Right: Auth/User */}
           <div className="hidden md:flex sm:gap-5 gap-3 justify-end items-center shrink-0">
             {isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-2 px-3 py-1.5 rounded-md hover:bg-gray-100 transition"
-              >
-                <img
-                  src={userData?.avatar || "https://i.pravatar.cc/300"}
-                  alt="User Avatar"
-                  className="size-12 shrink-0 border border-gray-200 rounded-full object-cover"
-                />
-                <span className="text-lg font-medium text-gray-800">{userData?.name || "Guest"}</span>
+              <Link prefetch={true} href={'/dashboard'} className="flex items-center gap-3 shrink-0">
+                <div className="size-12 shrink-0 border flex justify-center items-center border-gray-200 rounded-full">
+                  {
+                    userData?.avatar ? (
+                      <img
+                        src={userData?.avatar}
+                        alt="User Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <FaUser className="text-2xl" />
+                    )
+                  }
+                </div>
+                <span className="text-lg hidden 3xs:block line-clamp-1 font-medium text-gray-800">
+                  {userData?.name || "Guest"}
+                </span>
               </Link>
             ) : (
               <>
@@ -72,11 +81,10 @@ const Header = () => {
               </>
             )}
           </div>
-        </div>
-      </header>
-
+        </div >
+      </header >
       {/* mobile sidebar */}
-      <MobileSideBar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+      < MobileSideBar isOpen={isOpen} toggleSidebar={toggleSidebar} />
     </>
   );
 };
