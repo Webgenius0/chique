@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import CommonInputWrapper from "../common/CommonInputWrapper";
 import Link from "next/link";
 import CommonBtn from "../common/CommonBtn";
-import { useRouter } from "next/navigation";
 import ErrorText from "../common/ErrorText";
 import { useAuth } from "@/hooks/auth.hook";
 

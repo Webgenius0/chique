@@ -21,7 +21,17 @@ export const useAuth = () => {
             sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // cross-site support in prod
         });
     };
-
+    // ------------------- // task after login // -------------------
+    const onLogin = (token, expires_in_minutes) => {
+        setAuthCookie(token, expires_in_minutes);
+        setAccessToken(token);
+        router.push("/dashboard");
+    }
+    // ------------------- // task after logout // -------------------
+    const onLogout = () => {
+        Cookies.remove(ACCESS_TOKEN_KEY, { path: "/" });
+        router.push('/auth/sign-in');
+    };
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
         mutationKey: ["login"],
@@ -31,16 +41,42 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "Logged in successfully");
-            const token = data?.data?.chique_auth_token;
-            setAuthCookie(token, data?.data?.expires_in_minutes);
-            setAccessToken(token);
-            router.push("/dashboard");
+            onLogin(data?.data?.token, data?.data?.expires_in_minutes);
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
         },
     });
-
+    // ------------------- // Apple login mutation // -------------------
+    const appleMutation = useMutation({
+        mutationFn: async (token) => {
+            const response = await axiosPublic.post("/apple-authentication", { token });
+            return response.data;
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success(data?.message || "Apple login successful");
+            // onLogin(data?.data?.token, data?.data?.expires_in_minutes);
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong!");
+        },
+    })
+    // ------------------- // Google login mutation // -------------------
+    const googleMutation = useMutation({
+        mutationFn: async (token) => {
+            const response = await axiosPublic.post("/google-authentication", { token });
+            return response.data;
+        },
+        onSuccess: (data) => {
+            console.log(data);
+            toast.success(data?.message || "Google login successful");
+            // onLogin(data?.data?.token, data?.data?.expires_in_minutes);
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong!");
+        },
+    })
     // ------------------- // Register mutation // -------------------
     const register = useMutation({
         mutationKey: ["register"],
@@ -61,7 +97,6 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "Registration failed");
         },
     });
-
     // ------------------- // Verify registered user mutation // -------------------
     const verifyOtp = useMutation({
         mutationKey: ["verifyOtp"],
@@ -70,21 +105,18 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
+            setAuthCookie(data?.data?.token, data?.data?.expires_in_minutes);
+            setAccessToken(data?.data?.token);
+            sessionStorage.removeItem("verifyEmail");
+            sessionStorage.removeItem("verifyOtp");
             toast.success(data?.message || "OTP verified successfully");
-            // If token is returned here, store it immediately
-            if (data?.data?.token) {
-                setAuthCookie(data?.data?.token, data?.data?.expires_in_minutes);
-                setAccessToken(data?.data?.token);
-                sessionStorage.removeItem("verifyEmail", email);
-                sessionStorage.removeItem("verifyOtp", otp);
-                router.push("/dashboard");
-            }
+            router.push("/dashboard");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "OTP verification failed");
         },
     });
-    //  Resend OTP mutation
+    //  Resend OTP mutation --- for forgot password
     const resendOtp = useMutation({
         mutationKey: ["resendOtp"],
         mutationFn: async (data) => {
@@ -94,19 +126,13 @@ export const useAuth = () => {
         onSuccess: (res) => {
             toast.success(res?.message || "OTP resent successfully");
             const otp = data?.data?.otp;
-           // sessionStorage.setItem("verifyOtp", otp);
+            // sessionStorage.setItem("verifyOtp", otp);
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
         },
     });
-
     // ------------------- // Logout user mutation // -------------------
-    const onLogout = () => {
-        Cookies.remove(ACCESS_TOKEN_KEY, { path: "/" });
-        router.push('/auth/sign-in');
-    };
-
     const logout = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
@@ -141,6 +167,16 @@ export const useAuth = () => {
             onLogout();
         },
     });
-
-    return { login, register, verifyOtp, resendOtp, logout, onLogout, setAuthCookie };
+    // ------------------- // Return all auth hooks // -------------------
+    return {
+        login,
+        googleMutation,
+        appleMutation,
+        register,
+        verifyOtp,
+        resendOtp,
+        logout,
+        onLogout,
+        setAuthCookie
+    };
 };

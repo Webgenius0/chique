@@ -4,7 +4,7 @@ export function middleware(request) {
     const path = request.nextUrl.pathname;
 
     // Paths that don't require login
-    const isPublicPath = path === '/auth/sign-in' || path === '/auth/sign-up';
+    const isPublicPath = path === '/auth/sign-in' || path === '/auth/sign-up' || path === '/auth/user-verification';
 
     // Get token name from env with a proper fallback
     const tokenName = process.env.AUTH_TOKEN_NAME || 'chique_auth_token';

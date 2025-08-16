@@ -19,7 +19,7 @@ const SideBarItems = ({ setIsModalOpen }) => {
             icon: <GrCoatCheck />,
         },
         {
-            path: "/dashboard/explore",
+            path: "/",
             name: "Explore",
             icon: <FaGlobeAmericas />,
         },

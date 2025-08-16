@@ -3,11 +3,9 @@ import { useForm } from "react-hook-form";
 import CommonInputWrapper from "@/components/common/CommonInputWrapper";
 import { validatePassword } from "@/utils/validatePassword";
 import CommonBtn from "../common/CommonBtn";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/auth.hook";
 
 const SignUpForm = () => {
-  const router = useRouter();
   const {
     register,
     handleSubmit,

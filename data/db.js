@@ -182,6 +182,16 @@ export const wardrobeItems = [
     size: "L",
     number: 8
   },
+  {
+    id: "5",
+    category: "jokers",
+    name: "Casual Button-Up",
+    image: wardrobe_image4,
+    description: "Lightweight button-up shirt for casual occasions",
+    color: "White",
+    size: "L",
+    number: 8
+  },
 ];
 
 export const marqueData = [
@@ -209,6 +219,18 @@ export const outfitData = [
   },
   {
     id: 3,
+    image: outfit_image3,
+    title: "Perfect for 65-750F",
+    subtitle: "Casual outfit for a warm day out",
+  },
+  {
+    id: 4,
+    image: outfit_image3,
+    title: "Perfect for 65-750F",
+    subtitle: "Casual outfit for a warm day out",
+  },
+  {
+    id: 5,
     image: outfit_image3,
     title: "Perfect for 65-750F",
     subtitle: "Casual outfit for a warm day out",

@@ -1,14 +1,14 @@
 "use client";
-
 import { outfitData } from "@/data/db";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { MdOutlineWbSunny } from "react-icons/md";
+import OutfitCard from "./OutfitCard";
 
 const OutfitSuggestion = () => {
 
   return (
     <div className="w-full flex flex-col gap-6 justify-start">
+      {/* Header Section */}
       <div className="w-full flex justify-between">
         <p className="xs:text-2xl text-xl text-primary-dark font-medium font-primary">
           Al Outfit Suggestions
@@ -20,25 +20,10 @@ const OutfitSuggestion = () => {
           </p>
         </div>
       </div>
-      <div className="w-full grid md:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-5">
+      {/* Outfit Suggestions Section */}
+      <div className="w-full grid md:grid-cols-4 xs:grid-cols-2 grid-cols-1 gap-6">
         {outfitData.map((item) => (
-          <div key={item.id} className="w-full  bg-[#FAFAFB] rounded-lg p-4">
-            <div className="w-full h-[220px] overflow-hidden">
-              <Image
-                src={item.image}
-                className="w-full h-full object-cover"
-                alt={item.title}
-              />
-            </div>
-            <div className="w-full flex flex-col gap-1 bg-[#F5F6F7] py-3">
-              <p className="xs:text-xl text-lg text-primary-dark font-primary">
-                {item.title}
-              </p>
-              <p className="text-base text-[#2B2B2B] font-primary">
-                {item.subtitle}
-              </p>
-            </div>
-          </div>
+          <OutfitCard item={item} />
         ))}
       </div>
     </div>
