@@ -4,6 +4,7 @@ import CommonInputWrapper from "@/components/common/CommonInputWrapper";
 import { validatePassword } from "@/utils/validatePassword";
 import CommonBtn from "../common/CommonBtn";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/auth.hook";
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -12,21 +13,16 @@ const SignUpForm = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      terms: true, // Set default checked state here
-    },
-  });
+  } = useForm();
   // on submit
-  const onSubmit = (data) => {
-    console.log(data);
-    router.push("/auth/user-verification");
+  const { register: sign_up } = useAuth();
+  // on submit
+  const onSubmit = async (data) => {
+    await sign_up.mutateAsync(data);
   };
+  // sign up form
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="w-full flex flex-col gap-3"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
       {/* name */}
       <CommonInputWrapper
         register={register}
@@ -76,24 +72,17 @@ const SignUpForm = () => {
         register={register}
         errors={errors}
         type="password"
-        name="confirm_password"
+        name="password_confirmation"
         placeholder="Confirm password"
-        register_as="confirm_password"
+        register_as="password_confirmation"
         label="Confirm Password:"
         validationRules={{
           validate: (value) =>
             value === watch("password") || "Passwords do not match",
         }}
       />
-      {/* error terms */}
-      {errors.terms && <ErrorText error={errors?.terms?.message} />}
       {/* submit button */}
-      <CommonBtn
-        type="submit"
-        className={` mt-4`}
-        isLoading={false}
-      // link={true}
-      >
+      <CommonBtn type="submit" className={` mt-4`} isLoading={sign_up.isPending} disabled={sign_up.isPending} >
         Sign Up
       </CommonBtn>
     </form>

@@ -4,6 +4,7 @@ import { useAxios } from "./axios.hook";
 import Cookies from "js-cookie";
 import { useUser } from "./get-user.hook";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const useAuth = () => {
     const axiosPublic = useAxios();
@@ -11,7 +12,6 @@ export const useAuth = () => {
     const queryClient = useQueryClient();
     const router = useRouter();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
-
     // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {
         Cookies.set(ACCESS_TOKEN_KEY, token, {
@@ -45,12 +45,17 @@ export const useAuth = () => {
     const register = useMutation({
         mutationKey: ["register"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/user/register", data);
+            const response = await axiosPublic.post("/register", data);
             return response.data;
         },
         onSuccess: (data) => {
-            toast.success(data?.message || "Registered successfully");
-            localStorage.setItem("verify_email", data?.email);
+            toast.success(data?.message || "Otp sent successfully");
+            const email = data?.data?.email;
+            const otp = data?.data?.otp;
+            // ⚡ store only for this session
+            sessionStorage.setItem("verifyEmail", email);
+            sessionStorage.setItem("verifyOtp", otp);
+            router.push("/auth/user-verification");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Registration failed");
@@ -61,20 +66,38 @@ export const useAuth = () => {
     const verifyOtp = useMutation({
         mutationKey: ["verifyOtp"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/user/verify-user", data);
+            const response = await axiosPublic.post("/register-otp-verify", data);
             return response.data;
         },
         onSuccess: (data) => {
             toast.success(data?.message || "OTP verified successfully");
             // If token is returned here, store it immediately
-            if (data?.data?.chique_auth_token) {
-                setAuthCookie(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
-                setAccessToken(data?.data?.chique_auth_token);
+            if (data?.data?.token) {
+                setAuthCookie(data?.data?.token, data?.data?.expires_in_minutes);
+                setAccessToken(data?.data?.token);
+                sessionStorage.removeItem("verifyEmail", email);
+                sessionStorage.removeItem("verifyOtp", otp);
                 router.push("/dashboard");
             }
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "OTP verification failed");
+        },
+    });
+    //  Resend OTP mutation
+    const resendOtp = useMutation({
+        mutationKey: ["resendOtp"],
+        mutationFn: async (data) => {
+            const response = await axiosPublic.post("/resend-otp", data)
+            return response.data
+        },
+        onSuccess: (res) => {
+            toast.success(res?.message || "OTP resent successfully");
+            const otp = data?.data?.otp;
+           // sessionStorage.setItem("verifyOtp", otp);
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong!");
         },
     });
 
@@ -119,5 +142,5 @@ export const useAuth = () => {
         },
     });
 
-    return { login, register, verifyOtp, logout, onLogout, setAuthCookie };
+    return { login, register, verifyOtp, resendOtp, logout, onLogout, setAuthCookie };
 };

@@ -17,12 +17,10 @@ const SignInForm = () => {
       terms: true,
     },
   });
-  const router = useRouter()
   const { login } = useAuth();
   // on submit
   const onSubmit = async (data) => {
     await login.mutateAsync(data);
-    router.push("/dashboard");
   };
 
   return (

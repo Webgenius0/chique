@@ -2,7 +2,6 @@
 import { FaBars, FaUser } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/hooks/get-user.hook";
-import default_user_image from "@/public/images/default.jpg"
 const NavBar = ({ setIsOpen }) => {
     const pathname = usePathname();
     const { userData } = useUser();
@@ -18,6 +17,7 @@ const NavBar = ({ setIsOpen }) => {
         }
     };
 
+    // nav component
     return (
         <nav className="w-full shrink-0 px-6 py-3 flex justify-between items-center gap-4 h-20 border-b border-black/90">
             {/* Left Section */}

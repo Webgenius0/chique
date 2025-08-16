@@ -1,9 +1,10 @@
+import AppleLogin from "@/components/auth/AppleLogin";
 import AuthSubText from "@/components/auth/AuthSubText";
 import AuthTitle from "@/components/auth/AuthTitle";
 import AuthWrapper from "@/components/auth/AuthWrapper";
+import GoogleLogin from "@/components/auth/GoogleLogin";
 import Or from "@/components/auth/Or";
 import SignUpForm from "@/components/auth/SignUpForm";
-import SocialAuth from "@/components/auth/SocialAuth";
 import Link from "next/link";
 // meta data
 export const metadata = {
@@ -31,7 +32,12 @@ const SignUp = () => {
             </div>
           </div>
           {/* Social */}
-          <SocialAuth />
+          <div className="w-full flex flex-col gap-3 sm:gap-4">
+            {/*
+              <GoogleLogin />
+              <AppleLogin />
+            */}
+          </div>
           {/* Or */}
           <Or />
           {/* Form */}

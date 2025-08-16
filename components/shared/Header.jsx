@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { IoMenu } from "react-icons/io5";
 import MobileSideBar from "./MobileSideBar";
 import { useUser } from "@/hooks/get-user.hook";
-import default_user_image from "@/public/images/default.jpg"
 import { FaUser } from "react-icons/fa6";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
