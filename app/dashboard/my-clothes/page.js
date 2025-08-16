@@ -1,6 +1,7 @@
-import AIStylist from "@/components/dashboard/clothe/AIStylist";
 import OutfitSuggestion from "@/components/dashboard/clothe/OutfitSuggestion";
 import Wardrobe from "@/components/dashboard/clothe/Wardrobe";
+
+// meta data
 export const metadata = {
   title: "Chique | My Clothes",
   description:

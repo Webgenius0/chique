@@ -40,8 +40,9 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
+            console.log(data);
             toast.success(data?.message || "Logged in successfully");
-            onLogin(data?.data?.token, data?.data?.expires_in_minutes);
+            onLogin(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
