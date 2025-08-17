@@ -4,18 +4,29 @@ export function middleware(request) {
     const path = request.nextUrl.pathname;
     const tokenName = process.env.AUTH_TOKEN_NAME || 'chique_auth_token';
     const token = request.cookies.get(tokenName)?.value;
-    // Define all public routes
-    const isPublicPath = [
+
+    // Public routes
+    const publicRoutes = [
         '/auth/sign-in',
         '/auth/sign-up',
         '/auth/user-verification',
         '/auth/forgot-password',
         '/auth/create-new-password',
         '/auth/reset-verification'
-    ].includes(path);
+    ];
+
+    // Protected routes
+    const protectedRoutes = [
+        '/dashboard',
+        '/quiz',
+        '/welcome',
+    ];
+
+    const isPublicPath = publicRoutes.includes(path);
+    const isProtectedPath = protectedRoutes.includes(path);
 
     // Redirect to login if accessing protected routes without token
-    if (!token && path.startsWith('/dashboard')) {
+    if (!token && isProtectedPath) {
         return NextResponse.redirect(new URL('/auth/sign-in', request.url));
     }
 
@@ -30,6 +41,8 @@ export function middleware(request) {
 export const config = {
     matcher: [
         '/dashboard/:path*',
-        '/auth/:path*'
+        '/auth/:path*',
+        '/quiz',
+        '/welcome',
     ],
 };

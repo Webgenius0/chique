@@ -117,7 +117,27 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "OTP verification failed");
         },
     });
-    //  Resend OTP mutation --- for forgot password
+    // ------------------- // Forgot password mutation // -------------------
+    const forgotPassword = useMutation({
+        mutationKey: ["forgotPassword"],
+        mutationFn: async (data) => {
+            const response = await axiosPublic.post("/forgot-password", data);
+            return response.data;
+        },
+        onSuccess: (response, variables) => {
+            toast.success(response?.message || "Otp sent successfully");
+            const email = variables?.email;
+            const otp = response?.data?.otp;
+            // ⚡ store only for this session
+            sessionStorage.setItem("resetEmail", email);
+            sessionStorage.setItem("resetOtp", otp);
+            router.push("/auth/reset-verification");
+        },
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Failed to send otp");
+        },
+    })
+    // ------------------- // Resend OTP mutation for forgot password // -------------------
     const resendOtp = useMutation({
         mutationKey: ["resendOtp"],
         mutationFn: async (data) => {
@@ -126,11 +146,51 @@ export const useAuth = () => {
         },
         onSuccess: (res) => {
             toast.success(res?.message || "OTP resent successfully");
-            const otp = data?.data?.otp;
-            // sessionStorage.setItem("verifyOtp", otp);
+            const otp = res?.data?.otp;
+            sessionStorage.setItem("resetOtp", otp);
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
+        },
+    });
+    // ------------------- // verify OTP mutation for forgot password // -------------------
+    const verifyResetOtp = useMutation({
+        mutationKey: ["verifyResetOtp"],
+        mutationFn: async (data) => {
+            const response = await axiosPublic.post("/verify-otp", data)
+            return response.data
+        },
+        onSuccess: (res) => {
+            toast.success(res?.message || "OTP verified successfully");
+            const resetToken = res?.token;
+            // ⚡ store reset token only for this session
+            sessionStorage.setItem("resetToken", resetToken);
+            sessionStorage.removeItem("resetOtp");
+            router.push("/auth/create-new-password");
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong!");
+        },
+    });
+    // ------------------- // Reset new password mutation // ------------------- 
+    const resetNewPassword = useMutation({
+        mutationKey: ["resetNewPassword"],
+        mutationFn: async (data) => {
+            const response = await axiosPublic.post("/reset-password", data)
+            return response.data
+        },
+        onSuccess: (res) => {
+            toast.success(res?.message || "Password reset successfully");
+            // ⚡ remove reset token and email from session storage
+            sessionStorage.removeItem("resetToken");
+            sessionStorage.removeItem("resetEmail");
+            router.push("/auth/sign-in");
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong!");
+            sessionStorage.removeItem("resetToken");
+            sessionStorage.removeItem("resetEmail");
+            router.push("/auth/sign-in");
         },
     });
     // ------------------- // Logout user mutation // -------------------
@@ -175,7 +235,10 @@ export const useAuth = () => {
         appleMutation,
         register,
         verifyOtp,
+        forgotPassword,
         resendOtp,
+        verifyResetOtp,
+        resetNewPassword,
         logout,
         onLogout,
         setAuthCookie

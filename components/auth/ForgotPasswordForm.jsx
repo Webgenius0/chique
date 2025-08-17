@@ -1,8 +1,8 @@
 "use client";
-import { useRouter } from "next/navigation";
 import CommonInputWrapper from "../common/CommonInputWrapper"
 import { useForm } from "react-hook-form";
 import CommonBtn from "../common/CommonBtn";
+import { useAuth } from "@/hooks/auth.hook";
 
 const ForgotPasswordForm = () => {
     const {
@@ -10,11 +10,10 @@ const ForgotPasswordForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-    const router = useRouter();
+    const { forgotPassword } = useAuth()
     // on submit
     const onSubmit = (data) => {
-        console.log(data);
-        router.push("/auth/reset-verification");
+        forgotPassword.mutate(data)
     };
     // form render
     return (
@@ -37,7 +36,7 @@ const ForgotPasswordForm = () => {
                 }}
             />
             {/* submit button */}
-            <CommonBtn type="submit" className={`mt-4`} isLoading={false}>
+            <CommonBtn type="submit" className={`mt-4`} isLoading={forgotPassword.isPending} disabled={forgotPassword.isPending}>
                 Send code
             </CommonBtn>
         </form>

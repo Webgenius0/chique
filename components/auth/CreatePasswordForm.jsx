@@ -6,6 +6,7 @@ import CommonBtn from '../common/CommonBtn';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ValidationCheck from './ValidationCheck';
+import { useAuth } from '@/hooks/auth.hook';
 
 const CreatePasswordForm = () => {
     const router = useRouter()
@@ -16,6 +17,20 @@ const CreatePasswordForm = () => {
         watch,
         formState: { errors }
     } = useForm();
+    const [resetToken, setResetToken] = useState(null);
+    const [resetEmail, setResetEmail] = useState(null);
+    const { resetNewPassword } = useAuth();
+    // if no reset token found, redirect to forgot password page
+    useEffect(() => {
+        const resetToken = sessionStorage.getItem("resetToken");
+        const resetEmail = sessionStorage.getItem("resetEmail");
+        if (!resetToken || !resetEmail) {
+            router.push("/auth/forgot-password");
+            return;
+        }
+        setResetToken(resetToken);
+        setResetEmail(resetEmail);
+    }, [router]);
     // password checks state
     const [passwordChecks, setPasswordChecks] = useState({
         hasUpperCase: false,
@@ -48,11 +63,19 @@ const CreatePasswordForm = () => {
     // form submit
     const onSubmit = (data) => {
         console.log(data);
-        router.push("/auth/sign-in");
+        resetNewPassword.mutate({
+            ...data,
+            token: resetToken,
+            email: resetEmail,
+        });
     }
     // main ui component
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 sm:gap-6">
+            <p className='text-center  font-semibold text-red-400'>
+                For testing purposes <br />
+                Resetting your password: {resetEmail || "--"}
+            </p>
             {/* password */}
             <CommonInputWrapper
                 register={register}
@@ -72,10 +95,10 @@ const CreatePasswordForm = () => {
                 register={register}
                 errors={errors}
                 type="password"
-                name="confirm_password"
+                name="password_confirmation"
                 control={control}
                 placeholder="Confirm password"
-                register_as="confirm_password"
+                register_as="password_confirmation"
                 validationRules={{
                     validate: (value) =>
                         value === watch("password") || "Passwords do not match",
@@ -110,7 +133,7 @@ const CreatePasswordForm = () => {
                 </div>
             </div>
             {/* change button */}
-            <CommonBtn className="mt-2 sm:mt-4" type='submit'>
+            <CommonBtn className={`mt-2 sm:mt-4`} type='submit' disabled={!passwordChecks.hasUpperCase || !passwordChecks.hasLowerCase || !passwordChecks.hasNumber || !passwordChecks.hasSpecialChar || !passwordChecks.hasMinLength || !resetToken || resetNewPassword.isPending} isLoading={resetNewPassword.isPending}>
                 Change Password
             </CommonBtn>
         </form>

@@ -1,25 +1,31 @@
+"use client";
 import { useAuth } from "@/hooks/auth.hook";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import AuthTitle from "./AuthTitle";
+import { Input } from "antd";
+import { maskEmail } from "@/utils/maskEmail";
+import CommonBtn from "../common/CommonBtn";
 
 const VerifyResetForm = () => {
     const [email, setEmail] = useState("");
     const [otp, setOtp] = useState("");
     const [seconds, setSeconds] = useState(25);
-    // const [resendActive, setResendActive] = useState(false);
-    const { verifyOtp } = useAuth();
+    const [resendActive, setResendActive] = useState(false);
+    const { resendOtp, verifyResetOtp } = useAuth();
     const router = useRouter()
+    // for testing
+    const [otpUpdateTrigger, setOtpUpdateTrigger] = useState(0);
     useEffect(() => {
-        const verifyEmail = sessionStorage.getItem("verifyEmail");
-        const otp = sessionStorage.getItem("verifyOtp");
-        if (!verifyEmail || !otp) {
-            // If no email found, redirect to signup page
-            router.push("/auth/sign-up"); // Adjust the path to your signup route
+        const verifyEmail = sessionStorage.getItem("resetEmail");
+        const otp = sessionStorage.getItem("resetOtp");
+        if (!verifyEmail) {
+            router.push("/auth/forgot-password");
             return;
         }
         setEmail(verifyEmail);
         setOtp(otp);
-    }, [router]);
+    }, [router, otpUpdateTrigger]); // Add otpUpdateTrigger to dependencies
     // otp change handler
     const OtpChange = (val) => {
         setOtp(val);
@@ -28,27 +34,21 @@ const VerifyResetForm = () => {
     const handleSubmit = () => {
         if (otp.length !== 4)
             return toast.error("Please enter a valid 4-digit code");
-        verifyOtp.mutate({ otp, email: email });
+        verifyResetOtp.mutate({ otp, email: email });
     };
-
     // handle resend 
-    {/**
-        
-        const handleResend = () => {
+    const handleResend = () => {
         if (!resendActive) return;
         setSeconds(25);
         setResendActive(false);
-        resendOtp.mutate({ email: email });
+        resendOtp.mutate({ email: email }, {
+            onSuccess: () => {
+                setOtpUpdateTrigger((prev) => prev + 1);
+            }
+        });
     };
-        
-        
-        */}
     //   Countdown timer effect
-    {
-        /**
-         * 
-         * 
-         * useEffect(() => {
+    useEffect(() => {
         let timer;
         if (seconds > 0) {
             timer = setInterval(() => setSeconds((prev) => prev - 1), 1000);
@@ -57,9 +57,6 @@ const VerifyResetForm = () => {
         }
         return () => clearInterval(timer);
     }, [seconds]);
-         */
-    }
-
 
     // otp component
     return (
@@ -86,15 +83,15 @@ const VerifyResetForm = () => {
                 </div>
                 <CommonBtn
                     type="button"
-                    isLoading={verifyOtp.isPending}
+                    isLoading={verifyResetOtp.isPending}
+                    disabled={verifyResetOtp.isPending || resendOtp.isPending}
                     className="max-w-[300px]"
                     onclick={handleSubmit}
                 >
                     Verify Code
                 </CommonBtn>
-                {/* resend code
-                
-                <p className="text-base hidden text-gray-400 font-primary text-center">
+                {/* resend code */}
+                <p className="text-base  text-gray-400 font-primary text-center">
                     Don&apos;t receive the code?{" "}
                     {resendActive ? (
                         <span
@@ -107,9 +104,6 @@ const VerifyResetForm = () => {
                         <span>Resend in {seconds} seconds</span>
                     )}
                 </p>
-                
-                */}
-
             </div>
         </div >
     )
