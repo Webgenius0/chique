@@ -74,7 +74,7 @@ const SignInForm = () => {
         </Link>
       </div>
 
-      <CommonBtn type="submit" className="mt-4" isLoading={login.isPending}>
+      <CommonBtn type="submit" className="mt-4" isLoading={login.isPending} disabled={login.isPending}>
         Log in
       </CommonBtn>
     </form>

@@ -60,7 +60,7 @@ const VerifyRegisterForm = () => {
                     type="button"
                     isLoading={verifyOtp.isPending}
                     className="max-w-[300px]"
-                    disabled={verifyOtp.isPending}
+                    disabled={verifyOtp.isPending || otp.length !== 4 || !email || !otp }
                     onclick={handleSubmit}
                 >
                     Verify Code

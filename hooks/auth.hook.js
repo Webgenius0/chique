@@ -5,11 +5,12 @@ import { useUser } from "./get-user.hook";
 import { useRouter } from "next/navigation";
 import axiosPublic from "@/lib/axios.public";
 
+
 export const useAuth = () => {
     const { setAccessToken } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
-
+    const axiosInstance = axiosPublic();
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
     // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {
@@ -35,7 +36,7 @@ export const useAuth = () => {
     const login = useMutation({
         mutationKey: ["login"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/login", data);
+            const response = await axiosInstance.post("/login", data);
             return response.data;
         },
         onSuccess: (data) => {
@@ -50,7 +51,7 @@ export const useAuth = () => {
     // ------------------- // Apple login mutation // -------------------
     const appleMutation = useMutation({
         mutationFn: async (token) => {
-            const response = await axiosPublic.post("/apple-authentication", { token });
+            const response = await axiosInstance.post("/apple-authentication", { token });
             return response.data;
         },
         onSuccess: (data) => {
@@ -65,7 +66,7 @@ export const useAuth = () => {
     // ------------------- // Google login mutation // -------------------
     const googleMutation = useMutation({
         mutationFn: async (token) => {
-            const response = await axiosPublic.post("/google-authentication", { token });
+            const response = await axiosInstance.post("/google-authentication", { token });
             return response.data;
         },
         onSuccess: (data) => {
@@ -81,7 +82,7 @@ export const useAuth = () => {
     const register = useMutation({
         mutationKey: ["register"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/register", data);
+            const response = await axiosInstance.post("/register", data);
             return response.data;
         },
         onSuccess: (data) => {
@@ -101,7 +102,7 @@ export const useAuth = () => {
     const verifyOtp = useMutation({
         mutationKey: ["verifyOtp"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/register-otp-verify", data);
+            const response = await axiosInstance.post("/register-otp-verify", data);
             return response.data;
         },
         onSuccess: (data) => {
@@ -120,7 +121,7 @@ export const useAuth = () => {
     const forgotPassword = useMutation({
         mutationKey: ["forgotPassword"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/forgot-password", data);
+            const response = await axiosInstance.post("/forgot-password", data);
             return response.data;
         },
         onSuccess: (response, variables) => {
@@ -140,7 +141,7 @@ export const useAuth = () => {
     const resendOtp = useMutation({
         mutationKey: ["resendOtp"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/resend-otp", data)
+            const response = await axiosInstance.post("/resend-otp", data)
             return response.data
         },
         onSuccess: (res) => {
@@ -156,7 +157,7 @@ export const useAuth = () => {
     const verifyResetOtp = useMutation({
         mutationKey: ["verifyResetOtp"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/verify-otp", data)
+            const response = await axiosInstance.post("/verify-otp", data)
             return response.data
         },
         onSuccess: (res) => {
@@ -175,7 +176,7 @@ export const useAuth = () => {
     const resetNewPassword = useMutation({
         mutationKey: ["resetNewPassword"],
         mutationFn: async (data) => {
-            const response = await axiosPublic.post("/reset-password", data)
+            const response = await axiosInstance.post("/reset-password", data)
             return response.data
         },
         onSuccess: (res) => {
@@ -198,7 +199,7 @@ export const useAuth = () => {
         mutationFn: async () => {
             try {
                 const token = Cookies.get(ACCESS_TOKEN_KEY);
-                const response = await axiosPublic.post(
+                const response = await axiosInstance.post(
                     "/logout",
                     {},
                     {

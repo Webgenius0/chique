@@ -9,12 +9,10 @@ const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
 
 export default function AuthProvider({ children, serverUserData = null, serverAccessToken = null }) {
     const router = useRouter();
-
     // Use server data as initial state
     const [accessToken, setAccessToken] = useState(() => {
         return serverAccessToken || Cookies.get(ACCESS_TOKEN_KEY) || null;
     });
-
     const { data: userData, refetch: userRefetch, isFetching } = useQuery({
         queryKey: ["userData"],
         queryFn: () => getUserProfile(accessToken),
