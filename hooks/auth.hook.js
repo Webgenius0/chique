@@ -110,8 +110,8 @@ export const useAuth = () => {
             setAccessToken(data?.data?.token);
             sessionStorage.removeItem("verifyEmail");
             sessionStorage.removeItem("verifyOtp");
-            toast.success(data?.message || "OTP verified successfully");
-            router.push("/dashboard");
+            toast.success(data?.message || "User Verified successfully");
+            router.push("/quiz");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "OTP verification failed");
