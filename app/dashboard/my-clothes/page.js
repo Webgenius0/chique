@@ -1,5 +1,6 @@
 import OutfitSuggestion from "@/components/dashboard/clothe/OutfitSuggestion";
 import Wardrobe from "@/components/dashboard/clothe/Wardrobe";
+import PageWrapper from "@/components/dashboard/PageWrapper";
 
 // meta data
 export const metadata = {
@@ -9,10 +10,10 @@ export const metadata = {
 };
 const MyClothes = () => {
   return (
-    <div className="w-full flex flex-col gap-6 xs:py-10 py-5">
+    <PageWrapper>
       <OutfitSuggestion />
       <Wardrobe />
-    </div>
+    </PageWrapper>
   );
 };
 export default MyClothes;

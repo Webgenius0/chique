@@ -7,6 +7,8 @@ export const metadata = {
 };
 
 const Contact = () => {
+
+  // main render
   return (
     <div className="container min-h-screen py-6 sm:py-10 flex justify-center items-center px-4 sm:px-6">
       <div className="w-full max-w-2xl">

@@ -1,16 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { useAxios } from "./axios.hook";
 import Cookies from "js-cookie";
 import { useUser } from "./get-user.hook";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import axiosPublic from "@/lib/axios.public";
 
 export const useAuth = () => {
-    const axiosPublic = useAxios();
     const { setAccessToken } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
+
     const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
     // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {

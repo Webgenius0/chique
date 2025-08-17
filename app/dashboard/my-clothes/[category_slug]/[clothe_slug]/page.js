@@ -11,6 +11,8 @@ const AiStyle = ({ params }) => {
   // Unwrap the params promise
   const unwrappedParams = use(params);
   const { clothe_slug } = unwrappedParams;
+
+  // main render
   return (
     <div className="w-full flex flex-col justify-center items-center xl:py-20 lg:py-16 md:py-12 xs:py-8 py-4">
       <div className="w-full max-w-[360px] flex flex-col gap-3">

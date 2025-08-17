@@ -1,4 +1,5 @@
 import CategoryItems from "@/components/dashboard/clothe/categoryItems/CategoryItems";
+import PageWrapper from "@/components/dashboard/PageWrapper";
 import { use } from "react";
 
 export const metadata = {
@@ -10,13 +11,14 @@ const AiFashion = ({ params }) => {
   // Unwrap the params promise
   const unwrappedParams = use(params);
   const { category_slug } = unwrappedParams;
+  // main render
   return (
-    <div className="w-full flex flex-col xs:gap-6 gap-4 xs:py-10 py-5">
+    <PageWrapper>
       <p className="xs:text-2xl text-xl font-semibold font-primary text-primary-dark">
         Pants
       </p>
       <CategoryItems category_slug={category_slug} />
-    </div>
+    </PageWrapper>
   );
 };
 

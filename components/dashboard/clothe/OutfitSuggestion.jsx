@@ -23,7 +23,7 @@ const OutfitSuggestion = () => {
       {/* Outfit Suggestions Section */}
       <div className="w-full grid md:grid-cols-4 xs:grid-cols-2 grid-cols-1 gap-6">
         {outfitData.map((item) => (
-          <OutfitCard item={item} />
+          <OutfitCard item={item} key={item.id} />
         ))}
       </div>
     </div>

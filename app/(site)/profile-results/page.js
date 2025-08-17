@@ -55,6 +55,8 @@ const styleProfiles = [
   },
 ];
 const ProfileResults = () => {
+
+  // main render
   return (
     <div className="container px-4 md:px-6 flex flex-col xl:gap-10 sm:gap-8 gap-5 items-center xl:py-12 xs:py-10 py-8">
       <h1 className=" xl:text-4xl sm:text-3xl text-2xl font-bold text-center font-secondary text-primary-dark">

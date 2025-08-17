@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-
 export function middleware(request) {
     const path = request.nextUrl.pathname;
     const tokenName = process.env.AUTH_TOKEN_NAME || 'chique_auth_token';
