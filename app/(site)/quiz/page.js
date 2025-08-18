@@ -1,5 +1,6 @@
 import QuizClient from "@/components/quiz/QuizClient";
 import { getQuiz } from "@/lib/api/get-quiz";
+import { axiosPrivateServer } from "@/lib/axios.private.server";
 
 export const metadata = {
   title: "Chique | Discover Your Personal Style",
@@ -8,12 +9,19 @@ export const metadata = {
 };
 
 const Quiz = async () => {
-  let quizQuestions = await getQuiz();
-  console.log(quizQuestions);
+  const axiosInstance = await axiosPrivateServer();
+  let quizQuestions = [];
+  try {
+    quizQuestions = await getQuiz(axiosInstance);
+  } catch (err) {
+    console.error("Failed to fetch quiz:", err);
+    throw err;
+  }
+  // console.log(quizQuestions);
   // main render
   return (
-    <div className="max-w-6xl  mx-auto flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5 sm:py-16 xs:py-12 py-10 px-4">
-      <QuizClient quizQuestions={quizQuestions} />
+    <div className="max-w-6xl container flex flex-col sm:py-16 xs:py-12 py-10">
+      <QuizClient initialQuestions={quizQuestions} />
     </div>
   );
 };

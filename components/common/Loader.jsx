@@ -1,7 +1,8 @@
+import { cn } from "@/lib/utils"
 
-const Loader = () => {
+const Loader = ({ className = "" }) => {
   return (
-    <span className="loader size-6 shrink-0 border-3"></span>
+    <span className={cn("loader size-6 shrink-0 border-3", className)}></span>
   )
 }
 
