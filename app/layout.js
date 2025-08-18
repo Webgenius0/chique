@@ -99,6 +99,7 @@ export default async function RootLayout({ children }) {
             console.error("Failed to fetch user on server:", err);
         }
     }
+    console.log("Server user data:", userData);
     // main render
     return (
         <html

@@ -52,7 +52,7 @@ const NavBar = ({ setIsOpen }) => {
                     }
                 </div>
                 <span className="text-lg hidden 3xs:block line-clamp-1 font-medium text-gray-800">
-                    {userData?.name || "Guest"}
+                    {userData?.user?.name || "Guest"}
                 </span>
             </div>
         </nav>

@@ -12,8 +12,8 @@ const Quiz = async () => {
   console.log(quizQuestions);
   // main render
   return (
-    <div className="max-w-6xl mx-auto flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5 sm:py-16 xs:py-12 py-10 px-4">
-      <QuizClient />
+    <div className="max-w-6xl  mx-auto flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5 sm:py-16 xs:py-12 py-10 px-4">
+      <QuizClient quizQuestions={quizQuestions} />
     </div>
   );
 };

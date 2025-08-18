@@ -10,7 +10,7 @@ import { FaUser } from "react-icons/fa6";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { userData, isLoggedIn } = useUser(); // 👈 get user info
-
+  //console.log(userData);
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const Header = () => {
                   }
                 </div>
                 <span className="text-lg hidden 3xs:block line-clamp-1 font-medium text-gray-800">
-                  {userData?.name || "Guest"}
+                  {userData?.user?.name || "Guest"}
                 </span>
               </Link>
             ) : (

@@ -5,32 +5,45 @@ import { useUser } from "./get-user.hook";
 import { useRouter } from "next/navigation";
 import axiosPublic from "@/lib/axios.public";
 
+// ------------------- // Constants from env // -------------------
+const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
+const VERIFY_EMAIL_KEY = process.env.NEXT_PUBLIC_VERIFY_EMAIL_KEY || "verifyEmail";
+const VERIFY_OTP_KEY = process.env.NEXT_PUBLIC_VERIFY_OTP_KEY || "verifyOtp";
+const RESET_EMAIL_KEY = process.env.NEXT_PUBLIC_RESET_EMAIL_KEY || "resetEmail";
+const RESET_OTP_KEY = process.env.NEXT_PUBLIC_RESET_OTP_KEY || "resetOtp";
+const RESET_TOKEN_KEY = process.env.NEXT_PUBLIC_RESET_TOKEN_KEY || "resetToken";
 
 export const useAuth = () => {
-    const { setAccessToken } = useUser();
+    const { userData, setAccessToken } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
     const axiosInstance = axiosPublic();
-    const ACCESS_TOKEN_KEY = process.env.AUTH_TOKEN_NAME || "chique_auth_token";
+    console.log("From auth hook:", userData);
     // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {
         Cookies.set(ACCESS_TOKEN_KEY, token, {
-            expires: expiresInMinutes / (60 * 24), // days
-            path: "/", // available everywhere
-            secure: process.env.NODE_ENV === "production", // required for HTTPS in production
-            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // cross-site support in prod
+            expires: expiresInMinutes / (60 * 24),
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         });
     };
-    // ------------------- // task after login // -------------------
-    const onLogin = (token, expires_in_minutes) => {
+    // ------------------- // Task after login // -------------------
+    const onLogin = (token, expires_in_minutes, isQuizAnswered) => {
         setAuthCookie(token, expires_in_minutes);
         setAccessToken(token);
-        router.push("/dashboard");
-    }
-    // ------------------- // task after logout // -------------------
+        console.log("Is quiz answered:", isQuizAnswered);
+        if (isQuizAnswered) {
+            router.push("/dashboard");
+        } else {
+            router.push("/quiz");
+        }
+    };
+
+    // ------------------- // Task after logout // -------------------
     const onLogout = () => {
         Cookies.remove(ACCESS_TOKEN_KEY, { path: "/" });
-        router.push('/auth/sign-in');
+        router.push("/auth/sign-in");
     };
     // ------------------- // Login mutation // -------------------
     const login = useMutation({
@@ -40,14 +53,19 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
-            console.log(data);
             toast.success(data?.message || "Logged in successfully");
-            onLogin(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
+            // get necessary data from response 
+            const isQuizAnswered = data?.data?.is_style_profile;
+            const token = data?.data?.chique_auth_token;
+            const expiresInMinutes = data?.data?.expires_in_minutes;
+            // pass data to onLogin function
+            onLogin(token, expiresInMinutes, isQuizAnswered);
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Login failed");
         },
     });
+
     // ------------------- // Apple login mutation // -------------------
     const appleMutation = useMutation({
         mutationFn: async (token) => {
@@ -55,14 +73,13 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
-            console.log(data);
             toast.success(data?.message || "Apple login successful");
-            // onLogin(data?.data?.token, data?.data?.expires_in_minutes);
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
         },
-    })
+    });
+
     // ------------------- // Google login mutation // -------------------
     const googleMutation = useMutation({
         mutationFn: async (token) => {
@@ -70,14 +87,13 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
-            console.log(data);
             toast.success(data?.message || "Google login successful");
-            // onLogin(data?.data?.token, data?.data?.expires_in_minutes);
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
         },
-    })
+    });
+
     // ------------------- // Register mutation // -------------------
     const register = useMutation({
         mutationKey: ["register"],
@@ -87,17 +103,15 @@ export const useAuth = () => {
         },
         onSuccess: (data) => {
             toast.success(data?.message || "Otp sent successfully");
-            const email = data?.data?.email;
-            const otp = data?.data?.otp;
-            // ⚡ store only for this session
-            sessionStorage.setItem("verifyEmail", email);
-            sessionStorage.setItem("verifyOtp", otp);
+            sessionStorage.setItem(VERIFY_EMAIL_KEY, data?.data?.email);
+            sessionStorage.setItem(VERIFY_OTP_KEY, data?.data?.otp);
             router.push("/auth/user-verification");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Registration failed");
         },
     });
+
     // ------------------- // Verify registered user mutation // -------------------
     const verifyOtp = useMutation({
         mutationKey: ["verifyOtp"],
@@ -106,10 +120,10 @@ export const useAuth = () => {
             return response.data;
         },
         onSuccess: (data) => {
-            setAuthCookie(data?.data?.token, data?.data?.expires_in_minutes);
-            setAccessToken(data?.data?.token);
-            sessionStorage.removeItem("verifyEmail");
-            sessionStorage.removeItem("verifyOtp");
+            setAuthCookie(data?.data?.chique_auth_token, data?.data?.expires_in_minutes);
+            setAccessToken(data?.data?.chique_auth_token);
+            sessionStorage.removeItem(VERIFY_EMAIL_KEY);
+            sessionStorage.removeItem(VERIFY_OTP_KEY);
             toast.success(data?.message || "User Verified successfully");
             router.push("/quiz");
         },
@@ -117,6 +131,7 @@ export const useAuth = () => {
             toast.error(error.response?.data?.message || "OTP verification failed");
         },
     });
+
     // ------------------- // Forgot password mutation // -------------------
     const forgotPassword = useMutation({
         mutationKey: ["forgotPassword"],
@@ -126,74 +141,71 @@ export const useAuth = () => {
         },
         onSuccess: (response, variables) => {
             toast.success(response?.message || "Otp sent successfully");
-            const email = variables?.email;
-            const otp = response?.data?.otp;
-            // ⚡ store only for this session
-            sessionStorage.setItem("resetEmail", email);
-            sessionStorage.setItem("resetOtp", otp);
+            sessionStorage.setItem(RESET_EMAIL_KEY, variables?.email);
+            sessionStorage.setItem(RESET_OTP_KEY, response?.data?.otp);
             router.push("/auth/reset-verification");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "Failed to send otp");
         },
-    })
-    // ------------------- // Resend OTP mutation for forgot password // -------------------
+    });
+
+    // ------------------- // Resend OTP mutation // -------------------
     const resendOtp = useMutation({
         mutationKey: ["resendOtp"],
         mutationFn: async (data) => {
-            const response = await axiosInstance.post("/resend-otp", data)
-            return response.data
+            const response = await axiosInstance.post("/resend-otp", data);
+            return response.data;
         },
         onSuccess: (res) => {
             toast.success(res?.message || "OTP resent successfully");
-            const otp = res?.data?.otp;
-            sessionStorage.setItem("resetOtp", otp);
+            sessionStorage.setItem(RESET_OTP_KEY, res?.data?.otp);
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
         },
     });
-    // ------------------- // verify OTP mutation for forgot password // -------------------
+
+    // ------------------- // Verify reset OTP mutation // -------------------
     const verifyResetOtp = useMutation({
         mutationKey: ["verifyResetOtp"],
         mutationFn: async (data) => {
-            const response = await axiosInstance.post("/verify-otp", data)
-            return response.data
+            const response = await axiosInstance.post("/verify-otp", data);
+            return response.data;
         },
         onSuccess: (res) => {
             toast.success(res?.message || "OTP verified successfully");
-            const resetToken = res?.token;
-            // ⚡ store reset token only for this session
-            sessionStorage.setItem("resetToken", resetToken);
-            sessionStorage.removeItem("resetOtp");
+            sessionStorage.setItem(RESET_TOKEN_KEY, res?.token);
+            sessionStorage.removeItem(RESET_OTP_KEY);
             router.push("/auth/create-new-password");
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
         },
     });
-    // ------------------- // Reset new password mutation // ------------------- 
+
+    // ------------------- // Reset new password mutation // -------------------
     const resetNewPassword = useMutation({
         mutationKey: ["resetNewPassword"],
         mutationFn: async (data) => {
-            const response = await axiosInstance.post("/reset-password", data)
-            return response.data
+            const response = await axiosInstance.post("/reset-password", data);
+            return response.data;
         },
         onSuccess: (res) => {
             toast.success(res?.message || "Password reset successfully");
-            // ⚡ remove reset token and email from session storage
-            sessionStorage.removeItem("resetToken");
-            sessionStorage.removeItem("resetEmail");
+            sessionStorage.removeItem(RESET_TOKEN_KEY);
+            sessionStorage.removeItem(RESET_EMAIL_KEY);
             router.push("/auth/sign-in");
         },
         onError: (err) => {
             toast.error(err?.response?.data?.message || "Something went wrong!");
-            sessionStorage.removeItem("resetToken");
-            sessionStorage.removeItem("resetEmail");
+            sessionStorage.removeItem(RESET_TOKEN_KEY);
+            sessionStorage.removeItem(RESET_EMAIL_KEY);
             router.push("/auth/sign-in");
         },
     });
-    // ------------------- // Logout user mutation // -------------------
+
+    // ------------------- // Logout mutation // -------------------
     const logout = useMutation({
         mutationKey: ["logout"],
         mutationFn: async () => {
@@ -202,11 +214,7 @@ export const useAuth = () => {
                 const response = await axiosInstance.post(
                     "/logout",
                     {},
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
+                    { headers: { Authorization: `Bearer ${token}` } }
                 );
                 return response?.data;
             } catch (error) {
@@ -218,8 +226,7 @@ export const useAuth = () => {
             toast.success(response?.message || "Logged out successfully");
             onLogout();
         },
-        onError: (error) => {
-            console.error(error);
+        onError: () => {
             onLogout();
             toast.success("Logged out successfully");
         },
@@ -228,6 +235,7 @@ export const useAuth = () => {
             onLogout();
         },
     });
+
     // ------------------- // Return all auth hooks // -------------------
     return {
         login,
@@ -241,6 +249,6 @@ export const useAuth = () => {
         resetNewPassword,
         logout,
         onLogout,
-        setAuthCookie
+        setAuthCookie,
     };
 };
