@@ -120,7 +120,7 @@ const QuizClient = ({ quizQuestions = [] }) => {
                     onClick={next}
                     className="px-6 py-3 bg-black text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 rounded-md"
                 >
-                    {current === quizQuestions.length - 1 ? "Finish" : "Next"}
+                    {current === quizQuestions.length - 1 ? "Submit" : "Next"}
                 </button>
             </div>
         </div>
