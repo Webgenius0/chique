@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import { Providers } from './providers';
 import { cookies } from 'next/headers';
 import { getUserProfile } from '@/lib/api/get-user-profile';
+import { axiosPrivateServer } from '@/lib/axios.private.server';
 
 // Add this new viewport export
 export const viewport = {
@@ -86,22 +87,25 @@ const specialFont = Poppins({
 });
 
 export default async function RootLayout({ children }) {
-
     // get user data
     const cookieStore = await cookies();
     const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value || null;
+    const axiosInstance = await axiosPrivateServer();
     let userData = null;
     if (token) {
         try {
-            userData = await getUserProfile(token);
+            userData = await getUserProfile(axiosInstance);
         } catch (err) {
             console.error("Failed to fetch user on server:", err);
         }
     }
-
     // main render
     return (
-        <html lang="en" suppressHydrationWarning className={`${primaryFont.variable} ${secondaryFont.variable} ${specialFont.variable}`}>
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={`${primaryFont.variable} ${secondaryFont.variable} ${specialFont.variable}`}
+        >
             <body suppressHydrationWarning>
                 <Toaster position="top-center" />
                 <AntdRegistry>
