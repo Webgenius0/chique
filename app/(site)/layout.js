@@ -5,7 +5,9 @@ export default function MainLayout({ children }) {
   return (
     <ReactLenis root>
       <Header />
-      <main className="w-full min-h-screen">{children}</main>
+      <main className="w-full">
+        {children}
+      </main>
       <Footer />
     </ReactLenis>
   );
