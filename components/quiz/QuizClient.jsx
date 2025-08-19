@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosPrivateClient } from "@/lib/axios.private.client";
 import { getQuiz } from "@/lib/api/get-quiz";
 import QuizHeader from "./QuizHeader";
@@ -16,7 +16,7 @@ const QuizClient = ({ initialQuestions }) => {
     const axiosInstance = axiosPrivateClient();
     const [current, setCurrent] = useState(0);
     const [answers, setAnswers] = useState([]);
-
+    const queryClient = useQueryClient();
     // Query for quiz questions
     const {
         data: quizQuestions = [],
@@ -38,19 +38,36 @@ const QuizClient = ({ initialQuestions }) => {
     const postAnswer = useMutation({
         mutationKey: ["postAnswer"],
         mutationFn: async (data) => {
-            const response = await axiosInstance.post("/style-quiz/answer", data);
+            const response = await axiosInstance.post("/style-quiz/answers", {
+                answers: data,
+            });
             return response.data;
         },
         onSuccess: (response) => {
+            console.log(response);
             toast.success(response?.message || "Answer submitted successfully");
-            router.push("/welcome");
+            // Invalidate user data query to refresh user profile
+            queryClient.invalidateQueries({
+                queryKey: ["userData"],
+                exact: true,
+            });
+            router.push("/profile-results");
         },
         onError: (error) => {
             toast.error(error?.response?.data?.message || "Failed to submit answer");
         },
     });
+    // if postAnswer is in progress, show loading state
+    if (postAnswer.isPending) {
+        return (
+            <div className="w-full h-[80vh] flex flex-col items-center justify-center gap-4">
+                <Loader className={`size-10`} />
+                <p className="text-lg font-semibold text-gray-700">Submitting answers</p>
+            </div>
+        )
+    }
     // Loading screen
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return (
             <div className="w-full h-[80vh] flex flex-col items-center justify-center gap-4">
                 <Loader className={`size-10`} />
@@ -80,10 +97,8 @@ const QuizClient = ({ initialQuestions }) => {
             </div>
         );
     }
-
     // Current question
     const question = quizQuestions[current];
-
     // Handle selecting an option (single choice)
     const handleSelectOption = (optionId) => {
         setAnswers((prev) => {
@@ -98,14 +113,14 @@ const QuizClient = ({ initialQuestions }) => {
 
     // Check if current question has been answered
     const hasAnswered = answers.some((a) => a.question_id === question.id);
-
     // Navigation functions
+
+    // Function to go to the next question or submit answers
     const next = () => {
         if (!hasAnswered) {
             toast.error("Please select an option to continue.");
             return;
         }
-
         if (current < quizQuestions.length - 1) {
             setCurrent((prev) => prev + 1);
         } else {
@@ -113,14 +128,13 @@ const QuizClient = ({ initialQuestions }) => {
                 toast.error("Please answer all questions before submitting.");
                 return;
             }
-            console.log("Final Answers:", answers);
+            postAnswer.mutate(answers);
         }
     };
-
+    // Function to go to the previous question
     const previous = () => {
         if (current > 0) setCurrent((prev) => prev - 1);
     };
-
     // Main quiz render
     return (
         <div className="w-full flex flex-col xl:gap-6 lg:gap-5 md:gap-4 gap-2.5">

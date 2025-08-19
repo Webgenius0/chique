@@ -18,7 +18,7 @@ export const useAuth = () => {
     const queryClient = useQueryClient();
     const router = useRouter();
     const axiosInstance = axiosPublic();
-    console.log("From auth hook:", userData);
+    // console.log("From auth hook:", userData);
     // ------------------- // Set auth cookie // -------------------
     const setAuthCookie = (token, expiresInMinutes) => {
         Cookies.set(ACCESS_TOKEN_KEY, token, {
@@ -125,7 +125,7 @@ export const useAuth = () => {
             sessionStorage.removeItem(VERIFY_EMAIL_KEY);
             sessionStorage.removeItem(VERIFY_OTP_KEY);
             toast.success(data?.message || "User Verified successfully");
-            router.push("/quiz");
+            router.push("/welcome");
         },
         onError: (error) => {
             toast.error(error.response?.data?.message || "OTP verification failed");

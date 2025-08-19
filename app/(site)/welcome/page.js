@@ -1,17 +1,21 @@
-"use client";
+
 import Image from "next/image";
 import logo from "@/public/images/logo/chique_mini_logo.png";
 import AuthWrapper from "@/components/auth/AuthWrapper";
 import AuthTitle from "@/components/auth/AuthTitle";
 import AuthSubText from "@/components/auth/AuthSubText";
 import CommonBtn from "@/components/common/CommonBtn";
-import { useRouter } from "next/navigation";
+
+
+export const metadata = {
+  title: "Chique | Welcome to Chique",
+  description:
+    "Take our style quiz and find your perfect fashion match. Answer 10 simple questions to find your perfect style match",
+};
+
 
 const WelcomePage = () => {
-  const router = useRouter();
-  const handleNavigate = () => {
-    router.push("/quiz");
-  };
+  // main render
   return (
     <div className="container min-h-screen py-32 flex justify-center items-center">
       <AuthWrapper>
@@ -31,12 +35,8 @@ const WelcomePage = () => {
             text="We’re going to ask a few quick questions about your health and lifestyle to create a plan tailored just for you."
           />
           {/* start button */}
-          <CommonBtn
-            className={"max-w-32"}
-            type="submit"
-            onclick={handleNavigate}
-          >
-            Start
+          <CommonBtn className={`max-w-[220px]`} link={true} path="/quiz">
+            Start Quiz
           </CommonBtn>
         </div>
       </AuthWrapper>

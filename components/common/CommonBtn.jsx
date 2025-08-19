@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Loader from "@/components/common/Loader";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -13,11 +13,17 @@ const CommonBtn = ({
     onclick,
     disabled = false,
 }) => {
-    const commonStyle = "w-full cursor-pointer bg-primary-dark rounded-4xl px-4 sm:px-6 py-3  flex justify-center min-h-[56px] items-center lg:text-xl md:font-semibold font-medium text-white relative capitalize disabled:cursor-not-allowed disabled:opacity-50"
+    const commonStyle =
+        "w-full cursor-pointer bg-primary-dark rounded-4xl px-4 sm:px-6 py-3 flex justify-center min-h-[56px] items-center lg:text-xl md:font-semibold font-medium text-white relative capitalize disabled:cursor-not-allowed disabled:opacity-50";
+
     return (
         <>
             {link ? (
-                <Link href={path} className={cn(commonStyle, className)}  >
+                <Link
+                    href={path}
+                    aria-hidden="true" // prevent scroll/focus warning
+                    className={cn(commonStyle, className)}
+                >
                     {children}
                 </Link>
             ) : (
@@ -25,12 +31,14 @@ const CommonBtn = ({
                     type={type}
                     disabled={disabled}
                     onClick={onclick}
+                    aria-hidden="true" // prevent scroll/focus warning
                     className={cn(commonStyle, className)}
                 >
-                    {isLoading ? <Loader className={``} /> : children}
+                    {isLoading ? <Loader /> : children}
                 </button>
             )}
         </>
     );
 };
+
 export default CommonBtn;
