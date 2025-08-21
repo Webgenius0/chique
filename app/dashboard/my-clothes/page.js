@@ -11,8 +11,8 @@ export const metadata = {
 const MyClothes = () => {
   return (
     <PageWrapper>
-      <OutfitSuggestion />
       <Wardrobe />
+      <OutfitSuggestion />
     </PageWrapper>
   );
 };

@@ -83,7 +83,7 @@ const CommonInputWrapper = ({
             {...register(register_as, validationRules)}
           />
         ) : type === "select" ? (
-          <div className={cn("w-full text-sm sm:text-base", selectClass)}>
+          <div className={cn("w-full text-sm sm:text-base ", selectClass)}>
             <Controller
               control={control}
               name={register_as}
@@ -104,7 +104,7 @@ const CommonInputWrapper = ({
                       field.onChange(option?.value || selectedValue);
                     }
                   }}
-                  className="w-full bg-transparent border-none capitalize outline-none placeholder:text-dark text-base"
+                  className="w-full bg-transparent border-none min-h-[55px] capitalize outline-none placeholder:text-dark text-base"
                   showSearch
                   allowClear
                   dropdownClassName="text-base"

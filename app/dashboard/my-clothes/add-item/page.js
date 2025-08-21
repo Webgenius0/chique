@@ -11,9 +11,6 @@ export const metadata = {
 const AddItem = () => {
   return (
     <PageWrapper>
-      <p className="xs:text-2xl text-xl text-primary-dark font-special font-medium">
-        Al Analysis Results
-      </p>
       <AnalysisForm />
     </PageWrapper>
   );

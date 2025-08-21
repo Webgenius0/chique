@@ -32,7 +32,6 @@ export const useAuth = () => {
     const onLogin = (token, expires_in_minutes, isQuizAnswered) => {
         setAuthCookie(token, expires_in_minutes);
         setAccessToken(token);
-        console.log("Is quiz answered:", isQuizAnswered);
         if (isQuizAnswered) {
             router.push("/dashboard");
         } else {

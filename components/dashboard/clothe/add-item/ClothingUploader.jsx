@@ -1,86 +1,157 @@
 "use client";
+import Loader from "@/components/common/Loader";
+import { axiosPrivateClient } from "@/lib/axios.private.client";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
+import { FiUploadCloud, FiCheckCircle, FiInfo } from "react-icons/fi";
 
-import { useRef, useState } from "react";
-import { FiUploadCloud, FiImage } from "react-icons/fi";
-import { RiDownloadCloudFill } from "react-icons/ri";
-
-const ClothingUploader = () => {
-  const inputRef = useRef(null);
+const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
+  const axiosInstance = axiosPrivateClient();
   const [preview, setPreview] = useState(null);
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) {
-      setPreview(null);
+  // post image to server
+  const postImage = useMutation({
+    mutationKey: ["postImage"],
+    mutationFn: async (file) => {
+      // status
+      setStatus({
+        error: null,
+        rawResponse: null,
+        isLoading: true,
+      });
+      // form data
+      const formData = new FormData();
+      formData.append("image", file);
+      // post
+      const response = await axiosInstance.post(
+        "/openai/image-analyze",
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      // return
+      return { ...response.data, file };
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message || "Image analyzed successfully!");
+      setPreview(URL.createObjectURL(data.file));
+      // set data
+      setAiAnalyze({
+        image: data.file,
+        result: data?.data || null
+      });
+      // set status
+      setStatus({
+        error: data?.data?.error || null,
+        rawResponse: data?.data?.raw || null,
+        isLoading: false
+      });
+    },
+    onError: (err) => {
+      console.error("❌ Upload error:", err);
+      toast.error(err?.response?.data?.message || "Failed to analyze image");
+      setStatus({
+        error: err?.response?.data?.message || "Server error",
+        rawResponse: null,
+        isLoading: false
+      });
+    },
+  });
+  const onDrop = (acceptedFiles, fileRejections) => {
+    if (fileRejections.length > 0) {
+      fileRejections.forEach((rej) => {
+        rej.errors.forEach((e) => toast.error(e.message));
+      });
       return;
     }
-
-    // 🔥 Fix: reset input to allow same file selection again
-    e.target.value = "";
-
-    const url = URL.createObjectURL(file);
-    setPreview(url);
+    const file = acceptedFiles[0];
+    if (!file) return;
+    setStatus({ error: null, rawResponse: null });
+    postImage.mutate(file);
   };
 
-  const triggerFileInput = () => inputRef.current.click();
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: { "image/*": [] },
+    multiple: false,
+    maxFiles: 1,
+    maxSize: 10 * 1024 * 1024,
+  });
 
   return (
-    <div className="w-full lg:max-w-[50%] flex flex-col gap-6">
-      {/* Upload Section */}
-      <div
-        className="border-1 border-dashed border-primary-dark rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer text-center 3xs:min-h-[330px] h-[300px]"
-        onClick={triggerFileInput}
-      >
-        {preview ? (
-          <img
-            src={preview}
-            alt="Uploaded preview"
-            className="h-full flex flex-col gap-6 max-h-[330px] w-auto object-cover rounded-xl"
-          />
-        ) : (
-          <>
-            <RiDownloadCloudFill className="text-6xl text-primary-dark mb-4" />
-            <p className="xs:text-xl text-lg font-medium text-primary-dark font-secondary">
-              Drop your clothing item photo here or click to upload
-            </p>
-            <p className="text-base text-primary-dark font-primary">
-              or take a photo with your camera
-            </p>
-            <button
-            type="button"
-              onClick={triggerFileInput}
-              className="mt-4 px-6 py-2 bg-black text-white rounded-md text-base font-primary font-medium cursor-pointer"
-            >
-              Choose File
-            </button>
-          </>
-        )}
+    <div className="w-full xl:max-w-[50%] flex flex-col h-auto gap-5">
 
-        <input
-          type="file"
-          accept="image/*"
-          ref={inputRef}
-          onChange={handleFileChange}
-          className="hidden"
-        />
+      {/* Upload Notes */}
+      <div className="bg-gray-50 border border-gray-300 rounded-lg p-4 flex flex-col gap-2 text-left">
+        <div className="flex items-center gap-2 mb-2">
+          <FiInfo className="text-black text-xl" />
+          <span className="font-semibold text-black">Upload Guidelines</span>
+        </div>
+        <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+          <li>Upload a **single clothing item** per image.</li>
+          <li>Supported formats: <b>JPG, PNG</b>.</li>
+          <li>Maximum file size: <b>10MB</b>.</li>
+          <li>Ensure the item is clearly visible and well-lit.</li>
+          <li>Avoid multiple items or cluttered background for better AI analysis.</li>
+        </ul>
       </div>
 
-      {/* Preview Section */}
-      <div className="bg-white border border-gray-200 rounded-xl p-5">
-        <p className="text-xl font-semibold text-primary-dark font-primary mb-3">
-          Preview
-        </p>
-        <div className="border-1 border-dashed border-primary-dark rounded-xl 3xs:h-[330px] h-[300px] flex items-center justify-center overflow-hidden bg-gray-50">
-          {preview ? (
+      {/* Drag/Drop Area */}
+      <div
+        {...getRootProps()}
+        className={`border-2 border-dashed p-2 rounded-xl p-5 h-full flex flex-col gap-5 items-center justify-center text-center cursor-pointer transition
+          ${isDragActive ? "border-black bg-gray-100" : "border-black"} min-h-[250px]`}
+      >
+        <input {...getInputProps()} />
+        {/* Pending State */}
+        {postImage.isPending ? (
+          <div className="flex flex-col items-center gap-2">
+            <Loader />
+            <p className="text-black text-lg font-medium">Uploading & Analyzing...</p>
+            <p className="text-sm text-gray-500">Please wait a few seconds.</p>
+          </div>
+        ) : status.rawResponse ? (
+          <div className="flex flex-col items-center gap-2">
             <img
               src={preview}
-              alt="Preview"
-              className="h-full w-full object-cover rounded-xl"
+              alt="preview"
+              className="max-h-80 object-contain  border border-gray-300"
             />
-          ) : (
-            <FiImage className="text-6xl text-primary-dark" />
-          )}
-        </div>
+            <p className="text-lg font-semibold text-red-600">{status.rawResponse}</p>
+            <p className="text-base text-gray-500">**Please upload a different image. following guidelines**</p>
+          </div>
+        ) : status.error ? (
+          <div className="flex flex-col items-center gap-2">
+            <img
+              src={preview}
+              alt="preview"
+              className="max-h-80 object-contain  border border-gray-300"
+            />
+            <p className="text-lg text-red-600">
+              {status.error}
+            </p>
+            <p className="text-base text-gray-500">**Please upload a different image. following guidelines**</p>
+          </div>
+        ) : preview ? (
+          <div className="flex flex-col items-center gap-3">
+            <img
+              src={preview}
+              alt="preview"
+              className="max-h-80 object-contain  border border-gray-300"
+            />
+            <div className="flex items-center gap-2 text-green-600 font-medium">
+              <FiCheckCircle /> Analysis Complete
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-3 text-black">
+            <FiUploadCloud className="text-5xl" />
+            <p className="text-lg font-medium">
+              {isDragActive ? "Drop your image here..." : "Click or drag an image (max 10MB)"}
+            </p>
+            <p className="text-sm text-gray-500">Supported formats: JPG, PNG</p>
+          </div>
+        )}
       </div>
     </div>
   );
