@@ -71,18 +71,39 @@ ant select
 
 /* common Loader */
 .loader {
-    border-bottom-color: transparent;
-    border-radius: 50%;
-    display: inline-block;
-    box-sizing: border-box;
-    animation: rotation 1s linear infinite;
-    }
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
 
-    @keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    } 
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ant design pagination */
+.ant-pagination .ant-pagination-item-active {
+  border: 1px solid black !important;
+  color: black !important;
+  background-color: transparent !important;
+}
+.ant-pagination .ant-pagination-item-active a {
+  color: black !important;
+}
+.ant-pagination-item {  
+  border: 1px solid transparent !important;
+  color: black !important;
+  background-color: gainsboro !important;
+  border-radius: 3px !important;
+  width: 45px !important;
+  height: 45px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}

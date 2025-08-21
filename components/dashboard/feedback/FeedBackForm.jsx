@@ -13,6 +13,7 @@ const FeedBackForm = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm()
     const axiosInstance = axiosPrivateClient();
@@ -27,11 +28,12 @@ const FeedBackForm = () => {
             return response.data
         },
         onSuccess: (data) => {
-            console.log(data)
             queryClient.invalidateQueries({
                 queryKey: ["reviews"],
                 exact: true
             });
+            reset()
+            setRating(5)
             toast.success(data?.message || "Review submitted successfully");
         },
         onError: (err) => {

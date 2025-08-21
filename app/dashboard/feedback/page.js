@@ -2,6 +2,7 @@ import FeedBackForm from "@/components/dashboard/feedback/FeedBackForm"
 import FeedBackList from "@/components/dashboard/feedback/FeedBackList"
 import { getReviews } from "@/lib/api/get-reviews";
 import { axiosPrivateServer } from "@/lib/axios.private.server";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { cookies } from "next/headers";
 
 export const metadata = {
@@ -11,26 +12,27 @@ export const metadata = {
 
 const FeedBack = async () => {
     // get user data
+    const queryClient = new QueryClient();
     const cookieStore = await cookies();
-    const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value || null;
+    const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value;
     const axiosInstance = await axiosPrivateServer();
-    let reviewsData = [];
+
     if (token) {
-        try {
-            reviewsData = await getReviews(axiosInstance);
-        } catch (err) {
-            console.error("Failed to fetch reviews on server:", err);
-        }
+        await queryClient.prefetchQuery({
+            queryKey: ["reviews", 1],
+            queryFn: () => getReviews(axiosInstance),
+        });
     }
-    console.log("Server reviews:", reviewsData);
     // main render
     return (
-        <div className="w-full flex flex-col xs:gap-6 gap-4  py-5">
-            {/* feed back form */}
-            <FeedBackForm />
-            {/* Previous feedback */}
-            <FeedBackList reviewsDataServer={reviewsData} />
-        </div>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+            <div className="w-full flex flex-col xs:gap-6 gap-4  py-5">
+                {/* feed back form */}
+                <FeedBackForm />
+                {/* Previous feedback */}
+                <FeedBackList />
+            </div>
+        </HydrationBoundary>
     )
 }
 
