@@ -107,7 +107,6 @@ const CommonInputWrapper = ({
                   className="w-full bg-transparent border-none min-h-[55px] capitalize outline-none placeholder:text-dark text-base"
                   showSearch
                   allowClear
-                  dropdownClassName="text-base"
                 />
               )}
             />
