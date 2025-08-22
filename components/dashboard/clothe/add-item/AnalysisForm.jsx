@@ -20,7 +20,7 @@ const AnalysisForm = () => {
       {/* Clothing Uploader Section */}
       <ClothingUploader setAiAnalyze={setAiAnalyze} setStatus={setStatus} status={status} />
       {/* final submit form*/}
-      <ItemAddForm aiAnalyze={aiAnalyze} status={status} />
+      <ItemAddForm aiAnalyze={aiAnalyze} setAiAnalyze={setAiAnalyze} setStatus={setStatus} status={status} />
     </div>
   );
 };

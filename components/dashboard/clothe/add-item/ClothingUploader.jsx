@@ -13,6 +13,7 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
   // post image to server
   const postImage = useMutation({
     mutationKey: ["postImage"],
+    // mutationFn
     mutationFn: async (file) => {
       // status
       setStatus({
@@ -35,25 +36,29 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
     onSuccess: (data) => {
       toast.success(data?.message || "Image analyzed successfully!");
       setPreview(URL.createObjectURL(data.file));
-      // set data
+      // update data
       setAiAnalyze({
         image: data.file,
         result: data?.data || null
       });
-      // set status
+      // update status
       setStatus({
         error: data?.data?.error || null,
         rawResponse: data?.data?.raw || null,
         isLoading: false
       });
     },
-    onError: (err) => {
+    onError: (err, file) => {
       console.error("❌ Upload error:", err);
       toast.error(err?.response?.data?.message || "Failed to analyze image");
+      // keep preview visible for failed upload too
+      setPreview(URL.createObjectURL(file));
+      // reset ai analyze state
       setAiAnalyze({
-        image: preview,
+        image: file,
         result: null
       });
+      // update status
       setStatus({
         error: err?.response?.data?.message || "Server error",
         rawResponse: null,
@@ -61,6 +66,7 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
       });
     },
   });
+  // on drop
   const onDrop = (acceptedFiles, fileRejections) => {
     if (fileRejections.length > 0) {
       fileRejections.forEach((rej) => {
@@ -73,7 +79,7 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
     setStatus({ error: null, rawResponse: null });
     postImage.mutate(file);
   };
-
+  // dropzone
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: { "image/*": [] },
@@ -81,10 +87,9 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
     maxFiles: 1,
     maxSize: 10 * 1024 * 1024,
   });
-
+  // main render
   return (
     <div className="w-full xl:max-w-[50%] flex flex-col h-auto gap-5">
-
       {/* Upload Notes */}
       <div className="bg-gray-50 border border-gray-300 rounded-lg p-4 flex flex-col gap-2 text-left">
         <div className="flex items-center gap-2 mb-2">
@@ -99,11 +104,10 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
           <li>Avoid multiple items or cluttered background for better AI analysis.</li>
         </ul>
       </div>
-
       {/* Drag/Drop Area */}
       <div
         {...getRootProps()}
-        className={`border-2 border-dashed p-2 rounded-xl p-5 h-full flex flex-col gap-5 items-center justify-center text-center cursor-pointer transition
+        className={`border-2 border-dashed  rounded-xl p-5 h-full flex flex-col gap-5 items-center justify-center text-center cursor-pointer transition
           ${isDragActive ? "border-black bg-gray-100" : "border-black"} min-h-[250px]`}
       >
         <input {...getInputProps()} />

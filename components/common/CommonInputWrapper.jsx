@@ -41,8 +41,8 @@ const CommonInputWrapper = ({
     }
     return typeof val === 'object' ? val?.value : val;
   };
-  const normalizedValue = normalizeValue(value);
 
+  // main render
   return (
     <div
       className={cn(
@@ -65,9 +65,11 @@ const CommonInputWrapper = ({
         innerWrapper
       )}>
         {/* Left icon */}
-        {icon && <div className="shrink-0 w-fit flex items-center"> 
-          {React.cloneElement(icon, { className: "text-lg sm:text-xl" })}
-        </div>}
+        {icon &&
+          <div className="shrink-0 w-fit flex items-center">
+            {icon}
+          </div>
+        }
 
         {/* Textarea */}
         {type === "textarea" ? (
@@ -87,7 +89,7 @@ const CommonInputWrapper = ({
             <Controller
               control={control}
               name={register_as}
-              defaultValue={normalizedValue}
+              defaultValue={selectMode === "multiple" || selectMode === "tags" ? [] : undefined}
               rules={validationRules}
               render={({ field }) => (
                 <Select
@@ -96,15 +98,21 @@ const CommonInputWrapper = ({
                   placeholder={placeholder}
                   options={options}
                   optionFilterProp="label"
-                  value={normalizeValue(field.value)}
+                  value={
+                    field.value === undefined ||
+                      field.value === null ||
+                      (Array.isArray(field.value) && field.value.length === 0)
+                      ? undefined
+                      : normalizeValue(field.value)
+                  }
                   onChange={(selectedValue, option) => {
                     if (selectMode === "multiple" || selectMode === "tags") {
-                      field.onChange(selectedValue);
+                      field.onChange(selectedValue || []);
                     } else {
-                      field.onChange(option?.value || selectedValue);
+                      field.onChange(option?.value || selectedValue || undefined);
                     }
                   }}
-                  className="w-full bg-transparent border-none min-h-[55px] capitalize outline-none placeholder:text-dark text-base"
+                  className="w-full bg-transparent border-none min-h-[55px] capitalize outline-none text-base"
                   showSearch
                   allowClear
                 />

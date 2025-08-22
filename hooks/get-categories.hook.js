@@ -17,9 +17,8 @@ export const useCategories = () => {
     });
     // format the categories
     const formattedCategories = categories.map((category) => ({
-        id: category.id,
-        name: category.name,
-        slug: category.slug
+        value: category.id,
+        label: category.name
     }))
     return { categories, formattedCategories, isLoading, isError }; // { data, isLoading, isError, error }
 };
