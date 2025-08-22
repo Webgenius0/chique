@@ -1,5 +1,5 @@
 
-const QuizNavigation = ({ previous, next, current, quizQuestions }) => {
+const QuizNavigation = ({ previous, next, current, quizQuestions,hasAnswered,isSelected }) => {
     return (
         <div className="flex w-full items-center gap-3 justify-between">
             <button
@@ -11,6 +11,7 @@ const QuizNavigation = ({ previous, next, current, quizQuestions }) => {
             </button>
             <button
                 onClick={next}
+                disabled={!hasAnswered || !isSelected}
                 className="px-6 py-3 bg-black text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 rounded-md"
             >
                 {current === quizQuestions.length - 1 ? "Submit" : "Next"}

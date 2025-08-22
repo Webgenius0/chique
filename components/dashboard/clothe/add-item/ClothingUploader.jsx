@@ -50,6 +50,10 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
     onError: (err) => {
       console.error("❌ Upload error:", err);
       toast.error(err?.response?.data?.message || "Failed to analyze image");
+      setAiAnalyze({
+        image: preview,
+        result: null
+      });
       setStatus({
         error: err?.response?.data?.message || "Server error",
         rawResponse: null,

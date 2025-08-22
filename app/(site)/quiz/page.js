@@ -1,6 +1,8 @@
 import QuizClient from "@/components/quiz/QuizClient";
 import { getQuiz } from "@/lib/api/get-quiz";
 import { axiosPrivateServer } from "@/lib/axios.private.server";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { cookies } from "next/headers";
 
 export const metadata = {
   title: "Chique | Discover Your Personal Style",
@@ -9,20 +11,29 @@ export const metadata = {
 };
 
 const Quiz = async () => {
+  const queryClient = new QueryClient();
+  const cookieStore = await cookies();
+  const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value;
   const axiosInstance = await axiosPrivateServer();
-  let quizQuestions = [];
-  try {
-    quizQuestions = await getQuiz(axiosInstance);
-  } catch (err) {
-    console.error("Failed to fetch quiz:", err);
-    throw err;
+  console.log("🔑 Token from cookies:", token);
+  // get quiz
+  if (token) {
+    console.log("🚀 Prefetching quiz questions on server...");
+    await queryClient.prefetchQuery({
+      queryKey: ["quizQuestions"],
+      queryFn: () => getQuiz(axiosInstance),
+    });
+    console.log("✅ Prefetch complete");
+  } else {
+    console.log("⚠️ No token found, skipping quiz prefetch");
   }
-  // console.log(quizQuestions);
   // main render
   return (
-    <div className="max-w-6xl container flex flex-col sm:py-16 xs:py-12 py-10">
-      <QuizClient initialQuestions={quizQuestions} />
-    </div>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <div className="max-w-6xl container flex flex-col sm:py-16 xs:py-12 py-10">
+        <QuizClient />
+      </div>
+    </HydrationBoundary>
   );
 };
 export default Quiz;
