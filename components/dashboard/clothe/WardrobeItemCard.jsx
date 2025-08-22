@@ -1,36 +1,75 @@
-"use client"
-import Image from "next/image"
-import Link from "next/link"
+"use client";
+import Image from "next/image";
 import { GoFileDirectory } from "react-icons/go";
-const WardrobeItemCard = ({ item = {} }) => {
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import Link from "next/link";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+const WardrobeItemCard = ({ category = {} }) => {
+    const {
+        id,
+        slug,
+        name = "",
+        items = [], // each item should have {id, image}
+    } = category;
+
     return (
-        <Link className="w-full flex flex-col gap-3 cursor-pointer" href={`/dashboard/my-clothes/${item.category}`}>
-            <div className="w-full sm:h-[290px] h-[200px] overflow-hidden border border-primary-dark rounded-lg cursor-pointer p-2">
-                <Image
-                    src={item.image}
-                    className="w-full h-full object-cover"
-                    alt={item.name}
-                    width={500}
-                    height={500}
-                    priority
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
+        <div className="w-full flex flex-col gap-3">
+            {/* Slider */}
+            <div className="w-full h-[350px] overflow-hidden border border-primary-dark rounded-lg">
+                {items.length > 0 ? (
+                    <Swiper
+                        modules={[Pagination, Navigation, Autoplay]}
+                        loop={true}
+                        pagination={{ clickable: true }}
+                        navigation={false}
+                        parallax={true}
+                        slidesPerView={1}
+                        className="h-full w-full custom-swiper"
+                    >
+                        {items.map((item) => (
+                            <SwiperSlide
+                                className="w-full h-full p-3 rounded-2xl overflow-hidden"
+                                key={item.id}
+                            >
+                                <img
+                                    className="w-full h-full object-contain rounded-2xl"
+                                    src={item.image}
+                                    alt={item.item_name}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400 text-sm">
+                        No images available
+                    </div>
+                )}
             </div>
-            <div className="w-full flex sm:flex-row flex-col sm:gap-4 gap-2 bg-[#F8F8F8] sm:p-4 p-2 rounded-lg">
-                <div className="sm:w-12 w-8 sm:h-12 h-8 bg-[#EDEDED] rounded-lg sm:p-3 p-1.5">
+
+            {/* Info */}
+            <Link
+                href={`/dashboard/my-clothes/${slug}`}
+                className="w-full flex sm:flex-row flex-col sm:gap-4 gap-2 bg-[#F8F8F8] p-4 rounded-lg"
+            >
+                <div className="size-12 flex items-center justify-center bg-[#EDEDED] rounded-lg sm:p-3 p-1.5">
                     <GoFileDirectory className="sm:text-2xl text-xl" />
                 </div>
-                <div className="flex flex-col gap-1">
-                    <p className="3xs:text-base text-sm text-primary-dark font-primary">
-                        {item.name}
+                <div className="flex w-full flex-col">
+                    <p className="text-xl text-primary-dark font-medium font-primary">
+                        {name || "N/A"}
                     </p>
-                    <p className="text-sm text-primary-dark font-primary">
-                        {item.number} Items
+                    <p className="text-base font-bold text-primary-dark font-primary">
+                        {items?.length || 0} Items
                     </p>
                 </div>
-            </div>
-        </Link>
-    )
-}
+            </Link>
+        </div>
+    );
+};
 
-export default WardrobeItemCard
+export default WardrobeItemCard;

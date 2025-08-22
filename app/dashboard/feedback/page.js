@@ -16,10 +16,10 @@ const FeedBack = async () => {
     const cookieStore = await cookies();
     const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value;
     const axiosInstance = await axiosPrivateServer();
-
+    // prefetch reviews if token
     if (token) {
         await queryClient.prefetchQuery({
-            queryKey: ["reviews", 1],
+            queryKey: ["reviews", 1, token],
             queryFn: () => getReviews(axiosInstance),
         });
     }

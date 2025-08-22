@@ -4,6 +4,7 @@ import CommonBtn from "@/components/common/CommonBtn";
 import CustomPagination from "@/components/common/CustomPagination";
 import Loader from "@/components/common/Loader";
 import StarRating from "@/components/common/StarRating";
+import { getReviews } from "@/lib/api/get-reviews";
 import { axiosPrivateClient } from "@/lib/axios.private.client";
 import { useQuery } from "@tanstack/react-query";
 import { Empty, Result } from "antd";
@@ -26,12 +27,7 @@ const FeedBackList = () => {
         refetch,
     } = useQuery({
         queryKey: ["reviews", currentPage],
-        queryFn: async () => {
-            const response = await axiosInstance.get("/reviews", {
-                params: { page: currentPage },
-            });
-            return response?.data?.data;
-        },
+        queryFn: async () => getReviews(axiosInstance, { params: { page: currentPage } }),
         keepPreviousData: true, // smooth pagination
     });
     // reviews
@@ -51,14 +47,13 @@ const FeedBackList = () => {
     };
     // main render
     return (
-        <div className="w-full flex flex-col gap-6 justify-start items-start">
+        <div className="w-full flex min-h-96 flex-col gap-6 justify-start items-start">
             {/* title */}
             <h2 className="sm:text-3xl text-xl font-bold capitalize">
                 Others Review
             </h2>
-
             {/* feedbacks */}
-            <div className="w-full flex flex-col gap-4 sm:gap-6">
+            <div className="w-full flex  flex-col gap-4 sm:gap-6">
                 {isLoading ? (
                     <div className="w-full flex-col gap-3 h-96 flex justify-center items-center">
                         <Loader />
@@ -125,7 +120,6 @@ const FeedBackList = () => {
                     ))
                 )}
             </div>
-
             {/* pagination */}
             {paginate?.last_page > 1 && !isError && (
                 <CustomPagination
