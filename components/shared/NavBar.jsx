@@ -38,7 +38,7 @@ const NavBar = ({ setIsOpen }) => {
                 </button>
 
                 {/* Page Title */}
-                <h1 className="text-2xl font-bold capitalize text-gray-800 font-secondary tracking-wide">
+                <h1 className="lg:text-2xl text-base font-bold capitalize text-gray-800 font-secondary tracking-wide line-clamp-1">
                     {getPageTitle()}
                 </h1>
             </div>
@@ -57,7 +57,7 @@ const NavBar = ({ setIsOpen }) => {
                         )
                     }
                 </div>
-                <span className="text-lg hidden 3xs:block line-clamp-1 font-medium text-gray-800">
+                <span className="text-lg hidden sm:block line-clamp-1 font-medium text-gray-800">
                     {userData?.user?.name || "Guest"}
                 </span>
             </Link>

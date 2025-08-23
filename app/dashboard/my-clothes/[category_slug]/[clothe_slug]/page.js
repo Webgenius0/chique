@@ -1,38 +1,43 @@
-import Image from "next/image";
-import image from "@/public/images/bannerImages/pant_image1.png";
-import { use } from "react"; // Import the use hook
+import PageWrapper from "@/components/dashboard/PageWrapper";
+import ClotheDetailsClient from "@/components/dashboard/clothe/clothe-details/ClotheDetailsClient";
+import { cookies } from "next/headers";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
+import { axiosPrivateServer } from "@/lib/axios.private.server";
+import { getWardrobeItemDetails } from "@/lib/api/get-item-details";
 
 export const metadata = {
   title: "Chique | My Clothe Details",
   description:
     "Your Personal Style Assistant.Discover your unique style, organize your wardrobe, and get personalized fashion advice with Chique Al.",
 };
-const AiStyle = ({ params }) => {
-  // Unwrap the params promise
-  const unwrappedParams = use(params);
-  const { clothe_slug } = unwrappedParams;
-
+const AiStyle = async ({ params }) => {
+  // params
+  const { clothe_slug } = await params;
+  const queryClient = new QueryClient();
+  const cookieStore = await cookies();
+  const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value;
+  const axiosInstance = await axiosPrivateServer();
+  let prefetchedData;
+  // Prefetch clothe server-side
+  if (token) {
+    await queryClient.prefetchQuery({
+      queryKey: ["wardrobeItemDetails", token, clothe_slug],
+      queryFn: () => getWardrobeItemDetails(axiosInstance, {}, clothe_slug),
+    });
+    prefetchedData = queryClient.getQueryData([
+      "wardrobeItemDetails",
+      token,
+      clothe_slug,
+    ]);
+  }
+  console.log("Prefetched clothe data:", prefetchedData);
   // main render
   return (
-    <div className="w-full flex flex-col justify-center items-center xl:py-20 lg:py-16 md:py-12 xs:py-8 py-4">
-      <div className="w-full max-w-[360px] flex flex-col gap-3">
-        <div className="w-full xs:h-[550px] 3xs:h-[400px] h-[300px] overflow-hidden rounded-2xl border 3xs:p-4 p-1.5">
-          <Image
-            src={image}
-            alt="image"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="w-full flex gap-4">
-          <button className="w-full border rounded-lg p-2">
-            Ask a Question
-          </button>
-          <button className="w-full border rounded-lg p-2">Style It</button>
-        </div>
-      </div>
-    </div>
+    <PageWrapper>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ClotheDetailsClient clothe_slug={clothe_slug} />
+      </HydrationBoundary>
+    </PageWrapper >
   );
 };
 export default AiStyle;
-
-// xs:h-[360px] 3xs:h-[300px] h-[250px]

@@ -32,7 +32,7 @@ const MyClothes = async () => {
     const prefetchedData = queryClient.getQueryData(["wardrobe", token]);
     console.log("Prefetched wardrobe data:", prefetchedData);
   }
-
+  // main render
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <PageWrapper>
