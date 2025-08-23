@@ -14,7 +14,7 @@ const RESET_OTP_KEY = process.env.NEXT_PUBLIC_RESET_OTP_KEY || "resetOtp";
 const RESET_TOKEN_KEY = process.env.NEXT_PUBLIC_RESET_TOKEN_KEY || "resetToken";
 
 export const useAuth = () => {
-    const { userData, setAccessToken } = useUser();
+    const { setAccessToken } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
     const axiosInstance = axiosPublic();

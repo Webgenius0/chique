@@ -18,7 +18,7 @@ export default function AuthProvider({ children, serverUserData = null, serverAc
     });
     // userdata query
     const { data: userData, refetch: userRefetch, isLoading, isFetching } = useQuery({
-        queryKey: ["userData"],
+        queryKey: ["userData", accessToken],
         queryFn: () => getUserProfile(axiosInstance),
         enabled: !!accessToken,
         initialData: serverUserData,

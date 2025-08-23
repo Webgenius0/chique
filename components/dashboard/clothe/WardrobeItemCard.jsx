@@ -16,7 +16,7 @@ const WardrobeItemCard = ({ category = {} }) => {
         name = "",
         items = [], // each item should have {id, image}
     } = category;
-
+    // main card render
     return (
         <div className="w-full flex flex-col gap-3">
             {/* Slider */}
@@ -25,7 +25,7 @@ const WardrobeItemCard = ({ category = {} }) => {
                     <Swiper
                         modules={[Pagination, Navigation, Autoplay]}
                         loop={true}
-                        pagination={{ clickable: true }}
+                        pagination={{ clickable: true, dynamicBullets: true }}
                         navigation={false}
                         parallax={true}
                         slidesPerView={1}
@@ -50,12 +50,8 @@ const WardrobeItemCard = ({ category = {} }) => {
                     </div>
                 )}
             </div>
-
             {/* Info */}
-            <Link
-                href={`/dashboard/my-clothes/${slug}`}
-                className="w-full flex sm:flex-row flex-col sm:gap-4 gap-2 bg-[#F8F8F8] p-4 rounded-lg"
-            >
+            <Link href={`/dashboard/my-clothes/${slug}`} className="w-full flex sm:flex-row flex-col sm:gap-4 gap-2 bg-[#F8F8F8] p-4 rounded-lg">
                 <div className="size-12 flex items-center justify-center bg-[#EDEDED] rounded-lg sm:p-3 p-1.5">
                     <GoFileDirectory className="sm:text-2xl text-xl" />
                 </div>
