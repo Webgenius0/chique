@@ -50,7 +50,7 @@ const Header = () => {
           {/* Right: Auth/User */}
           <div className="hidden md:flex sm:gap-5 gap-3 justify-end items-center shrink-0">
             {isLoggedIn ? (
-              <Link prefetch={true} href={'/dashboard'} className="flex items-center gap-3 shrink-0">
+              <Link prefetch={true} href={"/dashboard/my-profile"} className="flex items-center gap-3 shrink-0">
                 <div className="size-12 shrink-0 border flex justify-center items-center border-gray-200 rounded-full">
                   {
                     userData?.avatar ? (

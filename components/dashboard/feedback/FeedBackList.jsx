@@ -14,10 +14,8 @@ import { FaUser } from "react-icons/fa6";
 const FeedBackList = () => {
     // axios
     const axiosInstance = axiosPrivateClient();
-
     // track current page
     const [currentPage, setCurrentPage] = useState(1);
-
     // get reviews
     const {
         data,
@@ -112,7 +110,7 @@ const FeedBackList = () => {
                                 <p className="text-base sm:text-lg">
                                     {item?.review_text || "N/A"}
                                 </p>
-                                <p className="text-base font-semibold text-end">
+                                <p className="text-base hidden font-semibold text-end">
                                     {item?.created_at || "N/A"}
                                 </p>
                             </div>

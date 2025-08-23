@@ -14,6 +14,7 @@ export const metadata = {
 };
 
 const SignIn = () => {
+  // main render
   return (
     <div className="container md:min-h-screen xl:py-32 lg:py-20 md:py-14 sm:py-10 py-8 flex justify-center items-center ">
       <AuthWrapper>
