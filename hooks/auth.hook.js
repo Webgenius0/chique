@@ -32,7 +32,6 @@ export const useAuth = () => {
     const onLogin = (token, expires_in_minutes, isQuizAnswered) => {
         setAuthCookie(token, expires_in_minutes);
         setAccessToken(token);
-        userRefetch();
         if (isQuizAnswered) {
             router.push("/dashboard");
         } else {
@@ -125,7 +124,6 @@ export const useAuth = () => {
             sessionStorage.removeItem(VERIFY_EMAIL_KEY);
             sessionStorage.removeItem(VERIFY_OTP_KEY);
             toast.success(data?.message || "User Verified successfully");
-            userRefetch();
             router.push("/welcome");
         },
         onError: (error) => {

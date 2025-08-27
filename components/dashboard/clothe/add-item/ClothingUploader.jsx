@@ -85,7 +85,7 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
     accept: { "image/*": [] },
     multiple: false,
     maxFiles: 1,
-    maxSize: 10 * 1024 * 1024,
+    maxSize: 5 * 1024 * 1024,
   });
   // main render
   return (
@@ -99,7 +99,7 @@ const ClothingUploader = ({ setAiAnalyze, setStatus, status }) => {
         <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
           <li>Upload a **single clothing item** per image.</li>
           <li>Supported formats: <b>JPG, PNG</b>.</li>
-          <li>Maximum file size: <b>10MB</b>.</li>
+          <li>Maximum file size: <b>5MB</b>.</li>
           <li>Ensure the item is clearly visible and well-lit.</li>
           <li>Avoid multiple items or cluttered background for better AI analysis.</li>
         </ul>

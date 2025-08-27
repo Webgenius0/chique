@@ -73,13 +73,13 @@ const CategoryItems = ({ category_slug }) => {
                         />
                     </div>
                 ) : items?.length === 0 ? (
-                    <div className="w-full h-64 flex justify-center items-center">
+                    <div className="w-full min-h-[70vh] flex justify-center items-center">
                         <Empty description="No Items Found" />
                     </div>
                 ) : (
                     <div className="w-full grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 xs:gap-5 gap-3">
                         {items?.map((item) => (
-                            <ItemCard key={item.id} item={item} category_slug={category_slug} />
+                            <ItemCard refetch={refetch} key={item.id} item={item} category_slug={category_slug} />
                         ))}
                     </div>
                 )
