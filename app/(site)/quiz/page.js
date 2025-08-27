@@ -15,7 +15,6 @@ const Quiz = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value;
   const axiosInstance = await axiosPrivateServer();
-  console.log("🔑 Token from cookies:", token);
   // get quiz
   if (token) {
     console.log("🚀 Prefetching quiz questions on server...");

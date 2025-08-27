@@ -12,13 +12,14 @@ import QuizQuestions from "./QuizQuestions";
 import LoadingScreen from "./LoadingScreen";
 import ErrorScreen from "./ErrorScreen";
 import EmptyScreen from "./EmptyScreen";
+import { useUser } from "@/hooks/get-user.hook";
 
 const QuizClient = () => {
     const router = useRouter();
     const axiosInstance = axiosPrivateClient();
     const [current, setCurrent] = useState(0);
     const [answers, setAnswers] = useState([]);
-    const queryClient = useQueryClient();
+    const { userRefetch } = useUser();
     // Query for quiz questions
     const {
         data: quizQuestions = [],
@@ -31,7 +32,6 @@ const QuizClient = () => {
         queryKey: ["quizQuestions"],
         queryFn: () => getQuiz(axiosInstance),
     });
-    console.log(quizQuestions);
     // Post answer mutation
     const postAnswer = useMutation({
         mutationKey: ["postAnswer"],
@@ -45,10 +45,7 @@ const QuizClient = () => {
             console.log(response);
             toast.success(response?.message || "Answer submitted successfully");
             // Invalidate user data query to refresh user profile
-            queryClient.invalidateQueries({
-                queryKey: ["userData"],
-                exact: true,
-            });
+            userRefetch();
             router.push("/profile-results");
         },
         onError: (error) => {

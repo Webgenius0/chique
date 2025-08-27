@@ -22,8 +22,6 @@ export default function AuthProvider({ children, serverUserData = null, serverAc
         queryFn: () => getUserProfile(axiosInstance),
         enabled: !!accessToken,
         initialData: serverUserData,
-        staleTime: 5 * 60 * 1000, // 5 mins
-        refetchOnWindowFocus: false,
     });
     // isLoggedIn and userRole
     const isLoggedIn = !!userData && !!accessToken;

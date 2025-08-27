@@ -137,7 +137,7 @@ const Price = () => {
           </div>
         </div>
         {/* Pricing Cards */}
-        <div className="w-full grid lg:grid-cols-4 xs:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
+        <div className="w-full grid xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
           {cardItems.map((item, index) => (
             <PriceCard billingType={billingType} index={index} key={index} item={item} />
           ))}

@@ -14,7 +14,7 @@ const RESET_OTP_KEY = process.env.NEXT_PUBLIC_RESET_OTP_KEY || "resetOtp";
 const RESET_TOKEN_KEY = process.env.NEXT_PUBLIC_RESET_TOKEN_KEY || "resetToken";
 
 export const useAuth = () => {
-    const { setAccessToken } = useUser();
+    const { setAccessToken, userRefetch } = useUser();
     const queryClient = useQueryClient();
     const router = useRouter();
     const axiosInstance = axiosPublic();
@@ -32,6 +32,7 @@ export const useAuth = () => {
     const onLogin = (token, expires_in_minutes, isQuizAnswered) => {
         setAuthCookie(token, expires_in_minutes);
         setAccessToken(token);
+        userRefetch();
         if (isQuizAnswered) {
             router.push("/dashboard");
         } else {
@@ -124,6 +125,7 @@ export const useAuth = () => {
             sessionStorage.removeItem(VERIFY_EMAIL_KEY);
             sessionStorage.removeItem(VERIFY_OTP_KEY);
             toast.success(data?.message || "User Verified successfully");
+            userRefetch();
             router.push("/welcome");
         },
         onError: (error) => {
