@@ -1,5 +1,4 @@
-import MessageScreen from "@/components/dashboard/chat/MessageScreen"
-import SendMessage from "@/components/dashboard/chat/SendMessage"
+import AiChatClient from "@/components/dashboard/chat/AiChatClient";
 
 export const metadata = {
   title: 'Chique | Dashboard',
@@ -7,12 +6,8 @@ export const metadata = {
 }
 
 export default async function Dashboard() {
-
   // main render
   return (
-    <div className="w-full h-full flex flex-col justify-start items-center gap-3 relative ">
-      <MessageScreen />
-      <SendMessage />
-    </div>
+    <AiChatClient />
   );
 }
