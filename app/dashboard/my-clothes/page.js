@@ -38,8 +38,8 @@ const MyClothes = async () => {
         getOutfitSuggestion(axiosInstance),
     });
     // ✅ Log prefetched data
-    // const prefetchedWardrobeData = queryClient.getQueryData(["OutfitSuggestion", token]);
-    // console.log("Prefetched wardrobe data:", prefetchedWardrobeData);
+   // const prefetchedWardrobeData = queryClient.getQueryData(["OutfitSuggestion", token]);
+   // console.log("Prefetched wardrobe data:", prefetchedWardrobeData);
   }
 
   // main render

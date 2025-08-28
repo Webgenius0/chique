@@ -29,7 +29,9 @@ const AiChatClient = () => {
             setMessage(chatHistory);
         }
     }, [chatHistory])
-    console.log(message);
+    const handleNewMessage = (newMessage) => {
+        setMessage((prevMessages) => [...prevMessages, newMessage]);
+    }
     // main render
     return (
         <div className="w-full h-full flex flex-col justify-start items-center gap-3 relative ">
@@ -38,7 +40,7 @@ const AiChatClient = () => {
                 isLoading={isFetching || isLoading}
                 isError={isError}
             />
-            <SendMessage />
+            <SendMessage handleNewMessage={handleNewMessage} />
         </div>
     )
 }

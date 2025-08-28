@@ -22,6 +22,8 @@ const OutfitSuggestion = () => {
     queryKey: ["OutfitSuggestion"],
     queryFn: () => getOutfitSuggestion(axiosInstance),
   })
+  const suggestions = data?.suggestions || [];
+  const weather = data?.weather || {};
   // main render
   return (
     <div className="w-full flex flex-col gap-6 justify-start">
@@ -33,7 +35,7 @@ const OutfitSuggestion = () => {
         <div className="w-fit flex items-center gap-3 text-primary-dark">
           <MdOutlineWbSunny className="text-primary-dark text-2xl" />
           <p className="text-primary-dark text-base font-medium">
-            24°C
+            {weather?.temperature || "N/A"}
           </p>
         </div>
       </div>
@@ -63,13 +65,13 @@ const OutfitSuggestion = () => {
               }
             />
           </div>
-        ) : data?.length === 0 ? (
+        ) : suggestions?.length === 0 ? (
           <div className="w-full h-64 flex justify-center items-center">
             <Empty description="No outfit suggestions found" />
           </div>
         ) : (
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {data?.map((item) => (
+            {suggestions?.map((item) => (
               <OutfitCard item={item} key={item.item_id} />
             ))}
           </div>

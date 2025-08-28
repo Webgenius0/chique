@@ -1,37 +1,56 @@
 "use client"
 import { useState, useRef, useCallback } from "react"
 import ImagePreview from "./ImagePreview"
-import MessageInput from "./MessageInput"
-import SuggestionsBar from "./SuggestionsBar"
+import { BsFillSendFill, BsImageFill } from "react-icons/bs"
+import { useMutation } from "@tanstack/react-query"
+import { axiosPrivateClient } from "@/lib/axios.private.client"
 
-const SendMessage = () => {
+const SendMessage = ({ handleNewMessage }) => {
+    // hooks 
+    const axiosInstance = axiosPrivateClient()
+
     const [text, setText] = useState("")
     const [image, setImage] = useState(null)
     const [imagePreview, setImagePreview] = useState(null)
     const fileInputRef = useRef(null)
 
-    const suggestions = [
-        { id: 1, message: "What should I wear to a wedding?" },
-        { id: 2, message: "Help me style this outfit" },
-        { id: 3, message: "Suggest casual weekend looks" },
-        { id: 4, message: "What colors work with my skin tone?" },
-    ]
 
-    const handleSendText = () => {
-        if (text.trim() || imagePreview) {
-            console.log("Sending:", { text, image: imagePreview })
+    // send message to server
+    const sendMessage = useMutation({
+        mutationKey: ["sendMessage"],
+        mutationFn: async () => {
+            const formData = new FormData()
+            if (image) {
+                formData.append("image", image)
+            }
+            if (text) {
+                formData.append("text", text)
+            }
+            const res = await axiosInstance.post("/open-ai/chat", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            })
+            return res.data.data || {}
+        },
+        onSuccess: (data) => {
+            console.log(data)
+            const formattedNewMessage = {
+                id: uuId,
+                sender: "ai",
+                message: data.response,
+                timestamp: new Date().toISOString(),
+                image: data.image
+            }
+            // handleNewMessage(data)
             setText("")
-            setImage(null)
-            setImagePreview(null)
+            removeImage()
+        },
+        onError: (err) => {
+            console.error(err)
         }
-    }
-
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
-            handleSendText()
-        }
-    }
-
+    })
+    // handle image
     const handleImageChange = (e) => {
         const file = e.target.files[0]
         if (file) {
@@ -43,7 +62,7 @@ const SendMessage = () => {
             reader.readAsDataURL(file)
         }
     }
-
+    // remove image
     const removeImage = useCallback(() => {
         setImage(null)
         setImagePreview(null)
@@ -52,35 +71,48 @@ const SendMessage = () => {
         }
     }, [])
 
-    const handleSuggestionClick = (message) => {
-        setText(message)
-        setTimeout(() => {
-            const input = document.querySelector('input[type="text"]')
-            if (input) input.focus()
-        }, 0)
-    }
-
+    // main render
     return (
         <div className="w-full shrink-0 flex flex-col gap-4 justify-start items-start p-4 bg-white rounded-lg shadow-sm">
-            <SuggestionsBar
-                suggestions={suggestions}
-                onSuggestionClick={handleSuggestionClick}
-            />
             {imagePreview && (
                 <ImagePreview
                     imagePreview={imagePreview}
                     onRemove={removeImage}
                 />
             )}
-            <MessageInput
-                text={text}
-                onTextChange={(e) => setText(e.target.value)}
-                onKeyPress={handleKeyPress}
-                onImageChange={handleImageChange}
-                fileInputRef={fileInputRef}
-                onSend={handleSendText}
-                hasContent={text.trim() || imagePreview}
-            />
+            <div className="w-full flex gap-3 items-center">
+                {/* Image upload button */}
+                <label className="cursor-pointer text-2xl text-primary-dark hover:text-primary-darker p-2 rounded-full hover:bg-gray-100 transition-colors">
+                    <BsImageFill />
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        hidden
+                        onChange={handleImageChange}
+                        accept="image/*"
+                        id="image"
+                    />
+                </label>
+
+                {/* Text input */}
+                <div className="flex-1 relative">
+                    <input
+                        type="text"
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                        placeholder="Type your fashion question..."
+                        className="w-full xs:p-3 p-2 xs:pr-12 xs:text-base text-sm rounded-lg border border-gray-300 focus:border-primary-dark  outline-none transition-all"
+                    />
+                </div>
+
+                {/* Send button */}
+                <button
+                    type="button"
+                    className={`xs:w-12 w-10 xs:h-12 h-10 rounded-lg shrink-0 flex border justify-center items-center transition-colors cursor-pointer `}
+                >
+                    <BsFillSendFill className="text-xl" />
+                </button>
+            </div>
         </div>
     )
 }
