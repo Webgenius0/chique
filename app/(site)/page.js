@@ -5,6 +5,9 @@ import Hero from "@/components/home/Hero";
 import Price from "@/components/home/Price";
 import Testimonial from "@/components/home/Testimonial";
 import WhyCreated from "@/components/home/WhyCreated";
+import { getTestimonials } from "@/lib/api/get-testimonials";
+import axiosPublic from "@/lib/axios.public";
+import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 
 export const metadata = {
   title: "Chique | Home",
@@ -61,7 +64,15 @@ export const metadata = {
   },
 };
 
-const Home = () => {
+const Home = async () => {
+  const axiosInstance = axiosPublic();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["testimonials"],
+    queryFn: () => getTestimonials(axiosInstance),
+  });
+  
+  // main render
   return (
     <div className="w-full flex flex-col gap-10">
       <Hero />
@@ -69,7 +80,9 @@ const Home = () => {
       <WhyCreated />
       <About />
       <Price />
-      <Testimonial />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Testimonial />
+      </HydrationBoundary>
       <Evolution />
     </div>
   );

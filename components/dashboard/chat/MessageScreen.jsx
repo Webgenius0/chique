@@ -1,7 +1,6 @@
 "use client"
-import { BsPersonFill, BsRobot, BsX } from "react-icons/bs";
+import { BsPersonFill, BsRobot } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { useUser } from "@/hooks/get-user.hook";
 
 const MessageScreen = () => {
     const [messages, setMessages] = useState([]);
@@ -104,6 +103,7 @@ const MessageScreen = () => {
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
 
+    // main render
     return (
         <div className="w-full h-full flex flex-col justify-start overflow-y-auto p-4 space-y-4">
             {messages.map((message, index) => (
