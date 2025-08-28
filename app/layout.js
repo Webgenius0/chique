@@ -90,7 +90,6 @@ export default async function RootLayout({ children }) {
     // get user data
     const cookieStore = await cookies();
     const token = cookieStore.get(process.env.AUTH_TOKEN_NAME)?.value || null;
-    console.log("Auth token from cookie:", token);
     const axiosInstance = await axiosPrivateServer();
     let userData = null;
     if (token) {

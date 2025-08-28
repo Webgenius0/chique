@@ -1,6 +1,7 @@
 import OutfitSuggestion from "@/components/dashboard/clothe/OutfitSuggestion";
 import Wardrobe from "@/components/dashboard/clothe/Wardrobe";
 import PageWrapper from "@/components/dashboard/PageWrapper";
+import { getOutfitSuggestion } from "@/lib/api/get-outfit-suggestion";
 import { getWardrobe } from "@/lib/api/get-wardrobe";
 import { axiosPrivateServer } from "@/lib/axios.private.server";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
@@ -20,7 +21,9 @@ const MyClothes = async () => {
   const axiosInstance = await axiosPrivateServer();
 
   if (token) {
-    // Prefetch wardrobe server-side with token in headers
+    // Prefetch wardrobe and outfit server-side with token in headers
+
+    // ✅ Prefetch wardrobe
     await queryClient.prefetchQuery({
       queryKey: ["wardrobe", token],
       queryFn: () =>
@@ -28,14 +31,21 @@ const MyClothes = async () => {
           params: { page: 1 }
         }),
     });
+    // ✅ Prefetch outfit suggestion
+    await queryClient.prefetchQuery({
+      queryKey: ["OutfitSuggestion", token],
+      queryFn: () =>
+        getOutfitSuggestion(axiosInstance),
+    });
     // ✅ Log prefetched data
-    const prefetchedData = queryClient.getQueryData(["wardrobe", token]);
-    console.log("Prefetched wardrobe data:", prefetchedData);
+    // const prefetchedWardrobeData = queryClient.getQueryData(["OutfitSuggestion", token]);
+    // console.log("Prefetched wardrobe data:", prefetchedWardrobeData);
   }
+
   // main render
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <PageWrapper>
+      <PageWrapper className={`gap-10`}>
         <Wardrobe />
         <OutfitSuggestion />
       </PageWrapper>
