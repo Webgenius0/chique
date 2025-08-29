@@ -47,8 +47,12 @@ const OutfitSuggestion = () => {
   const { data, isError, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["OutfitSuggestion"],
     queryFn: () => getOutfitSuggestion(axiosInstance),
-    retry: false,
     refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    refetchInterval: false,
+    // 👇 Cache settings
+    staleTime: 1000 * 60 * 60 * 24, // 24 hours (data considered fresh)
+    cacheTime: 1000 * 60 * 60 * 24, // 24 hours (kept in cache)
   });
 
   const suggestions = data?.suggestions || [];
