@@ -29,6 +29,7 @@ const ContactForm = () => {
     onSuccess: (data) => {
       console.log(data);
       toast.success(data?.message || "Contact submitted successfully");
+      reset();
     },
     onError: (err) => {
       console.log(err);
