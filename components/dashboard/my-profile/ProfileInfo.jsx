@@ -3,10 +3,10 @@
 import Loader from "@/components/common/Loader";
 import { useUser } from "@/hooks/get-user.hook";
 import { Result } from "antd";
+import NameAndAvatar from "./NameAndAvatar";
 
 const ProfileInfo = () => {
-    const { userData, isLoading } = useUser();
-
+    const { userData, isLoading, userRefetch } = useUser();
     // Loading state
     if (isLoading) {
         return (
@@ -29,42 +29,14 @@ const ProfileInfo = () => {
         );
     }
     // destructure user data
-    const { user, style_profile } = userData || {};
+    const { style_profile } = userData || {};
     // main render
     return (
         <div className="w-full flex flex-col gap-8 text-black">
             {/* User Section */}
-            <div>
-                <h2 className="text-xl font-semibold border-b border-gray-300 pb-2 mb-4">
-                    Profile Information
-                </h2>
-                <div className="space-y-2 text-sm flex flex-col items-center sm:text-base">
-                    <div className="size-36 border border-gray-400 bg-gray-200 flex items-center justify-center p-2 rounded-full">
-                        {
-                            user?.avatar ? (
-                                <img
-                                    src={user?.avatar}
-                                    alt={user?.name}
-                                    className="w-full h-full object-cover rounded-full"
-                                />
-                            ) : (
-                                <span className="text-2xl font-semibold">
-                                    {user?.name?.charAt(0)}
-                                </span>
-                            )
-                        }
-                    </div>
-                    <p>
-                        <span className="font-semibold">Name:</span> {user?.name}
-                    </p>
-                    <p>
-                        <span className="font-semibold">Email:</span> {user?.email}
-                    </p>
-                </div>
-            </div>
-
+            <NameAndAvatar />
             {/* Style Section */}
-            <div>
+            <div className="w-full flex flex-col">
                 <h2 className="text-xl font-semibold border-b border-gray-300 pb-2 mb-4">
                     Style Profile
                 </h2>
@@ -101,9 +73,8 @@ const ProfileInfo = () => {
                     </div>
                 </div>
             </div>
-
             {/* Quiz Answers */}
-            <div>
+            <div className="w-full flex flex-col">
                 <h2 className="text-xl font-semibold border-b border-gray-300 pb-2 mb-4">
                     Quiz Answers
                 </h2>

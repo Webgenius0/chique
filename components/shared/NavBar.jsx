@@ -44,11 +44,11 @@ const NavBar = ({ setIsOpen }) => {
             </div>
             {/* Right Section - User Info */}
             <Link href={"/dashboard/my-profile"} className="flex shrink-0 items-center gap-3 px-3 py-2 hover:bg-gray-50 transition">
-                <div className="size-12 shrink-0 border flex justify-center items-center border-gray-200 rounded-full ">
+                <div className="size-12 shrink-0 border overflow-hidden flex justify-center items-center border-gray-500 rounded-full ">
                     {
-                        userData?.avatar ? (
+                        userData?.user?.avatar ? (
                             <img
-                                src={userData?.avatar}
+                                src={userData?.user?.avatar}
                                 alt="User Avatar"
                                 className="w-full h-full object-cover"
                             />
