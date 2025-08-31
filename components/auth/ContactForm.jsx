@@ -1,7 +1,10 @@
 "use client";
 import CommonBtn from "@/components/common/CommonBtn";
 import CommonInputWrapper from "@/components/common/CommonInputWrapper";
+import axiosPublic from "@/lib/axios.public";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const {
@@ -11,13 +14,32 @@ const ContactForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      terms: true, // Set default checked state here
+      terms: true,
     },
   });
+  // axios hook
+  const axiosInstance = axiosPublic();
+  // mutate
+  const contactMutation = useMutation({
+    mutationKey: ["contact"],
+    mutationFn: async (data) => {
+      const response = await axiosInstance.post("/contact-us", data);
+      return response.data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success(data?.message || "Contact submitted successfully");
+    },
+    onError: (err) => {
+      console.log(err);
+      toast.error(err?.response?.data?.message || "Something went wrong");
+    },
+  })
   // on submit
   const onSubmit = (data) => {
-    console.log(data);
+    contactMutation.mutate(data);
   };
+  // main render
   return (
     <div className="bg-[#FAFAFB] max-w-[646px] w-full flex flex-col xl:gap-8 lg:gap-7 md:gap-5 gap-4 rounded-3xl border border-[#DFE0E4] xl:p-8 lg:p-7 md:p-6 p-4 items-start justify-start">
       <p className="xl:text-3xl lg:text-2xl md:text-xl text-lg font-extrabold text-primary-dark font-secondary">Contact now</p>
@@ -31,10 +53,10 @@ const ContactForm = () => {
           register={register}
           errors={errors}
           type="text"
-          name="fname"
+          name="full_name"
           control={control}
           placeholder="Your name"
-          register_as="fname"
+          register_as="full_name"
           label="Full Name:"
           validationRules={{
             required: "This field is required",
@@ -63,13 +85,13 @@ const ContactForm = () => {
           register={register}
           errors={errors}
           type="number"
-          name="phoneNumber"
+          name="phone"
           control={control}
           placeholder="ex 012345678"
-          register_as="phoneNumber"
+          register_as="phone"
           label="Phone Numbers:"
           validationRules={{
-            required: "Phone number field is required",
+            required: "This field is required",
           }}
         />
         {/* subject */}
@@ -83,7 +105,7 @@ const ContactForm = () => {
           register_as="subject"
           label="Subject:"
           validationRules={{
-            required: "Phone number field is required",
+            required: "This field is required",
           }}
         />
         {/* your message */}
@@ -91,13 +113,13 @@ const ContactForm = () => {
           register={register}
           errors={errors}
           type="textarea"
-          name="yourMessage"
+          name="message"
           control={control}
           placeholder="Message"
-          register_as="yourMessage"
+          register_as="message"
           label="Your Message:"
           validationRules={{
-            required: "Phone number field is required",
+            required: "This field is required",
           }}
         />
 
@@ -120,9 +142,13 @@ const ContactForm = () => {
         {errors.terms && (
           <ErrorText error={errors?.terms?.message} />
         )}
-
         {/* send message button */}
-        <CommonBtn className={""}>Send Message</CommonBtn>
+        <CommonBtn
+          type="submit"
+          disabled={contactMutation.isPending}
+          isLoading={contactMutation.isPending} >
+          Send Message
+        </CommonBtn>
       </form>
     </div>
   );
