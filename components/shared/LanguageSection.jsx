@@ -1,36 +1,49 @@
-'use client';
-import { useEffect, useRef, useState } from "react";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
 
 const LanguageSection = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState(
-        localStorage.getItem("selectedLanguage") || "en"
-    );
+    const [selectedLanguage, setSelectedLanguage] = useState("en"); // safe default
     const [googleTranslateLoaded, setGoogleTranslateLoaded] = useState(false);
     const googleTranslateRef = useRef(null);
+    const [mounted, setMounted] = useState(false); // to prevent hydration mismatch
 
     const languages = [
-        { code: "en", name: "English" },
-        { code: "es", name: "Spanish" },
-        { code: "fr", name: "French" },
+        { code: "ar", name: "Arabic" },
+        { code: "zh-CN", name: "Chinese" },
         { code: "de", name: "German" },
-        { code: "pt", name: "Portuguese" },
+        { code: "en", name: "English" },
+        { code: "fr", name: "French" },
+        { code: "hi", name: "Hindi" },
+        { code: "ja", name: "Japanese" },
+        { code: "ru", name: "Russian" },
+        { code: "es", name: "Spanish" },
     ];
 
+    // Fix hydration mismatch: wait until mounted
     useEffect(() => {
+        setMounted(true);
+        const storedLang = localStorage.getItem("selectedLanguage") || "en";
+        setSelectedLanguage(storedLang);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
         const initializeGoogleTranslate = () => {
             window.googleTranslateElementInit = () => {
-                googleTranslateRef.current = new window.google.translate.TranslateElement(
-                    {
-                        pageLanguage: "en",
-                        includedLanguages: languages.map((lang) => lang.code).join(","),
-                        layout:
-                            window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-                        autoDisplay: false,
-                    },
-                    "google_translate_element"
-                );
+                googleTranslateRef.current =
+                    new window.google.translate.TranslateElement(
+                        {
+                            pageLanguage: "en",
+                            includedLanguages: languages.map((lang) => lang.code).join(","),
+                            layout:
+                                window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+                            autoDisplay: false,
+                        },
+                        "google_translate_element"
+                    );
 
-                // Apply saved language
+                // apply stored language
                 setTimeout(() => {
                     const select = document.querySelector(".goog-te-combo");
                     if (select) {
@@ -60,9 +73,8 @@ const LanguageSection = () => {
                 delete window.googleTranslateElementInit;
             }
         };
-    }, []);
+    }, [mounted, selectedLanguage]);
 
-    // Handle language change
     const handleLanguageChange = (e) => {
         const langCode = e.target.value;
         setSelectedLanguage(langCode);
@@ -74,6 +86,8 @@ const LanguageSection = () => {
             select.dispatchEvent(new Event("change", { bubbles: true }));
         }
     };
+
+    if (!mounted) return null; // 🚀 prevent hydration error
 
     return (
         <div className="language-selector">

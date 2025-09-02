@@ -3,6 +3,7 @@ import { FaBars, FaUser } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
 import { useUser } from "@/hooks/get-user.hook";
 import Link from "next/link";
+import LanguageSection from "./LanguageSection";
 const NavBar = ({ setIsOpen }) => {
     const pathname = usePathname();
     const { userData } = useUser();
@@ -25,7 +26,7 @@ const NavBar = ({ setIsOpen }) => {
 
     // nav component
     return (
-        <nav className="w-full shrink-0 px-6 py-3 flex justify-between items-center gap-4 h-20 border-b border-black/90">
+        <nav className="w-full shrink-0 overflow-hidden px-6 py-3 flex justify-between items-center gap-4 h-20 border-b border-black/90">
             {/* Left Section */}
             <div className="flex w-full items-center gap-4">
                 {/* Mobile Menu Button */}
@@ -61,6 +62,7 @@ const NavBar = ({ setIsOpen }) => {
                     {userData?.user?.name || "Guest"}
                 </span>
             </Link>
+            {/* <LanguageSection /> */}
         </nav>
     );
 };
