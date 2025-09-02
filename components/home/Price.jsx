@@ -5,75 +5,34 @@ import { motion } from "framer-motion";
 import layer_image from "@/public/images/bannerImages/layer_image4.png";
 import Image from "next/image";
 import PriceCard from "./PriceCard";
+import axiosPublic from "@/lib/axios.public";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "../common/Loader";
+import { Empty } from "antd";
 
 
 const Price = () => {
   const [billingType, setBillingType] = useState("monthly");
-
   const handleToggle = (type) => {
     setBillingType(type);
   };
+  // hooks
+  const axiosInstance = axiosPublic();
+  // get plans
+  const {
+    data: plans = [],
+    isFetching,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["plans"],
+    queryFn: async () => {
+      const res = await axiosInstance.get("/subscription/plans");
+      return res?.data?.data || [];
+    },
+  })
 
-  const cardItems = [
-    {
-      id: 1,
-      buttonText: "Free",
-      monthlyPrice: 0,
-      yearlyPrice: 0,
-      subtitle: [
-        "Upload up to 5 photos total",
-        "Make 3 outfit shopping searches",
-        "No MY Closet access",
-        "Limited AI usage",
-        "Ads included",
-        "Best for: Trying the platform with no commitment",
-      ],
-    },
-    {
-      id: 2,
-      buttonText: "Regular",
-      monthlyPrice: 4.99,
-      yearlyPrice: 49.99,
-      subtitle: [
-        "Upload up to 15 photos per day",
-        "Make 15 outfit shopping searches per day",
-        "Unlimited AI chat",
-        "No My Closet access",
-        "No ads",
-        "Best for: Casual users who want more features and a clean, ad-free experience",
-      ],
-    },
-    {
-      id: 3,
-      buttonText: "Plus",
-      monthlyPrice: 14.99,
-      yearlyPrice: 149.99,
-      subtitle: [
-        "Upload up to 25 photos per day",
-        "Make 25 outfit shopping searches per day",
-        "Full access to My Closet",
-        "Unlimited AI chat",
-        "No ads",
-        "Best for: Fashion lovers who want to organize their style and use the full AI experience daily",
-      ],
-    },
-    {
-      id: 4,
-      buttonText: "Pro",
-      monthlyPrice: 30,
-      yearlyPrice: 299.99,
-      subtitle: [
-        "Unlimited photo uploads",
-        "Unlimited outfit shopping searches",
-        "Full access to My Closet",
-        "Unlimited AI chat",
-        "No ads",
-        "Premium experience with everything unlocked",
-        "Best for: Stylists, influencers, or serious users who want total freedom",
-      ],
-    },
-  ];
-
+  // main render 
   return (
     <div id="subscriptions" className="w-full relative">
       <div className="container flex flex-col xs:gap-10 gap-5 xl:py-20">
@@ -96,7 +55,6 @@ const Price = () => {
             priority
           />
         </motion.div>
-
         {/* Title + Toggle */}
         <div className="w-full flex flex-col md:gap-4 gap-2 text-center items-center">
           <CommonTitle
@@ -137,11 +95,29 @@ const Price = () => {
           </div>
         </div>
         {/* Pricing Cards */}
-        <div className="w-full grid xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-6 gap-3">
-          {cardItems.map((item, index) => (
-            <PriceCard billingType={billingType} index={index} key={index} item={item} />
-          ))}
-        </div>
+        {
+          isLoading || isFetching ? (
+            <div className="flex items-center min-h-96 flex-col gap-4 justify-center ">
+              <Loader />
+              <p className="text-primary-dark text-2xl animate-pulse">Loading plans...</p>
+            </div>
+          ) : isError ? (
+            <div className="flex items-center justify-center min-h-40 text-red-500">
+              <p>Failed to load plans. Please try again later.</p>
+            </div>
+          ) : plans?.length === 0 ? (
+            <div className="flex items-center justify-center min-h-40 text-gray-500">
+              <Empty />
+              <p>No plans available yet.</p>
+            </div>
+          ) : (
+            <div className="w-full grid 2xl:grid-cols-4 sm:grid-cols-2 xl:grid-cols-3 grid-cols-1 sm:gap-6 gap-3">
+              {plans?.map((item, index) => (
+                <PriceCard billingType={billingType} index={index} key={item.id} item={item} />
+              ))}
+            </div>
+          )
+        }
       </div>
     </div>
   );

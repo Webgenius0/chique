@@ -38,18 +38,18 @@ const Testimonial = () => {
 
             {/* Loading state */}
             {isLoading || isFetching ? (
-                <div className="flex items-center flex-col gap-4 justify-center min-h-40">
+                <div className="flex items-center flex-col gap-4 justify-center min-h-96">
                     <Loader />
                     <p className="text-primary-dark text-2xl animate-pulse">Loading testimonials...</p>
                 </div>
             ) : isError ? (
                 /* Error state */
-                <div className="flex items-center justify-center min-h-40 text-red-500">
+                <div className="flex items-center justify-center min-h-96 text-red-500">
                     <p>Failed to load testimonials. Please try again later.</p>
                 </div>
             ) : testimonials.length === 0 ? (
                 /* Empty state */
-                <div className="flex items-center justify-center min-h-40 text-gray-500">
+                <div className="flex items-center flex-col justify-center min-h-96 text-gray-500">
                     <Empty />
                     <p>No testimonials available yet.</p>
                 </div>
