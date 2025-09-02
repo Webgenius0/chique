@@ -4,6 +4,7 @@
 @import "swiper/css";
 @import "swiper/css/pagination";
 @import "swiper/css/navigation";
+@import "leaflet/dist/leaflet.css";
 
 @theme inline {
   --color-background: #ffffff;
