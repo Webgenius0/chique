@@ -28,8 +28,22 @@ const PriceCard = ({ item = {}, index, billingType }) => {
             },
         }),
     };
-    const { accessToken } = useUser();
-
+    // destructuring context
+    const { accessToken, userData } = useUser();
+    // destructure user data
+    const {
+        user,
+        subscription
+    } = userData || {};
+    // destructure subscription
+    const {
+        subscribed,
+        status,
+        type,
+        ends_at,
+        canceled_at,
+        plan = {},
+    } = subscription || {};
     // functions
     const handleGetStarted = () => {
         if (!accessToken) {
@@ -38,7 +52,6 @@ const PriceCard = ({ item = {}, index, billingType }) => {
         }
 
     };
-
 
     // main render
     return (

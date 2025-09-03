@@ -1,3 +1,4 @@
+import Loader from "@/components/common/Loader";
 import { useUser } from "@/hooks/get-user.hook";
 import { axiosPrivateClient } from "@/lib/axios.private.client";
 import { useMutation } from "@tanstack/react-query";
