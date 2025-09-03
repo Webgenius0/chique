@@ -26,7 +26,7 @@ const NavBar = ({ setIsOpen }) => {
 
     // nav component
     return (
-        <nav className="w-full shrink-0 overflow-hidden px-6 py-3 flex justify-between items-center gap-4 h-20 border-b border-black/90">
+        <nav className="w-full shrink-0 overflow-hidden px-3 sm:px-6 py-2 sm:py-3 flex justify-between items-center gap-4 h-20 border-b border-black/90">
             {/* Left Section */}
             <div className="flex w-full items-center gap-4">
                 {/* Mobile Menu Button */}
@@ -45,7 +45,7 @@ const NavBar = ({ setIsOpen }) => {
             </div>
             {/* Right Section - User Info */}
             <Link href={"/dashboard/my-profile"} className="flex shrink-0 items-center gap-3 px-3 py-2 hover:bg-gray-50 transition">
-                <div className="size-12 shrink-0 border overflow-hidden flex justify-center items-center border-gray-500 rounded-full ">
+                <div className="sm:size-12 size-8 shrink-0 border overflow-hidden flex justify-center items-center border-gray-500 rounded-full ">
                     {
                         userData?.user?.avatar ? (
                             <img
@@ -54,7 +54,7 @@ const NavBar = ({ setIsOpen }) => {
                                 className="w-full h-full object-cover"
                             />
                         ) : (
-                            <FaUser className="text-2xl" />
+                            <FaUser className="sm:text-xl text-sm" />
                         )
                     }
                 </div>

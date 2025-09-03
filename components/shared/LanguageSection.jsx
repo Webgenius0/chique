@@ -8,10 +8,10 @@ const LanguageSection = () => {
     const [mounted, setMounted] = useState(false); // to prevent hydration mismatch
 
     const languages = [
-        { code: "en", name: "English" },
-        { code: "fr", name: "French" },
-        { code: "es", name: "Spanish" },
-        { code: "it", name: "Italian" },
+        { code: "en", name: "EN" },
+        { code: "fr", name: "FR" },
+        { code: "es", name: "ES" },
+        { code: "it", name: "IT" },
     ];
 
     // Fix hydration mismatch: wait until mounted
@@ -85,7 +85,7 @@ const LanguageSection = () => {
     if (!mounted) return null; // 🚀 prevent hydration error
 
     return (
-        <div className="language-selector">
+        <div className="language-selector  !w-fit">
             {/* Hidden Google Translate Element */}
             <div id="google_translate_element" style={{ display: "none" }}></div>
 
