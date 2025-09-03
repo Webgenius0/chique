@@ -62,7 +62,7 @@ const NavBar = ({ setIsOpen }) => {
                     {userData?.user?.name || "Guest"}
                 </span>
             </Link>
-            {/* <LanguageSection /> */}
+            <LanguageSection />
         </nav>
     );
 };

@@ -8,15 +8,10 @@ const LanguageSection = () => {
     const [mounted, setMounted] = useState(false); // to prevent hydration mismatch
 
     const languages = [
-        { code: "ar", name: "Arabic" },
-        { code: "zh-CN", name: "Chinese" },
-        { code: "de", name: "German" },
         { code: "en", name: "English" },
         { code: "fr", name: "French" },
-        { code: "hi", name: "Hindi" },
-        { code: "ja", name: "Japanese" },
-        { code: "ru", name: "Russian" },
         { code: "es", name: "Spanish" },
+        { code: "it", name: "Italian" },
     ];
 
     // Fix hydration mismatch: wait until mounted
