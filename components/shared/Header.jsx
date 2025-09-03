@@ -60,7 +60,7 @@ const Header = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <FaUser className="text-2xl" />
+                      <FaUser className="sm:text-xl text-sm" />
                     )
                   }
                 </div>
@@ -83,7 +83,7 @@ const Header = () => {
         </div >
       </header >
       {/* mobile sidebar */}
-      < MobileSideBar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+      <MobileSideBar isOpen={isOpen} toggleSidebar={toggleSidebar} />
     </>
   );
 };

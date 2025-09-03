@@ -1,7 +1,8 @@
 "use client";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useRef, useState } from "react";
 
-const LanguageSection = () => {
+const LanguageSection = ({ className }) => {
     const [selectedLanguage, setSelectedLanguage] = useState("en"); // safe default
     const [googleTranslateLoaded, setGoogleTranslateLoaded] = useState(false);
     const googleTranslateRef = useRef(null);
@@ -85,7 +86,7 @@ const LanguageSection = () => {
     if (!mounted) return null; // 🚀 prevent hydration error
 
     return (
-        <div className="language-selector  !w-fit">
+        <div className={cn("language-selector", className)}>
             {/* Hidden Google Translate Element */}
             <div id="google_translate_element" style={{ display: "none" }}></div>
 

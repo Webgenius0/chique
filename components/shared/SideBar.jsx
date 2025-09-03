@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { RxCross2 } from "react-icons/rx";
 import DashboardLogo from "../common/DashboardLogo";
 import { useState } from "react";
