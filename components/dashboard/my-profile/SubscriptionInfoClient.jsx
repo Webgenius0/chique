@@ -27,6 +27,21 @@ const SubscriptionInfoClient = () => {
             </div>
         );
     }
+    // destructure user data
+    const {
+        subscription
+    } = userData || {};
+    // destructure subscription
+    const {
+        subscribed,
+        status,
+        type,
+        ends_at,
+        canceled_at,
+        plan = {},
+    } = subscription || {};
+
+    // main render
     return (
         <div className="w-full flex flex-col gap-8 text-black">
 
