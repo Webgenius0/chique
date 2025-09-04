@@ -3,6 +3,7 @@ import CommonBtn from "../common/CommonBtn";
 import { motion } from "framer-motion";
 import { useUser } from "@/hooks/get-user.hook";
 import toast from "react-hot-toast";
+import { useSubscription } from "@/hooks/subscription.hook";
 const PriceCard = ({ item = {}, index, billingType }) => {
     // destructuring props
     const {
@@ -44,13 +45,20 @@ const PriceCard = ({ item = {}, index, billingType }) => {
         canceled_at,
         plan = {},
     } = subscription || {};
+
+    // hooks
+    const {
+        purchaseSubscription
+    } = useSubscription();
+
     // functions
     const handleGetStarted = () => {
         if (!accessToken) {
             toast.error("Please login to get started");
             return;
         }
-
+        console.log(id);
+        purchaseSubscription.mutate(id);
     };
 
     // main render
@@ -93,9 +101,9 @@ const PriceCard = ({ item = {}, index, billingType }) => {
             {/* CTA button */}
             <div className="w-full">
                 {/* get started */}
-                <button onClick={handleGetStarted} type="button" className="w-full cursor-pointer bg-black text-white p-3 flex justify-center items-center min-h-12 rounded-full">
+                <CommonBtn type="button" isLoading={purchaseSubscription.isPending} onclick={handleGetStarted}>
                     Get Started
-                </button>
+                </CommonBtn>
             </div>
         </motion.div>
     )

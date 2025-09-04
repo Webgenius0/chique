@@ -2,19 +2,18 @@
 import Link from "next/link";
 import Logo from "../common/Logo";
 import NavItems from "./NavItems";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { IoMenu } from "react-icons/io5";
 import MobileSideBar from "./MobileSideBar";
 import { useUser } from "@/hooks/get-user.hook";
 import { FaUser } from "react-icons/fa6";
-import LanguageSection from "./LanguageSection";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { userData, isLoggedIn } = useUser(); // 👈 get user info
-  //console.log(userData);
+  const { userData, isLoggedIn } = useUser();
   const toggleSidebar = () => setIsOpen(!isOpen);
-
-  useEffect(() => {
+  {/**
+  
+   useEffect(() => {
     const handleMediaChange = (e) => {
       if (e.matches) setIsOpen(false);
     };
@@ -26,13 +25,15 @@ const Header = () => {
       mediaQuery.removeEventListener("change", handleMediaChange);
     };
   }, []);
+  
+  */}
 
   // header component
   return (
     <>
       {/* desktop header */}
       <header className="w-full sm:py-4 py-3 text-base font-secondary capitalize border-b font-medium backdrop-blur-md border-[#2E2125] sticky top-0 bg-background z-[500]">
-        <div className="container flex gap-6 justify-between items-center">
+        <div className="container flex gap-6 justify-between overflow-hidden items-center">
           {/* Left: Logo + Mobile Menu */}
           <div className="lg:w-fit w-full flex items-center md:gap-2 justify-between">
             <Logo />
@@ -47,7 +48,7 @@ const Header = () => {
           {/* Middle: Nav */}
           <NavItems />
           {/* Right: Auth/User */}
-          <div className="hidden lg:flex sm:gap-5 gap-3 justify-end items-center shrink-0">
+          <div className="hidden lg:flex sm:gap-5 gap-3 justify-end items-center  shrink-0">
             {isLoggedIn ? (
               <Link prefetch={true} href={"/dashboard/my-profile"} className="flex items-center gap-3 shrink-0">
                 <div className="size-12 shrink-0 border flex justify-center items-center border-gray-500 overflow-hidden rounded-full">
@@ -78,7 +79,7 @@ const Header = () => {
                 </Link>
               </>
             )}
-            <LanguageSection />
+
           </div>
         </div>
       </header>

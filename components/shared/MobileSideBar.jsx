@@ -32,7 +32,7 @@ const MobileSideBar = ({ toggleSidebar, isOpen }) => {
             exit="closed"
             variants={sidebarVariants}
             transition={{ type: "tween", ease: "easeInOut" }}
-            className="fixed flex flex-col top-0 bottom-0 left-0 h-screen  w-2xs lg:w-full bg-background z-[1000] shadow-lg p-4"
+            className="fixed flex flex-col top-0 bottom-0 left-0 h-screen w-full xs:w-2xs  bg-background z-[1000] shadow-lg p-4"
           >
             {/* logo and close button */}
             <div className="w-full shrink-0 flex justify-between items-center mb-6">
