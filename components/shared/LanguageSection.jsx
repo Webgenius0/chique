@@ -99,7 +99,7 @@ const LanguageSection = ({ className }) => {
                 disabled={!googleTranslateLoaded}
             >
                 {languages.map((language) => (
-                    <option translate="no" key={language.code} value={language.code}>
+                    <option translate="no" className="cursor-pointer" key={language.code} value={language.code}>
                         {language.name}
                     </option>
                 ))}
