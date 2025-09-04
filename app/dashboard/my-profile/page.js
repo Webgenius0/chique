@@ -1,5 +1,4 @@
 import ProfileInfo from "@/components/dashboard/my-profile/ProfileInfo";
-import PageWrapper from "@/components/dashboard/PageWrapper";
 
 
 export const metadata = {
@@ -9,9 +8,7 @@ export const metadata = {
 };
 const MyProfile = () => {
     return (
-        <PageWrapper>
-            <ProfileInfo />
-        </PageWrapper>
+        <ProfileInfo />
     )
 }
 

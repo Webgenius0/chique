@@ -19,6 +19,8 @@ const NavBar = ({ setIsOpen }) => {
             return "My Clothe Details";
         }
         if (pathname === "/dashboard/my-profile") return "My Profile";
+        if (pathname === "/dashboard/my-profile/style-profile") return "My Style Profile";
+        if (pathname === "/dashboard/my-profile/subscription") return "My Subscription";
         if (pathname === "/dashboard/explore") return "Explore";
         if (pathname === "/dashboard/feedback") return "Feedback";
         return "";

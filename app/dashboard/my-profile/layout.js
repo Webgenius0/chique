@@ -9,6 +9,11 @@ const MyProfileLayout = ({ children }) => {
             end: true,
         },
         {
+            path: "/dashboard/my-profile/style-profile",
+            name: "Style Profile",
+            end: true,
+        },
+        {
             path: "/dashboard/my-profile/subscription",
             name: "Subscriptions",
             end: true,
@@ -16,14 +21,14 @@ const MyProfileLayout = ({ children }) => {
     ];
     // main render
     return (
-        <PageWrapper>
-            <div className="flex gap-3 w-full border-b">
+        <PageWrapper className={`pt-2`}>
+            <div className="flex gap-1 w-full border-b">
                 {navItems.map((item) => (
                     <NavLink
                         key={item.path}
                         href={item.path}
                         end={item.end}
-                        className="p-2 flex items-center gap-2  text-xl"
+                        className="px-3 py-2 flex items-center gap-2  text-base"
                         activeClassName="bg-primary-dark text-white"
                         inactiveClassName="text-primary-dark hover:bg-primary-dark hover:text-white"
                     >

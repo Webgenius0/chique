@@ -3,9 +3,10 @@ import { useUser } from "@/hooks/get-user.hook";
 import { axiosPrivateClient } from "@/lib/axios.private.client";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { FaCamera } from "react-icons/fa6";
 
 const NameAndAvatar = () => {
-    const { userData,  userRefetch } = useUser();
+    const { userData, userRefetch } = useUser();
     // destructure user data
     const { user } = userData || {};
     // hooks
@@ -66,6 +67,9 @@ const NameAndAvatar = () => {
                             </div>
                         )
                     }
+                    <span className="absolute size-8  rounded-full bottom-3 -right-1  bg-gray-500/50 bg-opacity-50 flex items-center justify-center">
+                        <FaCamera />
+                    </span>
                     {/* Avatar Input */}
                     <input type="file" name="avatar" id="avatar" hidden accept="image/*" onChange={(e) => handleAvatarChange(e)} />
                 </label>

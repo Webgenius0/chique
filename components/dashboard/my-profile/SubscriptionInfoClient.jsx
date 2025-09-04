@@ -1,12 +1,10 @@
-"use client";
+'use client';
 
 import Loader from "@/components/common/Loader";
 import { useUser } from "@/hooks/get-user.hook";
 import { Result } from "antd";
-import NameAndAvatar from "./NameAndAvatar";
-import ProfileLocation from "./ProfileLocation";
 
-const ProfileInfo = () => {
+const SubscriptionInfoClient = () => {
     const { userData, isLoading } = useUser();
     // Loading state
     if (isLoading) {
@@ -29,15 +27,11 @@ const ProfileInfo = () => {
             </div>
         );
     }
-    // main render
     return (
         <div className="w-full flex flex-col gap-8 text-black">
-            {/* User Section */}
-            <NameAndAvatar />
-            {/* User Location */}
-            <ProfileLocation />
-        </div>
-    );
-};
 
-export default ProfileInfo;
+        </div>
+    )
+}
+
+export default SubscriptionInfoClient

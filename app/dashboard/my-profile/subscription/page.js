@@ -1,3 +1,5 @@
+import SubscriptionInfoClient from "@/components/dashboard/my-profile/SubscriptionInfoClient";
+
 export const metadata = {
     title: "Chique | My Subscription",
     description:
@@ -5,7 +7,7 @@ export const metadata = {
 };
 const Subscription = () => {
     return (
-        <div>page</div>
+        <SubscriptionInfoClient />
     )
 }
 
