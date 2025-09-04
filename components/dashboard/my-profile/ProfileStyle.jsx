@@ -7,7 +7,7 @@ const ProfileStyle = () => {
     
     // main render
     return (
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-col  text-black">
             <h2 className="text-xl font-semibold border-b border-gray-300 pb-2 mb-4">
                 Style Profile
             </h2>

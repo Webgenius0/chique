@@ -5,7 +5,7 @@ const MyProfileLayout = ({ children }) => {
     const navItems = [
         {
             path: "/dashboard/my-profile",
-            name: "Profile",
+            name: "Update Profile",
             end: true,
         },
         {
@@ -22,13 +22,13 @@ const MyProfileLayout = ({ children }) => {
     // main render
     return (
         <PageWrapper className={`pt-2`}>
-            <div className="flex gap-1 w-full border-b">
+            <div className="flex gap-1 w-full overflow-x-auto border-b">
                 {navItems.map((item) => (
                     <NavLink
                         key={item.path}
                         href={item.path}
                         end={item.end}
-                        className="px-3 py-2 flex items-center gap-2  text-base"
+                        className="px-3 py-2 text-nowrap flex items-center gap-2 text-xs  sm:text-base"
                         activeClassName="bg-primary-dark text-white"
                         inactiveClassName="text-primary-dark hover:bg-primary-dark hover:text-white"
                     >
