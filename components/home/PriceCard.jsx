@@ -30,7 +30,7 @@ const PriceCard = ({ item = {}, index, billingType }) => {
         }),
     };
     // destructuring context
-    const { accessToken, userData } = useUser();
+    const { accessToken, userData, userRefetch } = useUser();
     // destructure user data
     const {
         user,
@@ -48,7 +48,8 @@ const PriceCard = ({ item = {}, index, billingType }) => {
 
     // hooks
     const {
-        purchaseSubscription
+        purchaseSubscription,
+        updateSubscription
     } = useSubscription();
 
     // functions
@@ -57,8 +58,16 @@ const PriceCard = ({ item = {}, index, billingType }) => {
             toast.error("Please login to get started");
             return;
         }
-        console.log(id);
         purchaseSubscription.mutate(id);
+    };
+
+    const handleUpgrade =  () => {
+        if (!accessToken) {
+            toast.error("Please login to get started");
+            return;
+        }
+         updateSubscription.mutate(id);
+        userRefetch();
     };
 
     // main render
@@ -101,9 +110,35 @@ const PriceCard = ({ item = {}, index, billingType }) => {
             {/* CTA button */}
             <div className="w-full">
                 {/* get started */}
-                <CommonBtn type="button" isLoading={purchaseSubscription.isPending} onclick={handleGetStarted}>
-                    Get Started
-                </CommonBtn>
+                {subscribed && plan?.id === id ? (
+                    // Current Plan - Check if active
+                    status === "active" ? (
+                        // Active subscription
+                        <div className={`w-full flex justify-center items-center py-3.5 text-white font-medium rounded-full bg-black`}>
+                            Current Plan
+                        </div>
+                    ) : (
+                        // Inactive subscription - Link to payment page
+                        <FaDivide
+                            className={`w-full flex justify-center items-center cursor-pointer py-3.5 text-white font-medium rounded transition-colors bg-red-500 hover:bg-red-600`}
+                        >
+                            Reactivate Plan
+                        </FaDivide>
+                    )
+                ) : subscribed ? (
+                    <button
+                        onClick={handleUpgrade}
+                        disabled={updateSubscription.isPending}
+                        className={`w-full flex justify-center items-center cursor-pointer py-3.5 text-white font-medium rounded-full bg-black`}
+                    >
+                        {updateSubscription.isPending ? 'Switching plan...' : 'Switch Plan'}
+                    </button>
+                ) : (
+                    // Subscribe Button (shown when not subscribed at all)
+                    <CommonBtn type="button" isLoading={purchaseSubscription.isPending} onclick={handleGetStarted}>
+                        Get Started
+                    </CommonBtn>
+                )}
             </div>
         </motion.div>
     )

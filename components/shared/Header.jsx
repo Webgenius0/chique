@@ -13,7 +13,7 @@ const Header = () => {
   const toggleSidebar = () => setIsOpen(!isOpen);
   {/**
   
-   useEffect(() => {
+  useEffect(() => {
     const handleMediaChange = (e) => {
       if (e.matches) setIsOpen(false);
     };
