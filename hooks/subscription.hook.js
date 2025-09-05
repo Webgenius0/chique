@@ -4,10 +4,12 @@ import { axiosPrivateClient } from "@/lib/axios.private.client";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useUser } from "./get-user.hook";
+import { useState } from "react";
 
 export const useSubscription = () => {
     const axiosInstance = axiosPrivateClient();
     const { userRefetch } = useUser();
+    const [cancelModal, setCancelModal] = useState(false);
     // purchase subscription
     const purchaseSubscription = useMutation({
         mutationKey: ["purchase-subscription"],
@@ -48,11 +50,31 @@ export const useSubscription = () => {
             toast.error(err?.response?.data?.message || "Something went wrong");
         }
     })
+    // cancel subscription
+    const cancelSubscription = useMutation({
+        mutationKey: ["cancel-subscription"],
+        mutationFn: async () => {
+            const response = await axiosInstance.post("/subscription/cancel")
+            return response.data
+        },
+        onSuccess: (response) => {
+            toast.success(response?.message || "Subscription cancelled successfully");
+            setCancelModal(false);
+            userRefetch();
+            console.log(response);
+        },
+        onError: (err) => {
+            toast.error(err?.response?.data?.message || "Something went wrong");
+        }
+    })
 
 
     // all return
     return {
         purchaseSubscription,
-        updateSubscription
+        updateSubscription,
+        cancelSubscription,
+        setCancelModal,
+        cancelModal
     };
 };

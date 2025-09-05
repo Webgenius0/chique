@@ -61,12 +61,12 @@ const PriceCard = ({ item = {}, index, billingType }) => {
         purchaseSubscription.mutate(id);
     };
 
-    const handleUpgrade =  () => {
+    const handleUpgrade = () => {
         if (!accessToken) {
             toast.error("Please login to get started");
             return;
         }
-         updateSubscription.mutate(id);
+        updateSubscription.mutate(id);
         userRefetch();
     };
 

@@ -2,11 +2,18 @@
 
 import Loader from "@/components/common/Loader";
 import { useUser } from "@/hooks/get-user.hook";
-import { Result, Button, Descriptions, Tag, List } from "antd";
+import { useSubscription } from "@/hooks/subscription.hook";
+import { Result, Descriptions, Tag, List, Modal } from "antd";
+import Link from "next/link";
+import { useState } from "react";
 
 const SubscriptionInfoClient = () => {
     const { userData, isLoading } = useUser();
-
+    const {
+        cancelSubscription,
+        cancelModal,
+        setCancelModal
+    } = useSubscription();
     // Loading state
     if (isLoading) {
         return (
@@ -16,7 +23,6 @@ const SubscriptionInfoClient = () => {
             </div>
         );
     }
-
     // No user data
     if (!userData) {
         return (
@@ -29,9 +35,9 @@ const SubscriptionInfoClient = () => {
             </div>
         );
     }
-
+    // destructure
     const { subscription } = userData || {};
-
+    // No subscription
     if (!subscription) {
         return (
             <div className="w-full flex items-center justify-center py-10 text-gray-500">
@@ -43,7 +49,7 @@ const SubscriptionInfoClient = () => {
             </div>
         );
     }
-
+    // destructure
     const {
         subscribed,
         status,
@@ -54,12 +60,26 @@ const SubscriptionInfoClient = () => {
         checkout_url,
         plan,
     } = subscription;
-
+    // functions
+    const handleCancelSubscription = () => {
+        cancelSubscription.mutate();
+    }
+    // main render
     return (
-        <div className="w-full flex flex-col text-black">
-            <h2 className="sm:text-xl text-base font-semibold border-b border-gray-300 pb-2 mb-4">
-                Subscription Information
-            </h2>
+        <div className="w-full flex gap-6 flex-col text-black">
+            {/* Cancel button */}
+            <div className="w-full flex gap-4  justify-end items-center">
+                <Link href={`/#subscriptions`} className={`bg-primary-dark text-center line-clamp-1 px-2 sm:px-6 sm:w-fit w-full sm:text-lg text-xs py-3 cursor-pointer flex justify-center items-center text-white rounded-md`}>
+                    View Subscriptions
+                </Link>
+                {subscribed && (
+                    <button onClick={() => setCancelModal(true)} className="text-center line-clamp-1 px-2 bg-black sm:px-6 sm:w-fit w-full sm:text-lg text-xs py-3 cursor-pointer flex justify-center items-center text-white rounded-md">
+                        Cancel Subscription
+                    </button>
+                )}
+            </div>
+
+            {/* Subscription Details */}
             <Descriptions bordered column={1}>
                 <Descriptions.Item label="Plan Name">
                     {plan?.name || "N/A"}
@@ -85,20 +105,10 @@ const SubscriptionInfoClient = () => {
                 <Descriptions.Item label="Canceled At">
                     {canceled_at ? new Date(canceled_at).toLocaleDateString() : "N/A"}
                 </Descriptions.Item>
-                <Descriptions.Item label="Grace Period">
-                    {on_grace_period ? "Yes" : "No"}
-                </Descriptions.Item>
-                <Descriptions.Item label="Checkout URL">
-                    {checkout_url ? (
-                        <a href={checkout_url} target="_blank" rel="noopener noreferrer" className="text-blue-600">
-                            Manage Subscription
-                        </a>
-                    ) : "N/A"}
-                </Descriptions.Item>
             </Descriptions>
             {/* Features List */}
             {plan?.features && (
-                <div className="mt-6">
+                <div className="w-full">
                     <h3 className="text-lg font-semibold mb-2">Features</h3>
                     <List
                         bordered
@@ -107,12 +117,24 @@ const SubscriptionInfoClient = () => {
                     />
                 </div>
             )}
-            {/* Cancel button */}
-            <div className="mt-6 flex justify-end">
-                <Button danger type="primary" onClick={() => alert("Cancel subscription logic here")}>
-                    Cancel Subscription
-                </Button>
-            </div>
+            {/* Cancel Subscription Modal */}
+            <Modal
+                open={cancelModal}
+                title="Cancel Subscription"
+                centered
+                closable={false}
+                width={500}
+                okButtonProps={{
+                    style: { backgroundColor: "black", borderColor: "black", color: "white" },
+                    disabled: cancelSubscription.isPending, // Disable when loading
+                }}
+                okText={cancelSubscription.isPending ? "Cancelling..." : "Yes, Cancel"}
+                cancelText="No, Keep it"
+                onCancel={() => setCancelModal(false)}
+                onOk={handleCancelSubscription}
+            >
+                <p>Are you sure you want to cancel your subscription?</p>
+            </Modal>
         </div>
     );
 };
