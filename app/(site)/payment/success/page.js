@@ -1,3 +1,4 @@
+import PaymentSuccessClient from "@/components/payment/PaymentSuccessClient";
 
 export const metadata = {
     title: "Chique | Payment Success",
@@ -6,7 +7,7 @@ export const metadata = {
 const PaymentSuccess = () => {
     return (
         <div className="container min-h-screen py-6 sm:py-10 flex justify-center items-center px-4 sm:px-6">
-            
+            <PaymentSuccessClient />
         </div>
     )
 }
